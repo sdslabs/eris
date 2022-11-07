@@ -1,0 +1,25 @@
+.button2 {
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 24px;
+    gap: 10px;
+    width: 20rem;
+    height: 3rem;
+    border-radius: 4px;
+    color: #000000;
+    border: 0;
+    background-color: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    
+    .inactive2 {
+      background-color: #F1F1F1;
+      border: 1px solid #191919;
+    }
+  }
+
+
+  
