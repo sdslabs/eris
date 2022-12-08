@@ -1,6 +1,7 @@
 @import "./components/button1.scss";
 @import "./components/button2.scss";
 @import "./components/input_box.scss";
+@import "./pages/login.scss";
 
 html,
 body {
@@ -33,7 +34,7 @@ a {
   color: green;
 }
 
-.green:hover {
+.underline:hover {
   text-decoration: underline;
 }
 

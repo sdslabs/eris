@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
+const crossedEye = <FontAwesomeIcon icon={faEyeSlash} />;
 
-export default function Password() {
-    const [inputActive, setInputActive] = useState(false);
+export default function Password(text) {
+  const [inputActive, setInputActive] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
+  const [eyeCrossed, setEyeCrossed] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
+  };
+  const toggleEye = () => {
+    setEyeCrossed(eyeCrossed ? false : true);
   };
 
   const { register, handleSubmit } = useForm();
@@ -21,14 +26,18 @@ export default function Password() {
     <div className={"inputBox"+ " " + inputActive}>
         {" "}
         <input
-
           type={passwordShown ? "text" : "password"}
           className="input"
+          placeholder={text}
           onFocus={() => setInputActive(!inputActive)}
           onBlur={() => setInputActive(!inputActive)}
-          //ref={register({ required: "This is required." })}
-        />
-        <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
+        >
+        </input>
+        <i className="passEye" onClick={() => 
+          { toggleEye(); togglePasswordVisiblity();}}>{crossedEye}</i>{" "}
+
+          
+          
     </div>
   );
 }

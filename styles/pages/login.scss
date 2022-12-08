@@ -1,0 +1,37 @@
+.split_left{
+    width: 45.833%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+  }
+  
+.split_right{
+    width: 54.167%;
+    height: 100%;
+    position: fixed;
+    right: 0;
+}  
+
+  .carousel {
+    background-color: black;
+  }
+  
+  .login {
+    margin: auto;
+
+  }
+  
+  .centred_img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .top {
+    padding: 1.5rem;
+  }
+
+  .passEye{
+    color: #939393;
+  }

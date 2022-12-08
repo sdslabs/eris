@@ -10,10 +10,10 @@ const LoginPage = ({ refs }) => {
         <div className="form">
       <p>New password</p>
         <Password 
-        placeholder={"YEnter your new password"} />
+        placeholder={"Enter your new password"} />
         <p>Confirm Password</p>
         <Password 
-        placeholder={"Re-enter your password"}/>
+            placeholder={"Re-enter your password"}/>
       </div>
       <div>
         <Button1 
