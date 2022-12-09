@@ -1,4 +1,3 @@
-
 import Button1 from "../../components/button1";
 import Button2 from "../../components/button2";
 import Input from "../../components/input_box";
@@ -19,7 +18,7 @@ const RecoverPage = ({ refs }) => {
         </div>
     </div>
     <div className="split_right">
-        <div className="recover">
+        <div className="login">
             <div>
                 <h1>Reset <span className="green">Password</span></h1>
             </div>

@@ -21,7 +21,7 @@ return (
   <div className="split_right ">
     <div className="login">
       <div>
-        <h1>Login</h1>
+        <h1>Log<span className="green">in</span></h1>
       </div>
       <div className="form">
         <div>
@@ -33,13 +33,13 @@ return (
         <Password 
           text="Enter your password"/>
         </div>
-        <div>
+        <div className="tickBox">
           <input 
             type="checkbox" 
             className="checkbox" 
           />
-          <label for="remember">Remember me</label>
-          <a className="green underline" href="/recover">Forgot password?</a>
+          <label for="remember" className="remember">Remember me</label>
+          <a className="green underline recover" href="/recover">Forgot password?</a>
         </div>
         <div>
           <Button1
@@ -47,11 +47,12 @@ return (
           />
         </div>
           <p>Don't have an account? <a className="green underline" href="/signup">Sign up</a> </p>
+          <table className="or"><tr><td><hr/></td><td>OR</td><td><hr /></td></tr></table>
       </div>
-        <div className="oauth">
-          <Button2
-            text={"Continue with Google"}
-          />
+      <div className="oauth">
+        <Button2
+          text={"Continue with Google"}
+        />
       </div>
     </div>
   </div>

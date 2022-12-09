@@ -9,7 +9,7 @@ const Button1 = ({ text, type, onClick }) => {
       //onClick={() => setButtonActive(!buttonActive)}
       //className={"button1"+ " " + buttonActive}
     >
-      <p>{text}</p>
+      {text}
     </button>
   );
 };

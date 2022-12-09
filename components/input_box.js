@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Input = ({ type}) => {
+const Input = ({ type, text}) => {
   const [inputActive, setInputActive] = useState(false);
   
   return (
@@ -10,7 +10,7 @@ const Input = ({ type}) => {
     onFocus={() => setInputActive(!inputActive)}
     onBlur={() => setInputActive(!inputActive)}
     className="input"
-    //placeholder={text}
+    placeholder={text}
     >
     </input>
     </div>

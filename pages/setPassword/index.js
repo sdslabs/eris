@@ -1,10 +1,11 @@
 import Button1 from "../../components/button1";
 import Password from "../../components/password";
-import Think from "../../public/images/illustration_think.png";
+import Icons from "../../components/icons";
 import Labs from "../../public/images/labs logo.png";
+import Think from "../../public/images/illustration_think.png";
 import Image from "next/image";
 
-const LoginPage = ({ refs }) => {
+const SignupPage = ({ refs }) => {
   return (
 <div>
   <div className="split_left carousel">
@@ -14,23 +15,24 @@ const LoginPage = ({ refs }) => {
     <div className="centred_img">
       <Image src={Think} alt="think" />
     </div>
-  </div>
+  </div> 
   <div className="split_right ">
-    <div className="login">
+    <div className="signup">
+      <Icons />
       <div>
-        <h1>Password <span className="green">Reset</span></h1>
+        <h1>Set <span className="green">Password</span></h1>
       </div>
-      <div className="form">
-        <p>New password</p>
+      <div className="form">  
+        <p>Password</p>
         <Password 
-          text={"Enter your new password"} />
+          text={"Your password must contain 8 characters"} />
         <p>Confirm Password</p>
         <Password 
           text={"Re-enter your password"}/>
       </div>
       <div>
         <Button1 
-          text={"Login"}/>
+          text={"Confirm"}/>
       </div>
     </div>
   </div>
@@ -38,6 +40,4 @@ const LoginPage = ({ refs }) => {
   );
 };
 
-export default LoginPage;
-
-
+export default SignupPage;

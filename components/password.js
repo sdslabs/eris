@@ -6,7 +6,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 const crossedEye = <FontAwesomeIcon icon={faEyeSlash} />;
 
-export default function Password(text) {
+const Password= ({ type, text}) => {
   const [inputActive, setInputActive] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const [eyeCrossed, setEyeCrossed] = useState(false);
@@ -34,10 +34,12 @@ export default function Password(text) {
         >
         </input>
         <i className="passEye" onClick={() => 
-          { toggleEye(); togglePasswordVisiblity();}}>{crossedEye}</i>{" "}
+          { toggleEye(); togglePasswordVisiblity();}}>{eyeCrossed ? eye : crossedEye}</i>{" "}
 
           
           
     </div>
   );
 }
+
+export default Password
