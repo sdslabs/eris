@@ -4,7 +4,6 @@ import Input from "../../components/input_box";
 import Icons from "../../components/icons";
 import Labs from "../../public/images/labs logo.png";
 import Think from "../../public/images/illustration_think.png";
-//import Password from "../../components/password";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey, faCheckCircle, faCheck} from "@fortawesome/free-solid-svg-icons";

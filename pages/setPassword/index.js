@@ -1,6 +1,6 @@
 import Button1 from "../../components/button1";
 import Password from "../../components/password";
-import Icons from "../../components/icons";
+import Icons from "../../components/icons_pass";
 import Labs from "../../public/images/labs logo.png";
 import Think from "../../public/images/illustration_think.png";
 import Image from "next/image";

@@ -1,7 +1,7 @@
 
 import Button1 from "../../components/button1";
 import Input from "../../components/input_box";
-import Icons from "../../components/icons";
+import Icons from "../../components/icons_verify";
 import Labs from "../../public/images/labs logo.png";
 import Think from "../../public/images/illustration_think.png";
 import Image from "next/image";
@@ -25,19 +25,7 @@ const SignupPage = ({ refs }) => {
   </div> 
   <div className="split_right ">
     <div className="signup">
-    <Icons 
-        icon1 = {tick}
-        class1 = {"icon_circle_done"}
-        i1 = {"white"}
-        icon2 = {verify}
-        class2 = {"icon_circle_active"}
-        i2 = {"green"}
-        icon3 = {key} 
-        class3 = {"icon_circle"}
-        text1 ={"green"}
-        text2 ={"green"}
-        text3 ={"grey"}
-        />
+    <Icons />
       <div>
         <h1>Email <span className="green">Verification</span></h1>
       </div>
