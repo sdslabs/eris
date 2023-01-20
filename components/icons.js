@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faKey, faCheckCircle} from "@fortawesome/free-solid-svg-icons";
-const user = <FontAwesomeIcon icon={faUser} />;
-const key = <FontAwesomeIcon icon={faKey} />;
-const tick = <FontAwesomeIcon icon={faCheckCircle} />;
+import React from "react";
+import Create_1 from "../public/images/Create.svg";
+import Create_2 from "../public/images/Create_done.svg";
+import Verify_1 from "../public/images/Verify.svg";
+import Verify_2 from "../public/images/Verify_2.svg";
+import Verify_3 from "../public/images/Verify_done.svg";
+import Set_1 from "../public/images/Set.svg";
+import Set_2 from "../public/images/Set_2.svg";
+import Image from "next/image";
 
-const Icons = ({ }) => {
+const Icons = () => {
     
       return (
-        <table className="icons">
+        <div className="icon_box">
+        <table>
+        <tbody>
         <tr>
-          <td><i>{user}</i></td>
-          <td><hr/></td>
-          <td><i> {tick}</i></td>
-          <td><hr /></td>
-          <td><i> {key}</i></td>
+          <td><Image className="icon" src={Create_1} alt="create" /></td>
+          <td><hr className="icon_hr"/></td>
+          <td><Image className="icon" src={Verify_1} alt="verify" /></td>
+          <td><hr className="icon_hr" /></td>
+          <td><Image className="icon" src={Set_1} alt="set" /></td>
         </tr>
-        <tr>
-          <td>Create account</td>
-          <td></td>
-          <td>Verify Email</td>
-          <td></td>
-          <td>Set password</td>
-        </tr>
-      </table>
+        </tbody>
+      </table>   
+      </div>
       );
     };
     

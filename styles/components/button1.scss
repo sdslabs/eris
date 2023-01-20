@@ -1,25 +1,25 @@
 .button1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 16px 24px;
-    background: #191919;
-    width: 32.5rem;
-    height: 3rem;
-    border-radius: 4px;
-    color: #FFFFFF;
-    border: 0;
-    background-color: #191919;
-    font-size: 0.9rem;
-    margin-top: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px;
+  background: #191919;
+  width: 100%;
+  height: 3rem;
+  border-radius: 4px;
+  color: #FFFFFF;
+  border: 0;
+  background-color: #191919;
+  font-size: 0.9rem;
+  margin-top: 3rem;
 }
     
-  .inactive1  {
-      border: 0;
-      background-color: #6B6B6B;
-    }
+.inactive1  {
+    border: 0;
+    background-color: #6B6B6B;
+}
   
-  .button1:hover{
-    background-color: #393939;
-  }
+.button1:hover{
+  background-color: #393939;
+}

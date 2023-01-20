@@ -1,7 +1,6 @@
 .signup{
         width: 50%;
-        margin-left: 15rem;
-        margin-top: 7rem;
+        margin: auto;
     }
 
 .otp{
@@ -13,5 +12,21 @@
 }
 
 .icons{
-    margin-bottom: 7rem;
+    margin: auto;
+}
+
+.icon_box{
+    align-items: center;
+    align-self: center;
+
+}
+
+.icon_hr{
+    width: 5rem;
+    margin: -0.5rem;
+}
+
+.icon{
+    width: 7rem;
+    height: 7rem;
 }

@@ -4,8 +4,14 @@ import Input from "../../components/input_box";
 import Icons from "../../components/icons";
 import Labs from "../../public/images/labs logo.png";
 import Think from "../../public/images/illustration_think.png";
-import Password from "../../components/password";
+//import Password from "../../components/password";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faKey, faCheckCircle, faCheck} from "@fortawesome/free-solid-svg-icons";
+const user = <FontAwesomeIcon icon={faUser} />;
+const key = <FontAwesomeIcon icon={faKey} />;
+const verify = <FontAwesomeIcon icon={faCheckCircle} />;
+const tick = <FontAwesomeIcon icon={faCheck} />;
 
 
 const SignupPage = ({ refs }) => {
@@ -21,7 +27,9 @@ return (
   </div> 
   <div className="split_right ">
     <div className="signup">
-<Icons />
+      <div className="icons">
+      <Icons />
+      </div>
       <div>
         <h1>Sign <span className="green">up</span></h1>
       </div>
@@ -41,7 +49,7 @@ return (
         </div>
         <p>Already have an account? <a className="green underline" href="/login">Log in</a> </p>
       </div>
-      <table className="or"><tr><td><hr/></td><td>OR</td><td><hr /></td></tr></table>
+      <table className="or"><tbody><tr><td><hr className="option_hr"/></td><td>OR</td><td><hr className="option_hr"/></td></tr></tbody></table>
       <div className="oauth">
         <Button2
         text={"Continue with Google"}

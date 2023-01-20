@@ -3,9 +3,9 @@ import Button1 from "../../components/button1";
 import Button2 from "../../components/button2";
 import Input from "../../components/input_box";
 import Password from "../../components/password";
-import Think from "../../public/images/illustration_think.png";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
+// import Slider from "../../src/components/slider";
 
 const LoginPage = ({ refs }) => {
 return (
@@ -15,7 +15,7 @@ return (
       <Image src={Labs} alt="labs" />
     </div>
     <div className="centred_img">
-      <Image src={Think} alt="think" />
+      {/* <Slider /> */}
     </div>
   </div>
   <div className="split_right ">
@@ -27,7 +27,7 @@ return (
         <div>
         <p>Email address</p>
         <Input 
-          //type={email}
+          // type={email}
           text="Enter your email address"/>
           <p>Password</p>
         <Password 
@@ -38,16 +38,29 @@ return (
             type="checkbox" 
             className="checkbox" 
           />
-          <label for="remember" className="remember">Remember me</label>
-          <a className="green underline recover" href="/recover">Forgot password?</a>
+          <label className="remember">Remember me</label>
+          <a className=" underline green" href="/recover" style={{float: "right"}}>
+            Forgot password?
+          </a>
         </div>
         <div>
           <Button1
             text={"Login"}
           />
         </div>
-          <p>Don't have an account? <a className="green underline" href="/signup">Sign up</a> </p>
-          <table className="or"><tr><td><hr/></td><td>OR</td><td><hr /></td></tr></table>
+          <p> 
+            Don't have an account? <a className="green underline" href="/signup">
+            Sign up </a>
+          </p>
+          <table className="or">
+            <tbody>
+              <tr>
+                <td><hr className="option_hr"/></td>
+                <td>OR</td>
+                <td><hr className="option_hr" /></td>
+              </tr>
+            </tbody>
+          </table>
       </div>
       <div className="oauth">
         <Button2

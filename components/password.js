@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-
+//import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
@@ -17,12 +16,13 @@ const Password= ({ type, text}) => {
     setEyeCrossed(eyeCrossed ? false : true);
   };
 
-  const { register, handleSubmit } = useForm();
-  const onSubmit = data => {
-    console.log(data);
-  };
+  // const { register, handleSubmit } = useForm();
+  // const onSubmit = data => {
+  //   console.log(data);
+  // };
 
   return (
+    <div>
     <div className={"inputBox"+ " " + inputActive}>
         {" "}
         <input
@@ -35,9 +35,7 @@ const Password= ({ type, text}) => {
         </input>
         <i className="passEye" onClick={() => 
           { toggleEye(); togglePasswordVisiblity();}}>{eyeCrossed ? eye : crossedEye}</i>{" "}
-
-          
-          
+    </div>
     </div>
   );
 }

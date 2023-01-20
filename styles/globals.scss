@@ -1,6 +1,7 @@
 @import "./components/button1.scss";
 @import "./components/button2.scss";
 @import "./components/input_box.scss";
+@import "./components/carousel.scss";
 @import "./pages/login.scss";
 @import "./pages/signup.scss";
 
@@ -32,7 +33,15 @@ a {
 }
 
 .green {
-  color: green;
+  color: #00902B;
+}
+
+.white {
+  color: #FFFFFF;
+}
+
+.grey {
+  color: #B3B3B3;
 }
 
 .underline:hover {
@@ -43,17 +52,18 @@ a {
   background-color: black;
 }
 
-p{
+p {
   line-height: 0.4rem;
   color: #393939;
 }
 
-i{
+i {
+ display: flex;
+ align-self: flex-end;
   align-self: center;
-  color: #939393;
 }
 
-::placeholder{
+::placeholder {
   color: #B3B3B3;
 }
 

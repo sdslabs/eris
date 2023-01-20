@@ -4,6 +4,7 @@ const Button1 = ({ text, type, onClick }) => {
 //const [buttonActive, setButtonActive] = useState(false);
 
   return (
+    <div>
     <button 
     className="button1"
       //onClick={() => setButtonActive(!buttonActive)}
@@ -11,6 +12,7 @@ const Button1 = ({ text, type, onClick }) => {
     >
       {text}
     </button>
+    </div>
   );
 };
 
