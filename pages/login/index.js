@@ -5,17 +5,17 @@ import Input from "../../components/input_box";
 import Password from "../../components/password";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
-import Carousel from "../../components/carousel";
+import Carousl from "../../components/carousel";
 
 const LoginPage = ({ refs }) => {
 return (
-<div>
-  <div className="split_left carousel">
+<div className="loginpage">
+  <div className="split_left">
     <div className="top">
       <Image src={Labs} alt="labs" />
     </div>
     <div className="centred_img">
-      <Carousel />
+      <Carousl />
     </div>
   </div>
   <div className="split_right ">
