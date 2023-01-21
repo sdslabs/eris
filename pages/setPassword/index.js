@@ -5,7 +5,7 @@ import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
 
-const setPassword = ({ refs }) => {
+const SetPasswordPage = ({ refs }) => {
   return (
 <div>
   <div className="split_left carousel">
@@ -35,4 +35,4 @@ const setPassword = ({ refs }) => {
   );
 };
 
-export default setPassword;
+export default SetPasswordPage;

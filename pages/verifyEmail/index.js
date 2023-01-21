@@ -5,7 +5,7 @@ import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
 
-const SignupPage = ({ refs }) => {
+const VerifyEmailPage = ({ refs }) => {
   return (
 <div>
   <div className="split_left carousel">
@@ -42,4 +42,4 @@ const SignupPage = ({ refs }) => {
   );
 };
 
-export default SignupPage;
+export default VerifyEmailPage;

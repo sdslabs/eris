@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Button1 from "../../components/button1";
 import Button2 from "../../components/button2";
 import Input from "../../components/input_box";

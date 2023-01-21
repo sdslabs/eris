@@ -4,7 +4,7 @@ import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
 
-const LoginPage = ({ refs }) => {
+const passwordReset = ({ refs }) => {
   return (
 <div>
   <div className="split_left carousel">
@@ -33,6 +33,6 @@ const LoginPage = ({ refs }) => {
   );
 };
 
-export default LoginPage;
+export default passwordReset;
 
 

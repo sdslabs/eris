@@ -4,7 +4,7 @@ import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
 
-const RecoverPage = ({ refs }) => {
+const RecoveryPage = ({ refs }) => {
   return (
 <div>
     <div className="split_left carousel">
@@ -39,5 +39,5 @@ const RecoverPage = ({ refs }) => {
   );
 };
 
-export default RecoverPage;
+export default RecoveryPage;
 

@@ -4,6 +4,7 @@
 @import "./components/carousel.scss";
 @import "./pages/login.scss";
 @import "./pages/signup.scss";
+@import "./pages/admin.scss";
 
 html,
 body {
@@ -38,10 +39,6 @@ a {
 
 .underline:hover {
   text-decoration: underline;
-}
-
-.centre{
-  margin: auto;
 }
 
 p {
