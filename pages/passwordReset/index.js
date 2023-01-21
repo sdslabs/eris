@@ -1,8 +1,8 @@
 import Button1 from "../../components/button1";
 import Password from "../../components/password";
-import Think from "../../public/images/illustration_think.png";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
+import Carousel from "../../components/carousel";
 
 const LoginPage = ({ refs }) => {
   return (
@@ -12,7 +12,7 @@ const LoginPage = ({ refs }) => {
       <Image src={Labs} alt="labs" />
     </div>
     <div className="centred_img">
-      <Image src={Think} alt="think" />
+    <Carousel />
     </div>
   </div>
   <div className="split_right ">

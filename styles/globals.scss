@@ -36,20 +36,12 @@ a {
   color: #00902B;
 }
 
-.white {
-  color: #FFFFFF;
-}
-
-.grey {
-  color: #B3B3B3;
-}
-
 .underline:hover {
   text-decoration: underline;
 }
 
-.checkbox:checked {
-  background-color: black;
+.centre{
+  margin: auto;
 }
 
 p {
@@ -58,8 +50,8 @@ p {
 }
 
 i {
- display: flex;
- align-self: flex-end;
+  display: flex;
+  align-self: flex-end;
   align-self: center;
 }
 

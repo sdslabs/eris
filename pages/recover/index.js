@@ -1,10 +1,9 @@
 import Button1 from "../../components/button1";
-import Button2 from "../../components/button2";
 import Input from "../../components/input_box";
-import Password from "../../components/password";
 import Think from "../../public/images/illustration_think.png";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
+import Carousel from "../../components/carousel";
 
 const RecoverPage = ({ refs }) => {
   return (
@@ -14,7 +13,7 @@ const RecoverPage = ({ refs }) => {
             <Image src={Labs} alt="labs" />
         </div>
         <div className="centred_img">
-            <Image src={Think} alt="think" />
+        <Carousel />
         </div>
     </div>
     <div className="split_right">

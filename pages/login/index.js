@@ -5,7 +5,7 @@ import Input from "../../components/input_box";
 import Password from "../../components/password";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
-// import Slider from "../../src/components/slider";
+import Carousel from "../../components/carousel";
 
 const LoginPage = ({ refs }) => {
 return (
@@ -15,7 +15,7 @@ return (
       <Image src={Labs} alt="labs" />
     </div>
     <div className="centred_img">
-      {/* <Slider /> */}
+      <Carousel />
     </div>
   </div>
   <div className="split_right ">
@@ -27,7 +27,6 @@ return (
         <div>
         <p>Email address</p>
         <Input 
-          // type={email}
           text="Enter your email address"/>
           <p>Password</p>
         <Password 
