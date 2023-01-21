@@ -1,11 +1,11 @@
 import Button1 from "../../components/button1";
-import Password from "../../components/password";
+import PasswordValidation from "../../components/passwordValidation";
 import Icons from "../../components/icons_pass";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
 
-const SignupPage = ({ refs }) => {
+const setPassword = ({ refs }) => {
   return (
 <div>
   <div className="split_left carousel">
@@ -23,12 +23,7 @@ const SignupPage = ({ refs }) => {
         <h1>Set <span className="green">Password</span></h1>
       </div>
       <div className="form">  
-        <p>Password</p>
-        <Password 
-          text={"Your password must contain 8 characters"} />
-        <p>Confirm Password</p>
-        <Password 
-          text={"Re-enter your password"}/>
+        <PasswordValidation />
       </div>
       <div>
         <Button1 
@@ -40,4 +35,4 @@ const SignupPage = ({ refs }) => {
   );
 };
 
-export default SignupPage;
+export default setPassword;

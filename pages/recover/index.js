@@ -1,6 +1,5 @@
 import Button1 from "../../components/button1";
 import Input from "../../components/input_box";
-import Think from "../../public/images/illustration_think.png";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
