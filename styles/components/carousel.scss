@@ -13,7 +13,7 @@
     top: 0;
     left: 0;
     overflow: hidden;
-    animation: slider 10s infinite;
+    //animation: slider 10s infinite;
 }
 .img-slider .slider-container .slide {
     position: relative;
@@ -31,9 +31,9 @@
 @keyframes slider {
     0%, 25%, 100%{left: 0}
     
-    30%, 55%{left: -180%}
+    30%, 55%{left: -100%}
     
-    60%, 85%{left: -360%}
+    60%, 85%{left: -200%}
 }
 
 .carousel_heading{

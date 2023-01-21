@@ -1,5 +1,5 @@
 import Button1 from "../../components/button1";
-import Password from "../../components/password";
+import PasswordValidation from "../../components/passwordValidation";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
@@ -21,12 +21,7 @@ const LoginPage = ({ refs }) => {
         <h1>Password <span className="green">Reset</span></h1>
       </div>
       <div className="form">
-        <p>New password</p>
-        <Password 
-          text={"Enter your new password"} />
-        <p>Confirm Password</p>
-        <Password 
-          text={"Re-enter your password"}/>
+        <PasswordValidation />
       </div>
       <div>
         <Button1 
