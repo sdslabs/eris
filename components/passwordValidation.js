@@ -56,19 +56,17 @@ if(passwordInputFieldName==='password'){
     }
 
     // for confirm password
-    if(passwordInputFieldName=== "confirmPassword" || (passwordInputFieldName==="password" && passwordInput.confirmPassword.length>0) ){
-            
-        if(passwordInput.confirmPassword!==passwordInput.password)
+    if (passwordInputFieldName=== "confirmPassword" || 
+        (passwordInputFieldName==="password" && passwordInput.confirmPassword.length > 0)){    
+        if (passwordInput.confirmPassword!==passwordInput.password)
         {
-        setConfirmPasswordError("Confirm password is not matched");
-        }else{
-        setConfirmPasswordError("");
+        setConfirmPasswordError ( "Confirm password is not matched" );
+        } else {
+        setConfirmPasswordError ("");
         }
-        
     }
 
 }
-
     return(
     <div className="row">
      <div className="col-sm-4">

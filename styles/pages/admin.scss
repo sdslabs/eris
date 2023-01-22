@@ -3,7 +3,7 @@
     height: 100%;
     position: fixed;
     left: 0;
-    background-color: black;
+    background-color: #191919;
     }
     
 .right_panel{
@@ -26,26 +26,66 @@
     display: flex;
     margin: auto;
     height: 4rem;
-    width: 20rem;
+    width: 90%;
+    word-wrap: break-word;
     border-radius: 10px;
     color: black;
     background-color: white;
     align-items: center;
-    padding: 1.5rem;
+    padding-left: 1.5rem;
 }
 
 .inactive{
     display: flex;
     margin: auto;
     height: 4rem;
-    width: 20rem;
+    width: 90%;
     border-radius: 10px;
     color: white;
-    background-color: black;
+    background-color: #191919;
     align-items: center;
     padding: 1.5rem;
+
+}
+
+.unused{
+    margin-left: 1rem;
+    transition: width 2s;
+}
+
+.used{
+    margin-left: 1rem;
+}
+
+.unused:hover{
+    margin-left: 3rem;
 }
 
 .inactive:hover{
     background-color: #575757;
+}
+
+.admin_heading{
+    font-size: 2rem;
+    letter-spacing: -2px;
+    font-weight: 500;
+    margin-left: 3rem;
+}
+
+.admin_hr{
+    width: 95%;
+    color: #575757;
+    border: none;
+    border-bottom: 2px solid rgba(216,216,216,255);
+}
+
+.users_data{
+    margin: auto;
+    width: 95%;
+    height: 50vh;
+    border: 2px solid rgba(216,216,216,255);
+}
+
+.admin_toggle{
+    display: flex;
 }

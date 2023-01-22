@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Button2 = ({ text, type, onClick }) => {
-//const [buttonActive, setButtonActive] = useState(false);
+const Button2 = ({ text }) => {
 
   return (
     <div>
-    <button 
-    className="button2"
-      //onClick={() => setButtonActive(!buttonActive)}
-      //className={"button2"+ " " + buttonActive}
-    >
+    <button className="button2">
       {text}
     </button>
     </div>
