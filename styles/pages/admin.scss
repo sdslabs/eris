@@ -82,10 +82,16 @@
 .users_data{
     margin: auto;
     width: 95%;
-    height: 50vh;
+    height: 70vh;
     border: 2px solid rgba(216,216,216,255);
+    padding: 1rem 2rem;
 }
 
 .admin_toggle{
     display: flex;
+}
+
+.roles{
+    margin: 2rem;
+    float: right;
 }

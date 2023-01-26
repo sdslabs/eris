@@ -2,9 +2,9 @@ import React from "react";
 import LeftPanel from "../../components/leftPanel";
 import Searchbar from "../../components/searchbar";
 import Buttons from "../../components/admin_buttons"
-import UserTable from "../../components/user_table"
-import UserAdd from "../../public/images/user_add.svg"
-import Filter from "../../public/images/filter.svg"
+import UserData from "../../components/user_table"
+import Sort from "../../public/images/sort.svg"
+import AppAdd from "../../public/images/app_add.svg"
 
 const AdminPage = ({ refs }) => {
 return (
@@ -19,28 +19,18 @@ return (
         state3={"unused"}/>
     </div>
     <div className="right_panel">
-    <h1 className="admin_heading">User Management</h1>
-    <div className="admin_toggle">
-    <div style={{marginLeft: "3rem"}}>Users</div>
-    <div style={{marginLeft: "2rem"}}>Invites</div>
-    </div>
-    <hr className="admin_hr"/>
+    <h1 className="admin_heading">Applications</h1>
     <div className="search_panel">
     <Searchbar 
     text={"Search user by name or email"}/>
-    <div className="roles">
-      <b>Role </b>
-      <input type="checkbox" style={{marginLeft:"1rem"}} /> Admin
-      <input type="checkbox" style={{marginLeft:"2rem"}} /> User
-    </div>
     <Buttons 
-      text1="Filter"
-      text2="Add User" 
-      img1={Filter}
-      img2={UserAdd}/>
+    text1="Sort"
+    text2="Add App" 
+    img1={Sort}
+    img2={AppAdd}/>
     </div>
     <div className="users_data">
-    <UserTable />
+    {/* <UserData /> */}
     </div>
     </div>
 </div>

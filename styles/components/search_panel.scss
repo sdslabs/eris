@@ -1,6 +1,7 @@
 .search_panel{
     display: flex;
-    width: 95%;
+    flex-direction: row;
+    width: 95.8%;
     margin: auto;
 }
 
@@ -8,7 +9,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    width: 50%;
+    flex: 1;
     padding: 7px;
     border: 2px solid rgba(161,161,160,255);
     border-radius: 5px;
@@ -29,8 +30,6 @@
 
 .buttons{
     width: auto;
-    position: absolute;
-    right: 2.5%;
     display: flex;
     float: right;
 }

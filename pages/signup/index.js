@@ -7,10 +7,10 @@ import Image from "next/image";
 import Carousel from "../../components/carousel";
 
 
-const SignupPage = ({ refs }) => {
+const SignupPage = () => {
 return (
 <div>
-  <div className="split_left carousel">
+  <div className="split_left">
     <div className="top">
       <Image src={Labs} alt="labs" />
     </div>
@@ -40,7 +40,7 @@ return (
             text={"Create account"}
           />
         </div>
-        <p>Already have an account? <a className="green underline" href="/login">Log in</a> </p>
+        <p>Already have an account? <a className="green underline" href="/">Log in</a> </p>
       </div>
       <table className="or"><tbody><tr><td><hr className="option_hr"/></td><td>OR</td><td><hr className="option_hr"/></td></tr></tbody></table>
       <div className="oauth">

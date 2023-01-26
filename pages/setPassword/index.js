@@ -5,10 +5,10 @@ import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
 
-const SetPasswordPage = ({ refs }) => {
+const SetPasswordPage = () => {
   return (
 <div>
-  <div className="split_left carousel">
+  <div className="split_left">
     <div className="top">
       <Image src={Labs} alt="labs" />
     </div>
