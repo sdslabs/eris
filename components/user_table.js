@@ -8,18 +8,34 @@ const UserTable = ({ text }) => {
       <table className="user_table">
         <tbody>
         <tr>
-          <th>NAME</th>
-          <th>EMAIL</th>
-          <th>ROLE</th>
-          <th>GITHUB</th>
-          <th></th>
+          <th style={{width: "30%"}}><b>NAME</b></th>
+          <th style={{width: "35%"}}><b>EMAIL</b></th>
+          <th style={{width: "10%"}}><b>ROLE</b></th>
+          <th style={{width: "20%"}}><b>GITHUB</b></th>
+          <th style={{width: "5%"}}></th>
         </tr>
-        <tr>
         <UserData />
-        </tr>
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+        <UserData />
+
         </tbody>
       </table>
-      
+
     </div>
   );
 };

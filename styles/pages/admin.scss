@@ -5,14 +5,14 @@
     left: 0;
     background-color: #191919;
     }
-    
+
 .right_panel{
     width: 82%;
     height: 100%;
     position: fixed;
     right: 0;
     background-color: white ;
-} 
+}
 
 .centre{
     margin: auto;
@@ -20,7 +20,7 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
-  
+
 
 .active{
     display: flex;
@@ -48,17 +48,9 @@
 
 }
 
-.unused{
+.unused, .used{
     margin-left: 1rem;
-    transition: width 2s;
-}
 
-.used{
-    margin-left: 1rem;
-}
-
-.unused:hover{
-    margin-left: 3rem;
 }
 
 .inactive:hover{
@@ -79,12 +71,13 @@
     border-bottom: 2px solid rgba(216,216,216,255);
 }
 
-.users_data{
+.data_div{
     margin: auto;
     width: 95%;
     height: 70vh;
     border: 2px solid rgba(216,216,216,255);
     padding: 1rem 2rem;
+    overflow-y: scroll;
 }
 
 .admin_toggle{

@@ -29,7 +29,7 @@ const LoginPage = () => {
   let sendRequest = async (e) => {
     e.preventDefault();
     try {
-      let res = await fetch("http://0.0.0.0:9999/login", {
+      let res = await fetch("http://10.25.1.18:9898/login", {
         method: "POST",
         body: JSON.stringify({
           flowID: FlowID,
@@ -54,7 +54,7 @@ const LoginPage = () => {
 
 useEffect(() =>{
  const createFLow= async ()=>{
-  const response=await fetch('http://0.0.0.0:9999/login')
+  const response=await fetch('http://10.25.1.18:9898/login')
   const result = await response.json()
   FlowID=(result.flowID)
   CsrfToken=(result.csrf_token)
