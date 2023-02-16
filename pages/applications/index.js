@@ -10,22 +10,22 @@ const AdminPage = ({ refs }) => {
 return (
 <div>
     <div className="left_panel">
-    <LeftPanel 
-        activity1={"active"}
-        activity2={"inactive"}
+    <LeftPanel
+        activity1={"inactive"}
+        activity2={"active"}
         activity3={"inactive"}
-        state1={"used"}
-        state2={"unused"}
+        state1={"unused"}
+        state2={"used"}
         state3={"unused"}/>
     </div>
     <div className="right_panel">
     <h1 className="admin_heading">Applications</h1>
     <div className="search_panel">
-    <Searchbar 
+    <Searchbar
     text={"Search user by name or email"}/>
-    <Buttons 
+    <Buttons
     text1="Sort"
-    text2="Add App" 
+    text2="Add App"
     img1={Sort}
     img2={AppAdd}/>
     </div>

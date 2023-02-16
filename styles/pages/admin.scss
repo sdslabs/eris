@@ -16,7 +16,7 @@
 
 .centre{
     margin: auto;
-    width: 8.2rem;
+    width: auto;
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
@@ -27,7 +27,6 @@
     margin: auto;
     height: 4rem;
     width: 90%;
-    word-wrap: break-word;
     border-radius: 10px;
     color: black;
     background-color: white;
@@ -48,9 +47,14 @@
 
 }
 
-.unused, .used{
+.unused{
     margin-left: 1rem;
+    color: white;
+}
 
+.used{
+    margin-left: 1rem;
+    color: black
 }
 
 .inactive:hover{
@@ -69,6 +73,7 @@
     color: #575757;
     border: none;
     border-bottom: 2px solid rgba(216,216,216,255);
+    margin-top: -1px;
 }
 
 .data_div{
@@ -87,4 +92,11 @@
 .roles{
     margin: 2rem;
     float: right;
+}
+
+.toggle_items{
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    padding-bottom: 8px;
+    margin-left: 2rem;
 }

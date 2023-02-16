@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import LeftPanel from "../../components/leftPanel";
 import Searchbar from "../../components/searchbar";
 import Buttons from "../../components/admin_buttons";
@@ -7,8 +7,8 @@ import InvitesTable from "../../components/invites_table";
 import UserAdd from "../../public/images/user_add.svg";
 import Filter from "../../public/images/filter.svg";
 
-const AdminPage = ({ refs }) => {
-
+const AdminPage = () => {
+  const [invitesActive, setInvitesActive] = useState(false);
 return (
 <div>
     <div className="left_panel">
@@ -23,8 +23,8 @@ return (
     <div className="right_panel">
     <h1 className="admin_heading">User Management</h1>
     <div className="admin_toggle">
-    <div style={{marginLeft: "3rem"}}>Users</div>
-    <div style={{marginLeft: "2rem"}}>Invites</div>
+    <div className="toggle_items" style={{marginLeft: "3rem"}}>Users</div>
+    <div className="toggle_items">Invites</div>
     </div>
     <hr className="admin_hr"/>
     <div className="search_panel">

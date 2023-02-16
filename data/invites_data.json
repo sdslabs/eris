@@ -1,0 +1,81 @@
+[{
+    "id": 1,
+    "name": "devpulse",
+    "email": "",
+    "role": "admin",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 2,
+    "name": "linklinks",
+    "email": "",
+    "role": "admin",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 3,
+    "name": "centizu",
+    "email": "",
+    "role": "admin",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 4,
+    "name": "dynabox",
+    "email": "",
+    "role": "admin",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 5,
+    "name": "avaveo",
+    "email": "",
+    "role": "user",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 6,
+    "name": "demivee",
+    "email": "",
+    "role": "user",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 7,
+    "name": "jayo",
+    "email": "",
+    "role": "user",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 8,
+    "name": "blognation",
+    "email": "",
+    "role": "user",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 9,
+    "name": "podcat",
+    "email": "",
+    "role": "user",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}, {
+    "id": 10,
+    "name": "layo",
+    "email": "",
+    "role": "user",
+    "date": "2015-01-01T00:00:00.000Z",
+    "invitedby": "admin",
+    "github": ""
+}]

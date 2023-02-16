@@ -4,6 +4,7 @@ import Icons from "../../components/icons_verify";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
+import Link from "next/link";
 
 const VerifyEmailPage = () => {
   return (
@@ -15,7 +16,7 @@ const VerifyEmailPage = () => {
     <div className="centred_img">
     <Carousel />
     </div>
-  </div> 
+  </div>
   <div className="split_right ">
     <div className="signup">
     <Icons />
@@ -28,7 +29,7 @@ const VerifyEmailPage = () => {
         <p className="green">test@gmail.com</p>
         <p className="otp">OTP</p>
         <Input />
-          <p>Didnt't get the otp? <a href="#" className="green underline"> Resend OTP</a> </p>
+          <p>Didnt get the otp? <Link href="#" className="green underline"> Resend OTP</Link> </p>
         </div>
         <div>
           <Button1

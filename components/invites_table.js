@@ -1,5 +1,5 @@
 import React from "react";
-import InvitesData from "./invites_data";
+import data from "../data/invites_data.json"
 
 const InvitesTable = ({ text }) => {
 
@@ -8,14 +8,26 @@ const InvitesTable = ({ text }) => {
       <table className="admin_table">
         <tbody>
         <tr>
-          <th style={{width: "25%"}}>NAME</th>
-          <th style={{width: "25%"}}>EMAIL</th>
-          <th style={{width: "10%"}}>ROLE</th>
-          <th style={{width: "10%"}}>DATE INVITED</th>
-          <th style={{width: "15%"}}>INVITED BY</th>
-          <th style={{width: "15%"}}>GITHUB</th>
+          <th style={{width: "25%"}}><b>NAME</b></th>
+          <th style={{width: "25%"}}><b>EMAIL</b></th>
+          <th style={{width: "10%"}}><b>ROLE</b></th>
+          <th style={{width: "10%"}}><b>DATE INVITED</b></th>
+          <th style={{width: "15%"}}><b>INVITED BY</b></th>
+          <th style={{width: "15%"}}><b>GITHUB</b></th>
         </tr>
-        <InvitesData />
+
+        {data.map((item) => (
+           <tr key={item.id} className="invites_data">
+           <td>{item.name}</td>
+           <td>{item.email}</td>
+           <td>{item.role}</td>
+           <td>{item.date}</td>
+           <td>{item.invitedby}</td>
+           <td>{item.github}</td>
+         </tr>
+        ))}
+
+
         </tbody>
       </table>
 
