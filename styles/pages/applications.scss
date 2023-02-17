@@ -1,0 +1,53 @@
+.app_div{
+    width: auto;
+    height: auto;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    border: 2px solid rgba(216,216,216,255);
+    padding: 2rem 4rem;
+    border-radius: 5px;
+}
+
+.app_img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 5px;
+}
+
+.app_box{
+    display: flex;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    border: 2px solid rgba(216,216,216,255);
+    padding: 1rem 2rem;
+    overflow-y: hidden;
+    border-radius: 5px;
+    padding: 7%;
+}
+
+.app_image{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 5px;
+}
+
+.app_data{
+    margin-left: 5%;
+}
+
+.applications{
+    display: flex;
+}
+
+.application_list{
+    width: 65%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 3rem;
+}
+
+.application_data{
+    width: 30%;
+    display: flex;
+}

@@ -3,6 +3,8 @@ import Labs from "../public/images/labs logo.png";
 import Users from "../public/images/users.svg";
 import Applications from "../public/images/applications.svg";
 import Settings from "../public/images/settings.svg";
+import Logout from "../public/images/logout.svg";
+import Test from "../public/images/test.jpg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,6 +26,16 @@ const LeftPanel = ({activity1, activity2, activity3, state1, state2, state3}) =>
       <Image src={Settings} alt="settings" />
       <p className={state3} >Settings</p>
     </Link>
+    <div className="logout centre">
+    <div className="logout_image">
+      <Image className="logout_image" src={Test}/>
+    </div>
+    <div className="logout_text">
+      <p style={{color:"white", fontSize: "1.3rem"}}>Ada Merlin</p>
+      <p style={{color:"white"}}>user@gmail.com</p>
+    </div>
+    <Image className="logout_logo" src={Logout} alt="logout" />
+    </div>
     </div>
   );
 };

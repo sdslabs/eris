@@ -1,10 +1,35 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import Popup from "./popup";
-import data from "../data/users_data.json"
+import Data from "../data/users_data.json"
 
 const UserTable = ({ text }) => {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {setIsOpen(!isOpen);}
+
+  const [post, setPost] = useState([]);
+  const [number, setNumber] = useState(1); // No of pages
+  const [postPerPage] = useState(2);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const data = Data;
+      setPost(data);
+    };
+    fetchApi();
+  }, []);
+
+  const lastPost = number * postPerPage;
+  const firstPost = lastPost - postPerPage;
+  const currentPost = post.slice(firstPost, lastPost);
+  const pageNumber = [];
+
+  for (let i = 1; i <= Math.ceil(post.length / postPerPage); i++) {
+    pageNumber.push(i);
+  }
+
+  const ChangePage = (pageNumber) => {
+    setNumber(pageNumber);
+  };
   return (
     <div>
       <table className="user_table">
@@ -16,34 +41,54 @@ const UserTable = ({ text }) => {
           <th style={{width: "20%"}}><b>GITHUB</b></th>
           <th style={{width: "5%"}}></th>
         </tr>
-        {data.map((item) => (
-           <tr key={item.id} className="users_data">
-           <td>{item.name}</td>
-           <td>{item.email}</td>
-           <td>{item.role}</td>
-           <td>{item.github}</td>
-           <td>
-             <input
-               className="popup_button"
-               type="button"
-               value=":"
-               onClick={togglePopup}
-             />
-             {isOpen && <Popup content={
-             <>
-               <div className="popup_content">Remove user</div>
-               <div className="popup_content">Ban user</div>
-               <div className="popup_content">Make user</div>
-             </>
-             }
-             handleClose={togglePopup}
-             />}
-           </td>
-         </tr>
-        ))}
+         {currentPost.map((Val) => {
+                return (
+                  <>
+                    <tr key={Val.id} className="users_data">
+                      <td> {Val.name} </td>
+                      <td> {Val.email} </td>
+                      <td> {Val.role} </td>
+                      <td> {Val.github} </td>
+                      <td>
+                        <input
+                          className="popup_button"
+                          type="button"
+                          value=":"
+                          onClick={togglePopup}
+                        />
+                        {isOpen && <Popup content={
+                        <>
+                          <div className="popup_content">Remove user</div>
+                          <div className="popup_content">Ban user</div>
+                          <div className="popup_content">Make user</div>
+                        </>
+                        }
+                        handleClose={togglePopup}
+                        />}
+                      </td>
+                    </tr>
+                  </>
+                );
+              })}
         </tbody>
       </table>
-
+      <div>
+            <button onClick={() => setNumber(number - 1)}>
+              Previous
+            </button>
+            {pageNumber.map((Elem) => {
+              return (
+                <>
+                  <button onClick={() => ChangePage(Elem)}>
+                    {Elem}
+                  </button>
+                </>
+              );
+            })}
+            <button onClick={() => setNumber(number + 1)}>
+              Next
+            </button>
+          </div>
     </div>
   );
 };

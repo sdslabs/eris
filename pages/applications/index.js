@@ -2,9 +2,11 @@ import React from "react";
 import LeftPanel from "../../components/leftPanel";
 import Searchbar from "../../components/searchbar";
 import Buttons from "../../components/admin_buttons"
-import UserData from "../../components/user_table"
+import Apps from "../../components/apps"
+import AppBox from "../../components/appBox"
 import Sort from "../../public/images/sort.svg"
 import AppAdd from "../../public/images/app_add.svg"
+import Test from "../../public/images/test.jpg"
 
 const AdminPage = ({ refs }) => {
 return (
@@ -22,15 +24,50 @@ return (
     <h1 className="admin_heading">Applications</h1>
     <div className="search_panel">
     <Searchbar
-    text={"Search user by name or email"}/>
+    text={"Search application"}/>
     <Buttons
     text1="Sort"
     text2="Add App"
     img1={Sort}
     img2={AppAdd}/>
     </div>
-    <div className="users_data">
-    {/* <UserData /> */}
+    <div className="applications">
+    <div className="application_list">
+    <Apps
+    img={Test}
+    name="Quizio" />
+       <Apps
+    img={Test}
+    name="Quizio" />
+       <Apps
+    img={Test}
+    name="Quizio" />
+       <Apps
+    img={Test}
+    name="Quizio" />
+       <Apps
+    img={Test}
+    name="Quizio" />
+       <Apps
+    img={Test}
+    name="Quizio" />
+       <Apps
+    img={Test}
+    name="Quizio" />
+       <Apps
+    img={Test}
+    name="Quizio" />
+       <Apps
+    img={Test}
+    name="Quizio" />
+    </div>
+    <div className="application_data">
+    <AppBox
+    img={Test}
+    name="Quizio"
+    des="App1"
+    href="quizio.com/profile"/>
+    </div>
     </div>
     </div>
 </div>
