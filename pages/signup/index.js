@@ -17,7 +17,7 @@ const SignupPage = () => {
   let sendRequest = async (e) => {
     e.preventDefault();
     try {
-      let res = await axios("http://10.25.1.18:9898/register", {
+      let res = await axios(process.env.NEXT_PUBLIC_SIGNUP, {
         method: "POST",
         body: JSON.stringify({
           flowID: FlowID,
@@ -41,7 +41,7 @@ const SignupPage = () => {
 
   useEffect(() =>{
     const createFLow= async ()=>{
-     const response=await axios.get("http://10.25.1.18:9898/register",{withCredentials: true})
+     const response=await axios.get(process.env.NEXT_PUBLIC_SIGNUP,{withCredentials: true})
      setFlowID(response.flowID)
      setCsrfToken(response.csrf_token)
     }

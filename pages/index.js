@@ -32,7 +32,7 @@ const LoginPage = () => {
   let sendRequest = async (e) => {
     e.preventDefault();
     try {
-      let res = await axios("http://localhost:9898/login", {
+      let res = await axios(process.env.NEXT_PUBLIC_LOGIN, {
         method: "POST",
         body: JSON.stringify({
           flowID: FlowID,
@@ -57,7 +57,7 @@ const LoginPage = () => {
 
 useEffect(() =>{
  const createFLow= async ()=>{
-  const response = await axios.get("http://localhost:9898/login",{withCredentials: true});
+  const response = await axios.get(process.env.NEXT_PUBLIC_LOGIN,{withCredentials: true});
   setFlowID(response.flowID)
   setCsrfToken(response.csrf_token)
   }
