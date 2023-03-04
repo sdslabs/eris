@@ -6,6 +6,11 @@ import Image from "next/image";
 import Carousel from "../../components/carousel";
 
 const SetPasswordPage = () => {
+  // e.preventDefault();
+  //   const response=await axios.get("http://localhost:9898/register",{withCredentials: true})
+  //   setFlowID(response.flowID)
+  //   setCsrfToken(response.csrf_token)
+  //   console.log("cookie dekh")
   return (
 <div>
   <div className="split_left">

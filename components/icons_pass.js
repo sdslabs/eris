@@ -12,8 +12,6 @@ const Icons = () => {
         <tbody>
         <tr>
           <td><Image className="icon" src={Create_2} alt="create" /></td>
-          <td><hr className="icon_hr"/></td>
-          <td><Image className="icon" src={Verify_3} alt="verify" /></td>
           <td><hr className="icon_hr" /></td>
           <td><Image className="icon" src={Set_2} alt="set" /></td>
         </tr>
