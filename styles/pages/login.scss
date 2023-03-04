@@ -5,7 +5,7 @@
   left: 0;
   background-color: #191919  ;
   }
-  
+
 .split_right{
   width: 54.167%;
   height: 100%;
@@ -14,13 +14,13 @@
   display: flex;
   align-items: center;
   background-color: white;
-} 
-  
+}
+
 .login {
   width: 50%;
-  margin: auto;  
+  margin: auto;
 }
-  
+
 .centred_img{
   position: absolute;
   top: 50%;
@@ -34,6 +34,7 @@
 
 .passEye{
   color: #939393;
+  margin-right: 0.5rem;
 }
 
 .or {
@@ -45,7 +46,8 @@
 }
 
 .option_hr{
-  width: 12.3vw;
+  width: 12vw;
+  margin: 0 -1rem;
 }
 
 .tickBox{
@@ -55,5 +57,5 @@
 
 .loginpage{
   display:flex;
-  flex-direction: row; 
+  flex-direction: row;
 }

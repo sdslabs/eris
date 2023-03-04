@@ -1,4 +1,4 @@
-import Button1 from "../../components/button1";
+import ButtonSubmit from "../../components/button_submit";
 import Input from "../../components/input_box";
 import Icons from "../../components/icons_verify";
 import Labs from "../../public/images/labs logo.png";
@@ -17,7 +17,7 @@ const VerifyEmailPage = () => {
     <Carousel />
     </div>
   </div>
-  <div className="split_right ">
+  <div className="top">
     <div className="signup">
     <Icons />
       <div>
@@ -32,7 +32,7 @@ const VerifyEmailPage = () => {
           <p>Didnt get the otp? <Link href="#" className="green underline"> Resend OTP</Link> </p>
         </div>
         <div>
-          <Button1
+          <ButtonSubmit
             text={"Create account"}
           />
         </div>

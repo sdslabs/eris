@@ -1,4 +1,4 @@
-.button1 {
+.button_submit {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -14,12 +14,12 @@
   font-size: 16px;
   margin-top: 3rem;
 }
-    
+
 .inactive1  {
     border: 0;
     background-color: #6B6B6B;
 }
-  
-.button1:hover{
+
+.button_submit:hover{
   background-color: #393939;
 }

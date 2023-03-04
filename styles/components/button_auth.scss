@@ -1,4 +1,4 @@
-.button2 {
+.button_auth {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -13,12 +13,12 @@
     border: 0;
     background-color: #FFFFFF;
     border: 1px solid #D7D7D7;
-    font-size: 0.9rem;
+    font-size: 1rem;
     background-image: url("../../public/images/google\ icon.svg");
     background-repeat: no-repeat;
-    background-position: 20%;
- 
-    
+    background-position: 30%;
+
+
     .inactive2 {
       background-color: #F1F1F1;
       border: 1px solid #191919;
@@ -26,4 +26,3 @@
   }
 
 
-  

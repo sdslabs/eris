@@ -1,4 +1,4 @@
-import Button1 from "../../components/button1";
+import ButtonSubmit from "../../components/button_submit";
 import Input from "../../components/input_box";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
@@ -23,12 +23,12 @@ const RecoveryPage = () => {
             <div className="form">
                 <div>
                     <p>Email address</p>
-                    <Input 
+                    <Input
                         text={"Enter your registered email address"}
                     />
                 </div>
                 <div>
-                    <Button1
+                    <ButtonSubmit
                         text={"Send reset link"}
                     />
                 </div>

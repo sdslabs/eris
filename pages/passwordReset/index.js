@@ -1,4 +1,4 @@
-import Button1 from "../../components/button1";
+import ButtonSubmit from "../../components/button_submit";
 import PasswordValidation from "../../components/passwordValidation";
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
@@ -24,7 +24,7 @@ const passwordReset = () => {
         <PasswordValidation />
       </div>
       <div>
-        <Button1 
+        <ButtonSubmit
           text={"Login"}/>
       </div>
     </div>

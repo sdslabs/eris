@@ -1,4 +1,4 @@
-import Button1 from "../../components/button1";
+import ButtonSubmit from "../../components/button_submit";
 import PasswordValidation from "../../components/passwordValidation";
 import Icons from "../../components/icons_pass";
 import Labs from "../../public/images/labs logo.png";
@@ -15,18 +15,18 @@ const SetPasswordPage = () => {
     <div className="centred_img">
     <Carousel />
     </div>
-  </div> 
+  </div>
   <div className="split_right ">
     <div className="signup">
     <Icons />
       <div>
         <h1>Set <span className="green">Password</span></h1>
       </div>
-      <div className="form">  
+      <div className="form">
         <PasswordValidation />
       </div>
       <div>
-        <Button1 
+        <ButtonSubmit
           text={"Confirm"}/>
       </div>
     </div>
