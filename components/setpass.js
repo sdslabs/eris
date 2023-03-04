@@ -4,9 +4,7 @@ import Icons from "./icons_pass";
 
 const SetPassword = () => {
   return (
-    <div className="signup">
-        
-    <Icons />
+    <div className="slide-in">
       <div>
         <h1>Set <span className="green">Password</span></h1>
       </div>

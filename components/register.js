@@ -4,7 +4,7 @@ import Icons from "./icons";
 
 import Link from "next/link";
 
-const Signup = () => {
+const Signup = ({ handleClick }) => {
   const [inputActive1, setInputActive1] = useState(false);
   const [inputActive2, setInputActive2] = useState(false);
   const [inputActive3, setInputActive3] = useState(false);
@@ -18,10 +18,8 @@ const signup=()=>{
     console.log("urmom")
 }
 return (
-<div className='signup'>
-<div className="icons">
-      <Icons />
-      </div>
+<div className='slide-out'>
+
       <div>
         <h1>Sign <span className="green">up</span></h1>
       </div>
@@ -69,7 +67,7 @@ return (
           </div>
         </div>
         <div>
-        <button type="submit" className="button_submit">
+        <button type="submit" className="button_submit" onClick={handleClick}>
           Create Account
         </button>
         </div>

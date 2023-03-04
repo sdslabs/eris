@@ -4,11 +4,11 @@ import Verify_3 from "../public/images/Verify_done.svg";
 import Set_2 from "../public/images/Set_2.svg";
 import Image from "next/image";
 
-const Icons = () => {
+const IconsPass = () => {
 
       return (
         <div className="icon_box">
-        <table>
+        <table className="icon_table">
         <tbody>
         <tr>
           <td><Image className="icon" src={Create_2} alt="create" /></td>
@@ -21,6 +21,6 @@ const Icons = () => {
       );
     };
     
-    export default Icons;
+    export default IconsPass;
     
     

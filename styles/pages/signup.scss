@@ -1,6 +1,7 @@
 .signup{
-    width: 50%;
     margin: auto;
+    margin-top:5rem;
+    min-width: 50%;
 }
 
 .top{
@@ -48,3 +49,27 @@
 .icon_table{
     margin: auto;
 }
+
+  
+  .slide-in {
+    animation: slide-in 0.5s forwards;
+  }
+  
+  @keyframes slide-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
