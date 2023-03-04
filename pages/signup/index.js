@@ -10,43 +10,21 @@ import Link from "next/link";
 const SignupPage = () => {
   const [inputActive1, setInputActive1] = useState(false);
   const [inputActive2, setInputActive2] = useState(false);
-
+  const [inputActive3, setInputActive3] = useState(false);
+  const [inputActive4, setInputActive4] = useState(false);
+  const [FlowID, setFlowID] = useState("");
+  const [CsrfToken, setCsrfToken] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
 
-  let sendRequest = async (e) => {
+  let signuppost = async (e) => {
     e.preventDefault();
-    try {
-      let res = await axios("http://10.25.1.18:9898/register", {
-        method: "POST",
-        body: JSON.stringify({
-          flowID: FlowID,
-          csrf_token: CsrfToken,
-          password: pass,
-          identifier: email,
-        }),
-      });
-      let resJson = await res.json();
-      if (res.status === 200) {
-        setEmail("");
-        setPass("");
-        console.log();
-      } else {
-        setMessage("Some error occured");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    const response=await axios.get("http://localhost:9898/register",{withCredentials: true})
+    setFlowID(response.flowID)
+    setCsrfToken(response.csrf_token)
+    console.log("cookie dekh")
   };
-
-  useEffect(() =>{
-    const createFLow= async ()=>{
-     const response=await axios.get("http://10.25.1.18:9898/register",{withCredentials: true})
-     setFlowID(response.flowID)
-     setCsrfToken(response.csrf_token)
-    }
-    createFLow()
-   }, []);
 
 return (
 <div>
@@ -67,7 +45,7 @@ return (
         <h1>Sign <span className="green">up</span></h1>
       </div>
       <div className="form">
-      <form onSubmit={sendRequest}>
+      <form onSubmit={signuppost}>
         <div>
           <p>Full name</p>
           <div className={"inputBox" + " " + inputActive1}>
@@ -92,6 +70,19 @@ return (
             placeholder="Enter your email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          >
+          </input>
+          </div>
+          <p>Phone Number</p>
+          <div className={"inputBox" + " " + inputActive3}>
+          <input
+            type="text"
+            onFocus={() => setInputActive3(!inputActive3)}
+            onBlur={() => setInputActive3(!inputActive3)}
+            className="input"
+            placeholder="Enter your Phone Number"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
           >
           </input>
           </div>

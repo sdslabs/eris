@@ -8,12 +8,10 @@ const Icons = () => {
 
       return (
         <div className="icon_box">
-        <table>
+        <table className="icon_table">
         <tbody>
         <tr>
           <td><Image className="icon" src={Create_1} alt="create" /></td>
-          <td><hr className="icon_hr"/></td>
-          <td><Image className="icon" src={Verify_1} alt="verify" /></td>
           <td><hr className="icon_hr" /></td>
           <td><Image className="icon" src={Set_1} alt="set" /></td>
         </tr>
