@@ -47,6 +47,7 @@ const LoginPage = () => {
         setEmail("");
         setPass("");
         console.log("logged in");
+        //res.redirect("/dashboard")
       } else {
         setMessage("Some error occured");
       }
