@@ -2,14 +2,9 @@ import { React, useState } from "react";
 import Password from "./password";
 import ConfirmPassword from "./confirmPassword";
 
-function PasswordValidation(){
+function PasswordValidation({passwordInput,setPasswordInput}){
 const [passwordError, setPasswordErr] = useState("");
 const [confirmPasswordError, setConfirmPasswordError] = useState("");
-const [passwordInput, setPasswordInput]= useState({
-    password:'',
-    confirmPassword:''
-})
-
 const handlePasswordChange =(evnt)=>{
     const passwordInputValue = evnt.target.value.trim();
     const passwordInputFieldName = evnt.target.name;

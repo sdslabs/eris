@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
-import ButtonAuth from "../../components/button_auth";
 import Icons from "../../components/icons";
 import IconsPass from '../../components/icons_pass';
 import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
 import Carousel from "../../components/carousel";
-import Link from "next/link";
 import SetPassword from '../../components/setpass';
 import Signup from '../../components/register';
 
 const SignupPage = () => {
   const [showSignup, setShowSignup] = useState(true);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
   const handleButtonClick = (event) => {
     event.preventDefault()
     setShowSignup(!showSignup);
@@ -33,14 +33,14 @@ const SignupPage = () => {
             <div>
           <Icons />
           </div>
-            <Signup handleClick={handleButtonClick}/>
+            <Signup handleClick={handleButtonClick} name={name} email={email} number={number} setEmail={setEmail} setName={setName} setNumber={setNumber}/>
             </div>
         ):(
           <div>
             <div>
               <IconsPass/>
               </div>
-          <SetPassword className='slide-in'/>
+          <SetPassword className='slide-in' name={name} email={email} number={number} setEmail={setEmail} setName={setName} setNumber={setNumber}/>
           </div>
         )
         }

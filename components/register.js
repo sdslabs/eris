@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ButtonAuth from "./button_auth";
-import Icons from "./icons";
 
 import Link from "next/link";
 
-const Signup = ({ handleClick }) => {
+const Signup = ({ handleClick,name,email,number, setEmail,setName,setNumber }) => {
   const [inputActive1, setInputActive1] = useState(false);
   const [inputActive2, setInputActive2] = useState(false);
   const [inputActive3, setInputActive3] = useState(false);
-  const [FlowID, setFlowID] = useState("");
-  const [CsrfToken, setCsrfToken] = useState("");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
-
-const signup=()=>{
-    console.log("urmom")
-}
 return (
 <div className='slide-out'>
 
@@ -24,7 +14,7 @@ return (
         <h1>Sign <span className="green">up</span></h1>
       </div>
       <div className="form">
-      <form onSubmit={signup}>
+      <form>
         <div>
           <p>Full name</p>
           <div className={"inputBox" + " " + inputActive1}>

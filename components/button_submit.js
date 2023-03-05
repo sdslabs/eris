@@ -1,10 +1,10 @@
 import React from "react";
 
-const ButtonSubmit = ({ text }) => {
+const ButtonSubmit = ({ text, func}) => {
 
   return (
     <div>
-    <button className="button_submit">
+    <button type="submit" className="button_submit" onClick={func} >
       {text}
     </button>
     </div>
