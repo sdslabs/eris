@@ -19,16 +19,14 @@ const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
       let res = await axios.post(
         "http://localhost:9898/register",
         {
-          body: {
-            csrf_token: getResponse.data.csrf_token,
             flowID: getResponse.data.flowID,
+            csrf_token: getResponse.data.csrf_token,
             password: passwordInput.password,
             traits: {
               email: email,
-              number: number,
               name: name,
+              phone_number: number,
             },
-          },
         },
         {
           withCredentials: true,
