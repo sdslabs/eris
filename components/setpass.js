@@ -7,6 +7,8 @@ const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
     password: "",
     confirmPassword: "",
   });
+  const [passwordError, setPasswordErr] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const func = async (event) => {
     event.preventDefault();
     const getResponse = await axios.get("http://localhost:9898/register", {
@@ -59,11 +61,15 @@ const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
         <PasswordValidation
           passwordInput={passwordInput}
           setPasswordInput={setPasswordInput}
+          setConfirmPasswordError = {setConfirmPasswordError}
+          confirmPasswordError = {confirmPasswordError}
+          passwordError = {passwordError}
+          setPasswordErr = {setPasswordErr}
         />
       </div>
       <div>
         <ButtonSubmit
-          text={"Confirm"} func={func}/>
+          text={"Confirm"} func={func} err1 = {confirmPasswordError} err2 = {passwordError} password={passwordInput.password} confirmPassword = {passwordInput.confirmPassword}/>
       </div>
     </div>
   );
