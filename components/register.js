@@ -3,7 +3,7 @@ import ButtonAuth from "./button_auth";
 
 import Link from "next/link";
 
-const Signup = ({ handleClick,name,email,number, setEmail,setName,setNumber }) => {
+const Signup = ({ handleClick,name,email,number, setEmail,setName,setNumber,tried }) => {
   const [inputActive1, setInputActive1] = useState(false);
   const [inputActive2, setInputActive2] = useState(false);
   const [inputActive3, setInputActive3] = useState(false);
@@ -57,7 +57,7 @@ return (
           </div>
         </div>
         <div>
-        <button type="submit" className="button_submit" onClick={handleClick}>
+        <button type="submit" className="button_submit" onClick={handleClick} disabled={(!name || !number || !email )}>
           Create Account
         </button>
         </div>

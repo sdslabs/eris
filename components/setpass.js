@@ -7,27 +7,22 @@ const SetPassword = ({name, number, email,setEmail,setName, setNumber}) => {
         password:'',
         confirmPassword:''
     })
-    const [FlowID, setFlowID] = useState("");
-    const [CsrfToken, setCsrfToken] = useState("");
     const func = async (event) =>{
         event.preventDefault()
         const response = await axios.get("http://localhost:9898/register",{withCredentials: true});
-        setFlowID(response.flowID)
-        setCsrfToken(response.csrf_token)
         try{
             let res= await axios.post("http://localhost:9898/register",{
-                body: JSON.stringify({
-                    csrf_token: CsrfToken,
-                    flowID: FlowID,
+                body: {
+                    csrf_token: response.data.csrf_token,
+                    flowID: response.data.flowID,
                     password:passwordInput.password,
                     traits:{
                         email:email,
                         number:number,
                         name:name
                     }
-                })
-            })
-            let resJson = await res.join();
+                }
+            },{withCredentials: true})
             if( res.status == 200){
                 setPasswordInput({
                     password:'',
@@ -53,7 +48,7 @@ const SetPassword = ({name, number, email,setEmail,setName, setNumber}) => {
       </div>
       <div>
         <ButtonSubmit
-          text={"Confirm"} func={func}/>
+          text={"Confirm"} func={func} password={passwordInput.password} confirmed={passwordInput.confirmPassword}/>
       </div>
     </div>
   );

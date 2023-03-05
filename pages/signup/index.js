@@ -9,12 +9,14 @@ import Signup from '../../components/register';
 
 const SignupPage = () => {
   const [showSignup, setShowSignup] = useState(true);
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [email, setEmail] = useState('');
+  const [tried, setTried] = useState(false);
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
   const handleButtonClick = (event) => {
     event.preventDefault()
     setShowSignup(!showSignup);
+
   };
   return (
     <div>
@@ -33,7 +35,7 @@ const SignupPage = () => {
             <div>
           <Icons />
           </div>
-            <Signup handleClick={handleButtonClick} name={name} email={email} number={number} setEmail={setEmail} setName={setName} setNumber={setNumber}/>
+            <Signup handleClick={handleButtonClick} name={name} email={email} number={number} setEmail={setEmail} setName={setName} setNumber={setNumber} tried={tried} setTried={setTried}/>
             </div>
         ):(
           <div>
