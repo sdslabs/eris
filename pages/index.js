@@ -16,8 +16,6 @@ const LoginPage = () => {
   const [inputActive2, setInputActive2] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const [eyeCrossed, setEyeCrossed] = useState(false);
-  const [FlowID, setFlowID] = useState("");
-  const [CsrfToken, setCsrfToken] = useState("");
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
@@ -28,27 +26,27 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  let sendRequest = async (e) => {
-    e.preventDefault();
+  let sendRequest = async () => {
     try {
       const getResponse = await axios.get("http://localhost:9898/login", {
         withCredentials: true,
       });
-      setFlowID(getResponse.flowID);
-      setCsrfToken(getResponse.csrf_token);
-      let res = await axios("http://localhost:9898/login", {
-        method: "POST",
-        body: JSON.stringify({
-          flowID: FlowID,
-          csrf_token: CsrfToken,
+      const res = await axios.post(
+        "http://localhost:9898/login",
+        {
+          flowID: getResponse.data.flowID,
+          csrf_token: getResponse.data.csrf_token,
           password: pass,
           identifier: email,
-        }),
-      });
+        },
+        {
+          withCredentials: true,
+        }
+      );
       if (res.status === 200) {
         setEmail("");
         setPass("");
-        console.log();
+        console.log("logged in");
       } else {
         setMessage("Some error occured");
       }
@@ -75,62 +73,64 @@ const LoginPage = () => {
             </h1>
           </div>
           <div className="form">
-            <form onSubmit={sendRequest}>
-              <div>
-                <p>Email address</p>
-                <div className={"inputBox" + " " + inputActive1}>
-                  <input
-                    type="text"
-                    onFocus={() => setInputActive1(!inputActive1)}
-                    onBlur={() => setInputActive1(!inputActive1)}
-                    className="input"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  ></input>
-                </div>
-                <p>Password</p>
+            <div>
+              <p>Email address</p>
+              <div className={"inputBox" + " " + inputActive1}>
+                <input
+                  type="text"
+                  onFocus={() => setInputActive1(!inputActive1)}
+                  onBlur={() => setInputActive1(!inputActive1)}
+                  className="input"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></input>
+              </div>
+              <p>Password</p>
 
-                <div className={"inputBox" + " " + inputActive2}>
-                  {" "}
-                  <input
-                    type={passwordShown ? "text" : "password"}
-                    className="input"
-                    placeholder="Enter your password"
-                    value={pass}
-                    onFocus={() => setInputActive2(!inputActive2)}
-                    onBlur={() => setInputActive2(!inputActive2)}
-                    onChange={(e) => setPass(e.target.value)}
-                  ></input>
-                  <i
-                    className="passEye"
-                    onClick={() => {
-                      toggleEye();
-                      togglePasswordVisiblity();
-                    }}
-                  >
-                    {eyeCrossed ? eye : crossedEye}
-                  </i>{" "}
-                </div>
-                {/* <p className="text-danger">{passwordError}</p> */}
-              </div>
-              <div className="tickBox">
-                <input type="checkbox" className="checkbox" />
-                <label className="remember">Remember me</label>
-                <Link
-                  className=" underline green"
-                  href="/recover"
-                  style={{ float: "right" }}
+              <div className={"inputBox" + " " + inputActive2}>
+                {" "}
+                <input
+                  type={passwordShown ? "text" : "password"}
+                  className="input"
+                  placeholder="Enter your password"
+                  value={pass}
+                  onFocus={() => setInputActive2(!inputActive2)}
+                  onBlur={() => setInputActive2(!inputActive2)}
+                  onChange={(e) => setPass(e.target.value)}
+                ></input>
+                <i
+                  className="passEye"
+                  onClick={() => {
+                    toggleEye();
+                    togglePasswordVisiblity();
+                  }}
                 >
-                  Forgot password?
-                </Link>
+                  {eyeCrossed ? eye : crossedEye}
+                </i>{" "}
               </div>
-              <div>
-                <button type="submit" className="button_submit">
-                  Login
-                </button>
-              </div>
-            </form>
+              {/* <p className="text-danger">{passwordError}</p> */}
+            </div>
+            <div className="tickBox">
+              <input type="checkbox" className="checkbox" />
+              <label className="remember">Remember me</label>
+              <Link
+                className=" underline green"
+                href="/recover"
+                style={{ float: "right" }}
+              >
+                Forgot password?
+              </Link>
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="button_submit"
+                onClick={sendRequest}
+              >
+                Login
+              </button>
+            </div>
             <p>
               Dont have an account?{" "}
               <Link className="green underline" href="/signup">
