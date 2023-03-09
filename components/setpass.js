@@ -1,7 +1,9 @@
 import ButtonSubmit from "./button_submit";
 import PasswordValidation from "./passwordValidation";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
+
 const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
   const [passwordInput, setPasswordInput] = useState({
     password: "",
@@ -9,15 +11,16 @@ const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
   });
   const [passwordError, setPasswordErr] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
   const func = async (event) => {
     event.preventDefault();
-    const getResponse = await axios.get("http://localhost:9898/register", {
+    const getResponse = await axios.get(process.env.NEXT_PUBLIC_SIGNUP, {
       withCredentials: true,
     });
     console.log(getResponse.data.flowID);
     try {
       let res = await axios.post(
-        "http://localhost:9898/register",
+        process.env.NEXT_PUBLIC_SIGNUP,
         {
             flowID: getResponse.data.flowID,
             csrf_token: getResponse.data.csrf_token,
@@ -41,6 +44,7 @@ const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
         setName("");
         setNumber("");
         console.log("registered");
+        redirect()
       } else {
         console.log("error");
       }
@@ -48,6 +52,12 @@ const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
       console.log(err);
     }
   };
+
+const router = useRouter();
+const redirect = () =>{
+  router.push('dashboard');
+}
+
   return (
     <div className="slide-in">
       <div>

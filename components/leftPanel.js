@@ -28,7 +28,7 @@ const LeftPanel = ({activity1, activity2, activity3, state1, state2, state3}) =>
     </Link>
     <div className="logout centre">
     <div className="logout_image">
-      <Image className="logout_image" src={Test}/>
+      <Image className="logout_image" src={Test} alt="test"/>
     </div>
     <div className="logout_text">
       <p style={{color:"white", fontSize: "1.3rem"}}>Ada Merlin</p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import Icons from "../../components/icons";
 import IconsPass from '../../components/icons_pass';
 import Labs from "../../public/images/labs logo.png";
@@ -16,6 +16,7 @@ const SignupPage = () => {
     event.preventDefault()
     setShowSignup(!showSignup);
   };
+
   return (
     <div>
       <div className="split_left">
@@ -45,7 +46,7 @@ const SignupPage = () => {
         )
         }
           </div>
-       
+
       </div>
     </div>
   );

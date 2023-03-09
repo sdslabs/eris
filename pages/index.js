@@ -1,10 +1,10 @@
-//require("dotenv").config({ path: __dirname + '/../.env' })
 import ButtonAuth from "../components/button_auth";
 import Labs from "../public/images/labs logo.png";
 import axios from "axios";
 import Image from "next/image";
 import Carousel from "../components/carousel";
-import React, { useState, useEffect } from "react";
+import { React, useState } from "react";
+import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -28,11 +28,11 @@ const LoginPage = () => {
 
   let sendRequest = async () => {
     try {
-      const getResponse = await axios.get("http://localhost:9898/login", {
+      const getResponse = await axios.get(process.env.NEXT_PUBLIC_LOGIN, {
         withCredentials: true,
       });
       const res = await axios.post(
-        "http://localhost:9898/login",
+        process.env.NEXT_PUBLIC_LOGIN,
         {
           flowID: getResponse.data.flowID,
           csrf_token: getResponse.data.csrf_token,
@@ -47,14 +47,22 @@ const LoginPage = () => {
         setEmail("");
         setPass("");
         console.log("logged in");
-        //res.redirect("/dashboard")
+        return true
       } else {
         setMessage("Some error occured");
+        return false
       }
     } catch (err) {
       console.log(err);
+      return false
     }
   };
+
+const router = useRouter();
+const redirect = () =>{
+
+  router.push('dashboard');
+}
 
   return (
     <div className="loginpage">
@@ -127,7 +135,14 @@ const LoginPage = () => {
               <button
                 type="submit"
                 className="button_submit"
-                onClick={sendRequest}
+                onClick={async ()=>{
+                  if(await sendRequest()){
+                    console.log("redirect");
+                     redirect();
+                  }else{
+                    console.log("error")
+                  }
+                }}
               >
                 Login
               </button>
