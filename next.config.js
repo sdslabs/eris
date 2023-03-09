@@ -6,6 +6,7 @@ const nextConfig = {
     NEXT_PUBLIC_SIGNUP: process.env.NEXT_PUBLIC_SIGNUP,
     NEXT_PUBLIC_LOGOUT: process.env.NEXT_PUBLIC_LOGOUT,
     NEXT_PUBLIC_REDIRECT: process.env.NEXT_PUBLIC_REDIRECT,
+    NEXT_PUBLIC_RECOVERY: process.env.NEXT_PUBLIC_RECOVERY,
   }
 }
 
