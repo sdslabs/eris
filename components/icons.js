@@ -14,13 +14,14 @@ const Icons = () => {
           <td><Image className="icon" src={Create_1} alt="create" /></td>
           <td><hr className="icon_hr" /></td>
           <td><Image className="icon" src={Set_1} alt="set" /></td>
+          <td><hr className="icon_hr" /></td>
+          <td><Image className="icon" src={Verify_1} alt="verify" /></td>
         </tr>
         </tbody>
-      </table>   
+      </table>
       </div>
       );
     };
-    
+
     export default Icons;
-    
-    
+

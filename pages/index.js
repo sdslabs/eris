@@ -25,6 +25,7 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   let sendRequest = async () => {
     try {
@@ -118,7 +119,7 @@ const redirect = () =>{
                   {eyeCrossed ? eye : crossedEye}
                 </i>{" "}
               </div>
-              {/* <p className="text-danger">{passwordError}</p> */}
+              <p className="text-danger">{passwordError}</p>
             </div>
             <div className="tickBox">
               <input type="checkbox" className="checkbox" />
@@ -141,6 +142,7 @@ const redirect = () =>{
                      redirect();
                   }else{
                     console.log("error")
+                    setPasswordError("Invalid email or password");
                   }
                 }}
               >

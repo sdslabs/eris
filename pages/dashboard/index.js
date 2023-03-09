@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import {React, useState} from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
+
+  const [logoutError, setLogoutError] = useState("");
 
     let sendRequest = async () => {
       try {
@@ -21,19 +24,39 @@ const Dashboard = () => {
         );
         if (res.status === 200) {
           console.log("logged out");
+          return true
         } else {
           setMessage("Some error occured");
+          setLogoutError("Logout failed. Try again.");
+          return false
         }
       } catch (err) {
         console.log(err);
+        setLogoutError("Logout failed. Try again.");
+        return false
       }
     };
 
+const router = useRouter();
+const redirect = () =>{
+  router.push('/');
+}
+
   return (
-    <div>
-    <button onClick={sendRequest}>
+    <div >
+      <div className="active">
+    <button className="button_submit" onClick={async ()=>{
+                  if(await sendRequest()){
+                    console.log("redirect");
+                     redirect();
+                  }else{
+                    console.log("error")
+                  }
+                }}>
         Logout
     </button>
+    <p className="text-danger">{logoutError}</p>
+      </div>
     </div>
   );
 };

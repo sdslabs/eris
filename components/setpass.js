@@ -1,16 +1,16 @@
 import ButtonSubmit from "./button_submit";
 import PasswordValidation from "./passwordValidation";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { React, useState } from "react";
 import axios from "axios";
 
-const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
+const SetPassword = ({ handleClick, name, number, email, setEmail, setName, setNumber }) => {
   const [passwordInput, setPasswordInput] = useState({
     password: "",
     confirmPassword: "",
   });
   const [passwordError, setPasswordErr] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [registrationError, setRegistrationError] = useState("");
 
   const func = async (event) => {
     event.preventDefault();
@@ -44,22 +44,19 @@ const SetPassword = ({ name, number, email, setEmail, setName, setNumber }) => {
         setName("");
         setNumber("");
         console.log("registered");
-        redirect()
+        handleClick();
       } else {
         console.log("error");
+        setRegistrationError("Registration failed. Try again.");
       }
     } catch (err) {
       console.log(err);
+      setRegistrationError("Password too weak. Try again with a stronger password.");
     }
   };
 
-const router = useRouter();
-const redirect = () =>{
-  router.push('dashboard');
-}
-
   return (
-    <div className="slide-in">
+    <div className="slide-out">
       <div>
         <h1>
           Set <span className="green">Password</span>
@@ -75,6 +72,7 @@ const redirect = () =>{
           setPasswordErr = {setPasswordErr}
         />
       </div>
+      <p className="text-danger">{registrationError}</p>
       <div>
         <ButtonSubmit
           text={"Confirm"} func={func} err1 = {confirmPasswordError} err2 = {passwordError} password={passwordInput.password} confirmPassword = {passwordInput.confirmPassword}/>
