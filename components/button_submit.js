@@ -3,7 +3,7 @@ import React from "react";
 const ButtonSubmit = ({ text, func, err1,err2, password , confirmedPassword}) => {
   return (
     <div>
-    <button type="submit" className="button_submit" onClick={func} disabled={((err1)+(err2)) || password.length==0 || confirmedPassword==0}>
+    <button type="submit" className="button_submit" onClick={func} disabled={((err1)+(err2)) || password=="" || confirmedPassword==0}>
       {text}
     </button>
     </div>
