@@ -1,7 +1,7 @@
 .signup{
     margin: auto;
     margin-top:5rem;
-    min-width: 50%;
+    width: 50%;
 }
 
 .top{
@@ -33,7 +33,7 @@
 }
 
 .icon_hr{
-    width: 5vw;
+    width: 4.5vw;
     margin: -0.7rem -3rem;
 }
 
@@ -50,11 +50,10 @@
     margin: auto;
 }
 
-  
   .slide-in {
     animation: slide-in 0.5s forwards;
   }
-  
+
   @keyframes slide-out {
     from {
       transform: translateX(0);
@@ -63,7 +62,7 @@
       transform: translateX(-100%);
     }
   }
-  
+
   @keyframes slide-in {
     from {
       transform: translateX(100%);
@@ -72,4 +71,3 @@
       transform: translateX(0);
     }
   }
-  
