@@ -1,19 +1,35 @@
 import { React, useState } from "react";
 import Password from "./password";
 import ConfirmPassword from "./confirmPassword";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+const info = <FontAwesomeIcon icon={faInfoCircle} />;
 
 function PasswordValidation({passwordInput,setPasswordInput,confirmPasswordError,setConfirmPasswordError,passwordError, setPasswordErr}){
+
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseOver = () => {
+      setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+      setIsHovering(false);
+    };
+
+    const [greenBox, setGreenBox] = useState("");
+const [confirmGreenBox, setConfirmGreenBox] = useState("");
 const handlePasswordChange =(evnt)=>{
     const passwordInputValue = evnt.target.value.trim();
     const passwordInputFieldName = evnt.target.name;
     const NewPasswordInput = {...passwordInput,[passwordInputFieldName]:passwordInputValue}
-    setPasswordInput(NewPasswordInput); 
+    setPasswordInput(NewPasswordInput);
 }
 const handleValidation= (evnt)=>{
     const passwordInputValue = evnt.target.value.trim();
     const passwordInputFieldName = evnt.target.name;
 
-        //for password 
+        //for password
 if(passwordInputFieldName==='password'){
     const uppercaseRegExp   = /(?=.*?[A-Z])/;
     const lowercaseRegExp   = /(?=.*?[a-z])/;
@@ -29,32 +45,35 @@ if(passwordInputFieldName==='password'){
     const minLengthPassword =   minLengthRegExp.test(passwordInputValue);
 
     let errMsg ="";
+    let errcolor ="";
     if(passwordLength===0){
             errMsg="";
-    }else if(!uppercasePassword){
-            errMsg="At least one Uppercase";
-    }else if(!lowercasePassword){
-            errMsg="At least one Lowercase";
-    }else if(!digitsPassword){
-            errMsg="At least one digit";
-    }else if(!specialCharPassword){
-            errMsg="At least one Special Characters";
-    }else if(!minLengthPassword){
-            errMsg="At least minumum 8 characters";
+            errcolor="";
+    }else if(!uppercasePassword || !lowercasePassword || !digitsPassword || !specialCharPassword || !minLengthPassword){
+            errMsg="";
+            errcolor="red-box";
     }else{
         errMsg="";
+        errcolor="green-box";
     }
     setPasswordErr(errMsg);
+    setGreenBox(errcolor)
     }
 
     // for confirm password
-    if (passwordInputFieldName=== "confirmPassword" || 
-        (passwordInputFieldName==="password" && passwordInput.confirmPassword.length > 0)){    
-        if (passwordInput.confirmPassword!==passwordInput.password)
+    if (passwordInputFieldName=== "confirmPassword" ||
+        (passwordInputFieldName==="password" && passwordInput.confirmPassword.length > 0)){
+        if (passwordInput.confirmPassword.length===0){
+                setConfirmPasswordError ("");
+                setConfirmGreenBox("")
+        }
+        else if (passwordInput.confirmPassword!==passwordInput.password)
         {
-        setConfirmPasswordError ( "Confirm password is not matched" );
+                setConfirmPasswordError ("");
+                setConfirmGreenBox("red-box")
         } else {
-        setConfirmPasswordError ("");
+                setConfirmPasswordError ("");
+                setConfirmGreenBox("green-box")
         }
     }
 
@@ -62,20 +81,42 @@ if(passwordInputFieldName==='password'){
     return(
     <div className="row">
      <div className="col-sm-4">
-        <p>Password</p>
+        <p>
+            Password <i
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut} >
+                {info}
+            </i>
+        </p>
+        {isHovering && (
+        <div className="pass-rules">
+            Your password needs to have:
+        <ul>
+          <li>Minimum 8 characters</li>
+          <li>Atleast 1 uppercase character</li>
+          <li>Atleast 1 lowercase character</li>
+          <li>Atleast 1 special character</li>
+          <li>Atleast 1 digit</li>
+        </ul>
+        </div>
+        )}
+        <div className={greenBox}>
         <Password
         text={"Your password must contain 8 characters"}
-        handlePasswordChange={handlePasswordChange} 
-        handleValidation={handleValidation} 
-        passwordValue={passwordInput.password} 
+        handlePasswordChange={handlePasswordChange}
+        handleValidation={handleValidation}
+        passwordValue={passwordInput.password}
         passwordError={passwordError}/>
+        </div>
         <p>Confirm Password</p>
+        <div className={confirmGreenBox}>
         <ConfirmPassword
         text={"Re-enter your password"}
-        handlePasswordChange={handlePasswordChange} 
-        handleValidation={handleValidation} 
-        confirmPasswordValue={passwordInput.confirmPassword} 
+        handlePasswordChange={handlePasswordChange}
+        handleValidation={handleValidation}
+        confirmPasswordValue={passwordInput.confirmPassword}
         confirmPasswordError={confirmPasswordError}/>
+     </div>
      </div>
     </div>
     )

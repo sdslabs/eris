@@ -50,6 +50,26 @@
     margin: auto;
 }
 
+.pass-rules{
+    position: absolute;
+    top: 10rem;
+    left: 50%;
+    margin: 2rem auto;
+    background-color: white;
+    color: #393939;
+}
+
+.green-box{
+    background-color: #E5F5E0;
+    border-radius: 10px;
+    padding: 0 0.5rem;
+}
+.red-box{
+    background-color: #FDEDEC;
+    border-radius: 10px;
+    padding: 0 0.5rem;
+}
+
   .slide-in {
     animation: slide-in 0.5s forwards;
   }

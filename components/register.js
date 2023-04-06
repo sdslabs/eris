@@ -44,7 +44,7 @@ return (
           <p>Phone Number</p>
           <div className={"inputBox" + " " + inputActive3}>
             <input
-              type="text"
+              type="number"
               onFocus={() => setInputActive3(!inputActive3)}
               onBlur={() => setInputActive3(!inputActive3)}
               className="input"
