@@ -4,6 +4,9 @@ import Searchbar from "../../components/searchbar";
 import Buttons from "../../components/admin_buttons"
 import Apps from "../../components/apps"
 import AppBox from "../../components/appBox"
+import EditAppBox from "../../components/editAppBox"
+import NewAppBox from "../../components/newAppBox"
+import ApplicationsPopup from "../../components/appPop"
 import Sort from "../../public/images/sort.svg"
 import AppAdd from "../../public/images/app_add.svg"
 import Test from "../../public/images/gasper.png"
@@ -61,15 +64,36 @@ return (
     name="Cerebro" />
     </div>
     <div className="application_data">
-    <AppBox
-    img={Test}
-    name="Quizio"
-    des="App1"
-    href="quizio.com/profile"
-    domains="http://localhost:5005, sdslabs.co"
-    organisations={["SDSLabs", "DSG"]}
-    clkey="blabla"
-    clsecret="topsecret"/>
+
+   {/* <AppBox
+      img={Test}
+      name="Quizio"
+      des="App1"
+      href="quizio.com/profile"
+      domains="http://localhost:5005, sdslabs.co"
+      organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}
+      clkey="blabla"
+      clsecret="topsecret"/> */}
+
+   {/* <EditAppBox
+      img={Test}
+      name="Quizio"
+      des="App1"
+      href="quizio.com/profile"
+      domains="http://localhost:5005, sdslabs.co"
+      organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}/> */}
+
+   <NewAppBox
+      img={Test}
+      name="Enter the name of the app"
+      des="Enter the app ID"
+      href="Enter the redirect URL of the app"
+      domains="Enter the allowed domains of the app"
+      organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}
+      clkey="Enter the client key of the app"
+      clsecret="Enter the client secret of the app"/>
+
+
     </div>
     </div>
     </div>

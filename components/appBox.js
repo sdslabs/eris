@@ -14,18 +14,20 @@ const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret 
   return (
     <div className="app_box">
       <div className="app_topbox">
-        <div className="app_image"><Image className="app_image" src={img} alt="test" /></div>
+        <div className="app_image">
+          <Image className="app_image" src={img} alt="test" />
+        </div>
         <div className="app_data">
-            <p className="app_name" style={{marginTop:"5px"}}><b>{name}</b></p>
+            <p className="app_name" style={{marginTop:"5px"}}><b>{name}</b><span style={{float:"right"}} className="green underline"><b>Edit</b></span></p>
             <p className="app_description">{des}</p>
-            <p className="green underline"><Link target={"_blank"} href={href}>{href}</Link><Image src={Export} alt="export"/></p>
+            <p className="green perm"><Link target={"_blank"} href={href}>{href}</Link><Image style={{margin: "-2px 5px"}} src={Export} alt="export"/></p>
         </div>
       </div>
-        <div className="domains">
+        <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Allowed domains</p> <br/>
           <input type="text" value={domains} />
         </div>
-        <div className="organisations">
+        <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Organisations</p> <br/>
           <div className="org_div">
           {organisations.map((item, index) => (
@@ -35,7 +37,7 @@ const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret 
           ))}
           </div>
         </div>
-        <div className="key">
+        <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Client key</p> <br/>
           <div className="copy_div">
           <input
@@ -45,7 +47,7 @@ const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret 
           <Image src={CopyIcon} onClick={handleCopyClick} id="copy_icon"/>
           </div>
         </div>
-        <div className="secret">
+        <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Client secret</p> <br/>
           <div className="copy_div">
           <input
@@ -60,46 +62,3 @@ const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret 
 };
 
 export default AppBox;
-
-// import { useState } from "react";
-
-// function DropdownWithKeywords() {
-//   const [selectedItems, setSelectedItems] = useState([]);
-//   const [dropdownValue, setDropdownValue] = useState("");
-
-//   const handleSelect = (event) => {
-//     const selectedItem = event.target.value;
-//     setSelectedItems([...selectedItems, selectedItem]);
-//     setDropdownValue("");
-//   };
-
-//   const handleDelete = (itemToDelete) => {
-//     const newSelectedItems = selectedItems.filter(
-//       (item) => item !== itemToDelete
-//     );
-//     setSelectedItems(newSelectedItems);
-//   };
-
-//   return (
-//     <div>
-//       <select value={dropdownValue} onChange={handleSelect}>
-//         <option value="">--Select an item--</option>
-//         <option value="Item 1">Item 1</option>
-//         <option value="Item 2">Item 2</option>
-//         <option value="Item 3">Item 3</option>
-//       </select>
-//       <div>
-//         {selectedItems.map((item) => (
-//           <span key={item} className="keyword">
-//             {item}
-//             <span className="delete" onClick={() => handleDelete(item)}>
-//               &#10005;
-//             </span>
-//           </span>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default DropdownWithKeywords;
