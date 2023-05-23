@@ -1,11 +1,24 @@
 .app_div{
     width: auto;
-    height: auto;
+    max-height: 11rem;
     margin-right: 5%;
     margin-bottom: 5%;
     border: 2px solid rgba(216,216,216,255);
     padding: 2rem 4rem;
     border-radius: 5px;
+}
+
+.app_div:hover{
+    background-color: #F1F1F1;
+}
+
+.active_app_div{
+    border: 2px solid #59D887;
+    background-color: #E4F8EA;
+}
+
+.app_topbox{
+    display: flex;
 }
 
 .app_img{
@@ -15,7 +28,6 @@
 }
 
 .app_box{
-    display: flex;
     margin: auto;
     width: 100%;
     height: auto;
@@ -36,6 +48,41 @@
     margin-left: 5%;
 }
 
+.domains, .organisations, .key, .secret{
+    margin-top: 2rem;
+}
+
+.org_div{
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+    padding: 0.5rem;
+}
+
+.org_item{
+    display: flex;
+    background-color: #d7d7d7;
+    margin: 0 1rem;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: small;
+}
+
+.copy_div{
+    display:flex;
+    width: 100%;
+    border: 1px solid black;
+    align-items: center;
+}
+
+#copy_icon{
+    margin:0 5px;
+}
+
+#copy_icon:active{
+    transform: scale(0.9);
+}
+
 .applications{
     display: flex;
 }
@@ -51,3 +98,4 @@
     width: 30%;
     display: flex;
 }
+

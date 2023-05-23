@@ -13,6 +13,7 @@ return (
 <div>
     <div className="left_panel">
     <LeftPanel
+        page = {"user"}
         activity1={"active"}
         activity2={"inactive"}
         activity3={"inactive"}

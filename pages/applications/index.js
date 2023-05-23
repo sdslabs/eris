@@ -6,13 +6,16 @@ import Apps from "../../components/apps"
 import AppBox from "../../components/appBox"
 import Sort from "../../public/images/sort.svg"
 import AppAdd from "../../public/images/app_add.svg"
-import Test from "../../public/images/test.jpg"
+import Test from "../../public/images/gasper.png"
+import Gasper from "../../public/images/gasper.png"
+import Quizio from "../../public/images/quizio.svg"
 
 const AdminPage = ({ refs }) => {
 return (
 <div>
     <div className="left_panel">
     <LeftPanel
+        page = {"applications"}
         activity1={"inactive"}
         activity2={"active"}
         activity3={"inactive"}
@@ -34,39 +37,39 @@ return (
     <div className="applications">
     <div className="application_list">
     <Apps
-    img={Test}
+    id= "1"
+    img={Quizio}
     name="Quizio" />
        <Apps
-    img={Test}
-    name="Quizio" />
+    id= "2"
+    img={Gasper}
+    name="Gasper" />
        <Apps
     img={Test}
-    name="Quizio" />
+    name="Erdos" />
        <Apps
+    id= "3"
     img={Test}
-    name="Quizio" />
+    name="Rootex" />
        <Apps
+    id= "4"
     img={Test}
-    name="Quizio" />
+    name="Gasper" />
        <Apps
+    id= "5"
     img={Test}
-    name="Quizio" />
-       <Apps
-    img={Test}
-    name="Quizio" />
-       <Apps
-    img={Test}
-    name="Quizio" />
-       <Apps
-    img={Test}
-    name="Quizio" />
+    name="Cerebro" />
     </div>
     <div className="application_data">
     <AppBox
     img={Test}
     name="Quizio"
     des="App1"
-    href="quizio.com/profile"/>
+    href="quizio.com/profile"
+    domains="http://localhost:5005, sdslabs.co"
+    organisations={["SDSLabs", "DSG"]}
+    clkey="blabla"
+    clsecret="topsecret"/>
     </div>
     </div>
     </div>
