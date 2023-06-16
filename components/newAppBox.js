@@ -1,12 +1,9 @@
 import {React, useState} from "react";
 import ApplicationsPopup from "./appPop"
-import Export from "../public/images/export.svg"
 import Image from "next/image";
-import DefaulImage from "../public/images/default_img.svg"
-import Link from "next/link";
-import CopyIcon from "../public/images/copyicon.svg"
+import DefaultImage from "../public/images/default_img.svg"
 
-const NewAppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret }) => {
+const NewAppBox = ({ name, des, href, domains, clkey, clsecret, handleAppBox, handleEditAppBox }) => {
 
     const [click, setClick] = useState(false);
     const handleClick = () => {
@@ -30,46 +27,46 @@ const NewAppBox = ({ img, name, des, href, domains, organisations, clkey, clsecr
 
   return (
     <div className="app_box">
-       <div className="app_topbox">
-         <div className="app_image">
-             <Image className="app_image" src={DefaulImage} alt="test" />
-         </div>
-         <div className="new_app_data">
-             <p className="underline"><b>Upload Image</b></p>
-         </div>
-       </div>
-         <div className="app_box_children">
+        <div className="app_topbox">
+          <div className="app_image">
+            <Image className="app_image" src={DefaultImage} alt="test" />
+          </div>
+          <div className="new_app_data">
+            <p style={{cursor: "pointer"}} className="underline"><b>Upload Image</b></p>
+          </div>
+        </div>
+        <div className="app_box_children">
            <p style={{marginBottom: "-0.5rem"}}>Name</p> <br/>
            <input type="text" placeholder={name} />
-         </div>
-         <div className="app_box_children">
-           <p style={{marginBottom: "-0.5rem"}}>Id</p> <br/>
-           <input type="text" placeholder={des} />
-         </div>
-         <div className="app_box_children">
-           <p style={{marginBottom: "-0.5rem"}}>Organisations</p><br/>
+        </div>
+        <div className="app_box_children">
+          <p style={{marginBottom: "-0.5rem"}}>Id</p> <br/>
+          <input type="text" placeholder={des} />
+        </div>
+        <div className="app_box_children">
+          <p style={{marginBottom: "-0.5rem"}}>Organisations</p><br/>
           <div className="org_div">
           {selectedItems.map((item) => (
-          <span key={item} className="org_item">
-            {item}
-            <span
+            <span key={item} className="org_item">
+              {item}
+              <span
                 className="delete_org"
                 onClick={() => handleDelete(item)}>
               &#10005;
+              </span>
             </span>
-          </span>
-        ))}
-        <select
-          className="org_div_select"
-          value={dropdownValue}
-          onChange={handleSelect}>
-            <option value=""></option>
-            <option value="DSG">DSG</option>
-            <option value="InfoSec">InfoSec</option>
-            <option value="PAG">PAG</option>
-            <option value="SDSLabs">SDSLabs</option>
-      </select>
+          ))}
           </div>
+          <select
+            className="org_div_select"
+            value={dropdownValue}
+            onChange={handleSelect}>
+              <option value=""></option>
+              <option value="DSG">DSG</option>
+              <option value="InfoSec">InfoSec</option>
+              <option value="PAG">PAG</option>
+              <option value="SDSLabs">SDSLabs</option>
+          </select>
         </div>
         <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Redirect URL</p> <br/>
@@ -92,8 +89,16 @@ const NewAppBox = ({ img, name, des, href, domains, organisations, clkey, clsecr
             placeholder={clsecret}/>
         </div>
         <div className="app_box_buttons">
-            <button className="cancel_btn">Cancel</button>
-            <button className="create_btn" onClick={handleClick}>
+            <button
+              style={{cursor: "pointer"}}
+              onClick={()=>{handleAppBox(), handleEditAppBox()}}
+              className="cancel_btn">
+                Cancel
+            </button>
+            <button
+              style={{cursor: "pointer"}}
+              className="create_btn"
+              onClick={()=>{handleClick, handleAppBox(), handleEditAppBox()}}>
                 Create
             </button>
         </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CopyIcon from "../public/images/copyicon.svg"
 
-const EditAppBox = ({ img, name, des, href, domains, organisations}) => {
+const EditAppBox = ({ img, name, des, href, domains, organisations, handleAppBox}) => {
 
     const [text, setText] = useState("");
 
@@ -31,8 +31,8 @@ const EditAppBox = ({ img, name, des, href, domains, organisations}) => {
             <Image className="app_image" src={img} alt="test" />
         </div>
         <div className="app_data">
-            <p className="underline"><b>Change Image</b></p>
-            <p className="underline">Remove Image</p>
+            <p style={{cursor: "pointer"}} className="underline"><b>Change Image</b></p>
+            <p style={{cursor: "pointer"}} className="underline">Remove Image</p>
         </div>
       </div>
       <div>
@@ -80,12 +80,14 @@ const EditAppBox = ({ img, name, des, href, domains, organisations}) => {
           <p style={{marginBottom: "-0.5rem"}}>Allowed domains</p> <br/>
           <input type="text" value={domains} />
         </div>
-           <div className="app_box_buttons">
-           <button className="cancel_btn">Cancel</button>
-           <button className="create_btn">
-             Save
-           </button>
-           </div>
+          <div className="app_box_buttons">
+          <button style={{cursor:"pointer"}} onClick={()=>handleAppBox()} className="cancel_btn">
+            Cancel
+          </button>
+          <button style={{cursor:"pointer"}} onClick={()=>handleAppBox()} className="create_btn">
+            Save
+          </button>
+          </div>
     </div>
   );
 };

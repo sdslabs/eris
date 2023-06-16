@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CopyIcon from "../public/images/copyicon.svg"
 
-const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret }) => {
+const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret, handleAppBox }) => {
 
     const [text, setText] = useState("");
     const handleCopyClick = () => {
@@ -18,7 +18,7 @@ const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret 
           <Image className="app_image" src={img} alt="test" />
         </div>
         <div className="app_data">
-            <p className="app_name" style={{marginTop:"5px"}}><b>{name}</b><span style={{float:"right"}} className="green underline"><b>Edit</b></span></p>
+            <p className="app_name" style={{marginTop:"5px"}}><b>{name}</b><span onClick={()=>handleAppBox()} style={{float:"right", cursor:"pointer"}} className="green underline"><b>Edit</b></span></p>
             <p className="app_description">{des}</p>
             <p className="green perm"><Link target={"_blank"} href={href}>{href}</Link><Image style={{margin: "-2px 5px"}} src={Export} alt="export"/></p>
         </div>
@@ -44,7 +44,10 @@ const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret 
             type="text"
             value={clkey}
             onChange={(e) => setText(e.target.value)}/>
-          <Image src={CopyIcon} onClick={handleCopyClick} id="copy_icon"/>
+          <Image src={CopyIcon}
+            style={{cursor: "pointer"}}
+            onClick={handleCopyClick}
+            id="copy_icon"/>
           </div>
         </div>
         <div className="app_box_children">
@@ -54,7 +57,10 @@ const AppBox = ({ img, name, des, href, domains, organisations, clkey, clsecret 
             type="text"
             value={clsecret}
             onChange={(e) => setText(e.target.value)}/>
-          <Image src={CopyIcon} onClick={handleCopyClick} id="copy_icon"/>
+          <Image src={CopyIcon}
+            style={{cursor: "pointer"}}
+            onClick={handleCopyClick}
+            id="copy_icon"/>
           </div>
         </div>
     </div>

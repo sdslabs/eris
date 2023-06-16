@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import LeftPanel from "../../components/leftPanel";
 import Searchbar from "../../components/searchbar";
 import Buttons from "../../components/admin_buttons"
@@ -13,7 +13,44 @@ import Test from "../../public/images/gasper.png"
 import Gasper from "../../public/images/gasper.png"
 import Quizio from "../../public/images/quizio.svg"
 
-const AdminPage = ({ refs }) => {
+const AdminPage = () => {
+
+   const appList=["Quizio", "Gasper", "Erdos", "Rootex", "Test"];
+   const imgList=[Quizio, Gasper, Gasper, Gasper, Test];
+
+   let [list, setList] = useState(appList);
+   let [imgs, setImgs] = useState(imgList);
+
+   const onSort = (sortType) => {
+      let sortedList = [...list];
+      let sortedImgs = [...imgs];
+
+      if (sortType === 'asc') {
+        sortedList.sort();
+        sortedImgs.sort();
+      } else if (sortType === 'desc') {
+        sortedList.sort().reverse();
+        sortedImgs.sort().reverse();
+      }
+
+      setList(sortedList);
+      setImgs(sortedImgs);
+    };
+
+   function handleSort(sortType) {
+      onSort(sortType);
+   }
+
+   const [appBox, setAppBox]= useState(true);
+   const [editAppBox, setEditAppBox]= useState(true);
+
+   function handleAppBox() {
+      setAppBox(!appBox);
+   }
+   function handleEditAppBox() {
+      setEditAppBox(!editAppBox);
+   }
+
 return (
 <div>
     <div className="left_panel">
@@ -34,6 +71,9 @@ return (
     <Buttons
     text1="Sort"
     text2="Add App"
+    sort={handleSort}
+    handleAppBox={handleAppBox}
+    handleEditAppBox={handleEditAppBox}
     img1={Sort}
     img2={AppAdd}/>
     </div>
@@ -41,57 +81,63 @@ return (
     <div className="application_list">
     <Apps
     id= "1"
-    img={Quizio}
-    name="Quizio" />
+    img={imgList[0]}
+    name={list[0]} />
        <Apps
     id= "2"
-    img={Gasper}
-    name="Gasper" />
+    img={imgList[1]}
+    name={list[1]} />
        <Apps
-    img={Test}
-    name="Erdos" />
+    img={imgList[2]}
+    name={list[2]} />
        <Apps
     id= "3"
-    img={Test}
-    name="Rootex" />
-       <Apps
-    id= "4"
-    img={Test}
-    name="Gasper" />
-       <Apps
-    id= "5"
-    img={Test}
-    name="Cerebro" />
+    img={imgList[3]}
+    name={list[3]} />
     </div>
     <div className="application_data">
 
-   {/* <AppBox
-      img={Test}
-      name="Quizio"
-      des="App1"
-      href="quizio.com/profile"
-      domains="http://localhost:5005, sdslabs.co"
-      organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}
-      clkey="blabla"
-      clsecret="topsecret"/> */}
-
-   {/* <EditAppBox
-      img={Test}
-      name="Quizio"
-      des="App1"
-      href="quizio.com/profile"
-      domains="http://localhost:5005, sdslabs.co"
-      organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}/> */}
-
-   <NewAppBox
-      img={Test}
-      name="Enter the name of the app"
-      des="Enter the app ID"
-      href="Enter the redirect URL of the app"
-      domains="Enter the allowed domains of the app"
-      organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}
-      clkey="Enter the client key of the app"
-      clsecret="Enter the client secret of the app"/>
+{(() => {
+        if (appBox) {
+          return (
+               <AppBox
+                  img={Test}
+                  name="Quizio"
+                  des="App1"
+                  href="quizio.com/profile"
+                  domains="http://localhost:5005, sdslabs.co"
+                  organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}
+                  clkey="blabla"
+                  clsecret="topsecret"
+                  handleAppBox={handleAppBox}/>
+          )
+        } else if (!appBox && editAppBox) {
+          return (
+              <EditAppBox
+                  img={Test}
+                  name="Quizio"
+                  des="App1"
+                  href="quizio.com/profile"
+                  domains="http://localhost:5005, sdslabs.co"
+                  organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}
+                  handleAppBox={handleAppBox}/>
+          )
+        } else {
+          return (
+              <NewAppBox
+                  img={Test}
+                  name="Enter the name of the app"
+                  des="Enter the app ID"
+                  href="Enter the redirect URL of the app"
+                  domains="Enter the allowed domains of the app"
+                  organisations={["SDSLabs", "DSG", "PAG", "Infosec"]}
+                  clkey="Enter the client key of the app"
+                  clsecret="Enter the client secret of the app"
+                  handleAppBox={handleAppBox}
+                  handleEditAppBox={handleEditAppBox}/>
+          )
+        }
+      })()}
 
 
     </div>
