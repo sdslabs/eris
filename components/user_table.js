@@ -1,23 +1,14 @@
 import {React, useState, useEffect} from "react";
 import Popup from "./popup";
-import Data from "../data/users_data.json"
+import {currentData} from "./searchbaradmin.js"
 
 const UserTable = ({ text }) => {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {setIsOpen(!isOpen);}
 
-  const [post, setPost] = useState([]);
-  const [number, setNumber] = useState(1); // No of pages
+  const [number, setNumber] = useState(1); 
   const [postPerPage] = useState(2);
-
-  useEffect(() => {
-    const fetchApi = async () => {
-      const data = Data;
-      setPost(data);
-    };
-    fetchApi();
-  }, []);
-
+  const post = currentData;
   const lastPost = number * postPerPage;
   const firstPost = lastPost - postPerPage;
   const currentPost = post.slice(firstPost, lastPost);

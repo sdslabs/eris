@@ -1,6 +1,6 @@
 import {React, useState} from "react";
 import LeftPanel from "../../components/leftPanel";
-import Searchbar from "../../components/searchbar";
+import { Searchbar } from "../../components/searchbaradmin";
 import Buttons from "../../components/admin_buttons";
 import UserTable from "../../components/user_table";
 import InvitesTable from "../../components/invites_table";
@@ -30,19 +30,6 @@ return (
     <div className="search_panel">
     <Searchbar
     text={"Search user by name or email"}/>
-    <div className="roles">
-      <b>Role </b>
-      <input type="checkbox" style={{marginLeft:"1rem"}} /> Admin
-      <input type="checkbox" style={{marginLeft:"2rem"}} /> User
-    </div>
-    <Buttons
-      text1="Filter"
-      text2="Add User"
-      img1={Filter}
-      img2={UserAdd}/>
-    </div>
-    <div className="data_div">
-    <UserTable />
     </div>
     </div>
 </div>
