@@ -28,32 +28,36 @@ export const Searchbar = ({ type, text}) => {
 },);
 }
   return (
-    <div><div className={"searchbar" + " " + inputActive}>
-      <Image src={Search} alt="user management" />
-      <input
-        type={type}
-        onFocus={() => setInputActive(!inputActive)}
-        onBlur={() => setInputActive(!inputActive)}
-        onChange={inputHandler}
-        value={inputText}
-        className="search_input"
-        placeholder={text}
-      >
-      </input>
-      </div>
-      <div className="roles">
+    <div>
+    <div className="search_panel">
+    <div className={"searchbar" + " " + inputActive}  text={"Search user by name or email"}>
+    <Image src={Search} alt="user management" />
+    <input
+    type={type}
+    onFocus={() => setInputActive(!inputActive)}
+    onBlur={() => setInputActive(!inputActive)}
+    onChange={inputHandler}
+    value={inputText}
+    className="search_input"
+    placeholder={"Search user by name or email"}
+    >
+    </input>
+    </div>
+    <div className="roles">
         <b>Role </b>
-        <input type="checkbox" style={{ marginLeft: "1rem" }} /> Admin
-        <input type="checkbox" style={{ marginLeft: "2rem" }} /> User
+        <input type="checkbox" style={{ marginLeft: "1rem" }} id="admin_role"/> Admin
+        <input type="checkbox" style={{ marginLeft: "2rem" }} id="user_role" /> User
       </div>
-      <Buttons
-        text1="Filter"
-        text2="Add User"
-        img1={Filter}
-        img2={UserAdd} />
+    <Buttons
+      text1="Filter"
+      text2="Add User"
+      img1={Filter}
+      img2={UserAdd}/>
+    </div>
     <div className="data_div">
-        <UserTable />
-      </div></div>
+    <UserTable />
+    </div>
+    </div>
   );
 };
 

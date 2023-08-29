@@ -1,6 +1,6 @@
 import {React, useState} from "react";
 import LeftPanel from "../../components/leftPanel";
-import { Searchbar } from "../../components/searchbaradmin";
+import { Searchbar, currentData } from "../../components/searchbaradmin";
 import Buttons from "../../components/admin_buttons";
 import UserTable from "../../components/user_table";
 import InvitesTable from "../../components/invites_table";
@@ -27,10 +27,7 @@ return (
     <div className="toggle_items">Invites</div>
     </div>
     <hr className="admin_hr"/>
-    <div className="search_panel">
-    <Searchbar
-    text={"Search user by name or email"}/>
-    </div>
+    <Searchbar/>
     </div>
 </div>
   );

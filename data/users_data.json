@@ -3,59 +3,69 @@
     "name": "devpulse",
     "email": "",
     "role": "admin",
-    "github": ""
+    "github": "",
+    "user_status": 0
 }, {
     "id": 2,
     "name": "linklinks",
     "email": "",
     "role": "admin",
-    "github": ""
+    "github": "",
+    "user_status": 1
 }, {
     "id": 3,
     "name": "centizu",
     "email": "",
     "role": "admin",
-    "github": ""
+    "github": "",
+    "user_status": 0
 }, {
     "id": 4,
     "name": "dynabox",
     "email": "",
     "role": "admin",
-    "github": ""
+    "github": "",
+    "userstatus": 1
 }, {
     "id": 5,
     "name": "avaveo",
     "email": "",
     "role": "user",
-    "github": ""
+    "github": "",
+    "userstatus": 0
 }, {
     "id": 6,
     "name": "demivee",
     "email": "",
     "role": "user",
-    "github": ""
+    "github": "",
+    "userstatus": 0
 }, {
     "id": 7,
     "name": "jayo",
     "email": "",
     "role": "user",
-    "github": ""
+    "github": "",
+    "userstatus": 1
 }, {
     "id": 8,
     "name": "blognation",
     "email": "",
     "role": "user",
-    "github": ""
+    "github": "",
+    "userstatus": 0
 }, {
     "id": 9,
     "name": "podcat",
     "email": "",
     "role": "user",
-    "github": ""
+    "github": "",
+    "userstatus": 1
 }, {
     "id": 10,
     "name": "layo",
     "email": "",
     "role": "user",
-    "github": ""
+    "github": "",
+    "userstatus": 1
 }]
