@@ -5,35 +5,61 @@ import DefaultImage from "../public/images/default_img.svg"
 
 const NewAppBox = ({ name, des, href, domains, clkey, clsecret, handleAppBox, handleEditAppBox }) => {
 
-    const [click, setClick] = useState(false);
-    const handleClick = () => {
-        setClick(true);
-      };
-    const [selectedItems, setSelectedItems] = useState([]);
-    const [dropdownValue, setDropdownValue] = useState("");
+  const [click, setClick] = useState(false);
+  const handleClick = () => {
+    setClick(true);
+  };
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [dropdownValue, setDropdownValue] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null); // For storing selected image
 
-    const handleSelect = (event) => {
-        const selectedItem = event.target.value;
-        setSelectedItems([...selectedItems, selectedItem]);
-        setDropdownValue("");
-    };
+  const handleSelect = (event) => {
+    const selectedItem = event.target.value;
+    setSelectedItems([...selectedItems, selectedItem]);
+    setDropdownValue("");
+  };
 
-    const handleDelete = (itemToDelete) => {
-        const newSelectedItems = selectedItems.filter(
-        (item) => item !== itemToDelete
-        );
-        setSelectedItems(newSelectedItems);
-    };
+  const handleDelete = (itemToDelete) => {
+    const newSelectedItems = selectedItems.filter(
+      (item) => item !== itemToDelete
+    );
+    setSelectedItems(newSelectedItems);
+  };
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file)); // Store the selected image URL
+    }
+  };
 
   return (
     <div className="app_box">
         <div className="app_topbox">
-          <div className="app_image">
+        <div className="app_image">
+          {selectedImage ? (
+            <img
+              className="app_image"
+              src={selectedImage}
+              alt="uploaded"
+              style={{ maxWidth: "100%" }}
+            />
+          ) : (
             <Image className="app_image" src={DefaultImage} alt="test" />
-          </div>
-          <div className="new_app_data">
-            <p style={{cursor: "pointer"}} className="underline"><b>Upload Image</b></p>
-          </div>
+          )}
+        </div>
+        <div className="new_app_data">
+          <label htmlFor="imageUpload" className="underline">
+            <b>Upload Image</b>
+          </label>
+          <input
+            type="file"
+            id="imageUpload"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: "none" }}
+          />
+        </div>
         </div>
         <div className="app_box_children">
            <p style={{marginBottom: "-0.5rem"}}>Name</p> <br/>
@@ -46,27 +72,30 @@ const NewAppBox = ({ name, des, href, domains, clkey, clsecret, handleAppBox, ha
         <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Organisations</p><br/>
           <div className="org_div">
-          {selectedItems.map((item) => (
-            <span key={item} className="org_item">
-              {item}
-              <span
-                className="delete_org"
-                onClick={() => handleDelete(item)}>
-              &#10005;
+            {selectedItems.map((item) => (
+              <span key={item} className="org_item">
+                {item}
+                <span className="delete_org" onClick={() => handleDelete(item)}>
+                  &#10005;
+                </span>
               </span>
-            </span>
-          ))}
+            ))}
+            <div className="org_select_container">
+              <select
+                className="org_div_select"
+                value={dropdownValue}
+                onChange={handleSelect}>
+                <option value=""></option>
+                <option value="DSG">DSG</option>
+                <option value="InfoSec">InfoSec</option>
+                <option value="PAG">PAG</option>
+                <option value="SDSLabs">SDSLabs</option>
+              </select>
+              <span className="org_arrow">&#9660;</span>
+            </div>
           </div>
-          <select
-            className="org_div_select"
-            value={dropdownValue}
-            onChange={handleSelect}>
-              <option value=""></option>
-              <option value="DSG">DSG</option>
-              <option value="InfoSec">InfoSec</option>
-              <option value="PAG">PAG</option>
-              <option value="SDSLabs">SDSLabs</option>
-          </select>
+
+          
         </div>
         <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Redirect URL</p> <br/>
