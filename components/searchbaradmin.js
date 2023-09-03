@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Search from "../public/images/search_icon.svg";
 import Image from "next/image";
 import data from "../data/users_data.json";
@@ -6,31 +6,32 @@ import Buttons from "./admin_buttons";
 import UserAdd from "../public/images/user_add.svg";
 import Filter from "../public/images/filter.svg";
 import UserTable from "./user_table";
+import { AdminRole } from "./admin_role_filter";
+import { Checkbox } from "@mui/material";
+import AdminPage from "../pages/admin";
 
 var currentData=data;
-
-export const Searchbar = ({ type, text}) => {
+export const Searchbar = ({ type, updateOnSearch}) => {
   
   const [inputActive, setInputActive] = useState(false);
   const [inputText, setInputText] = useState("");
   let inputHandler = (e) => {
     e.preventDefault();
     var lowerCase = e.target.value.toLowerCase();
+    if(lowerCase!=inputText) 
+    {
+      console.log("Finally!");
+      updateOnSearch(lowerCase);
+    }
     setInputText(lowerCase);
   };
   currentData=data;
-  if (inputText.length > 0) {
-    currentData=[];
-    let i=0;
-    data.filter((user) => {
-      if(user.name.match(inputText)) currentData.push(user);
-      return user.name.match(inputText);
-},);
-}
+  console.log("length of input text");
+  console.log(inputText);
+  console.log(currentData);
   return (
-    <div>
-    <div className="search_panel">
-    <div className={"searchbar" + " " + inputActive}  text={"Search user by name or email"}>
+    
+    (<div className={"searchbar" + " " + inputActive}  text={"Search user by name or email"}>
     <Image src={Search} alt="user management" />
     <input
     type={type}
@@ -42,22 +43,7 @@ export const Searchbar = ({ type, text}) => {
     placeholder={"Search user by name or email"}
     >
     </input>
-    </div>
-    <div className="roles">
-        <b>Role </b>
-        <input type="checkbox" style={{ marginLeft: "1rem" }} id="admin_role"/> Admin
-        <input type="checkbox" style={{ marginLeft: "2rem" }} id="user_role" /> User
-      </div>
-    <Buttons
-      text1="Filter"
-      text2="Add User"
-      img1={Filter}
-      img2={UserAdd}/>
-    </div>
-    <div className="data_div">
-    <UserTable />
-    </div>
-    </div>
+    </div>)
   );
 };
 

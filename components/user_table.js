@@ -5,13 +5,25 @@ import defaultFace from "../public/images/default_face.svg"
 import bannedUser from "../public/images/banned.svg"
 import Image from "next/image";
 
-const UserTable = ({ text }) => {
+const UserTable = ({ userData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {setIsOpen(!isOpen);}
 
-  const [number, setNumber] = useState(1); 
+  // const [number, setNumber] = useState(1); 
+  // const [postPerPage] = useState(2);
+  // const post = userData;
+  const post=userData;
+  const [number, setNumber] = useState(1); // No of pages
   const [postPerPage] = useState(2);
-  const post = currentData;
+
+  // useEffect(() => {
+  //   const fetchApi = async () => {
+  //     const data = userData;
+  //     setPost(data);
+  //   };
+  //   fetchApi();
+  // }, []);
+  
   const lastPost = number * postPerPage;
   const firstPost = lastPost - postPerPage;
   const currentPost = post.slice(firstPost, lastPost);
@@ -24,6 +36,8 @@ const UserTable = ({ text }) => {
   const ChangePage = (pageNumber) => {
     setNumber(pageNumber);
   };
+  console.log("inside data display");
+  console.log(userData);
   return (
     <div>
       <table className="user_table">
@@ -84,6 +98,7 @@ const UserTable = ({ text }) => {
             <button onClick={() => setNumber(number + 1)}>
               Next
             </button>
+            
           </div>
     </div>
   );
