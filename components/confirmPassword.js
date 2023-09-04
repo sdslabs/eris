@@ -4,7 +4,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 const crossedEye = <FontAwesomeIcon icon={faEyeSlash} />;
 
-const Password= ({text, handleValidation, handlePasswordChange, passwordValue, passwordError}) => {
+const Password= ({type, text, handleValidation, handlePasswordChange, confirmPasswordValue, confirmPasswordError}) => {
   const [inputActive, setInputActive] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const [eyeCrossed, setEyeCrossed] = useState(false);
@@ -21,21 +21,21 @@ const Password= ({text, handleValidation, handlePasswordChange, passwordValue, p
         {" "}
         <input
           type={passwordShown ? "text" : "password"}
-          value={passwordValue}
-          onChange={handlePasswordChange}
+          value={confirmPasswordValue}  
+          onChange={handlePasswordChange} 
           onKeyUp={handleValidation}
           className="input"
           placeholder={text}
-          name="password"
+          name="confirmPassword"
           onFocus={() => setInputActive(!inputActive)}
           onBlur={() => setInputActive(!inputActive)}
         >
         </input>
-        <i className="passEye" onClick={() =>
+        <i className="passEye" onClick={() => 
           { toggleEye(); togglePasswordVisiblity();}}>
             {eyeCrossed ? eye : crossedEye}</i>{" "}
     </div>
-    <p className="text-danger">{passwordError}</p>
+    <p className="text-danger">{confirmPasswordError}</p>
     </div>
   );
 }

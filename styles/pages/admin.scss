@@ -1,0 +1,125 @@
+.left_panel{
+    width: 18%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    background-color: #191919;
+    }
+
+.right_panel{
+    width: 82%;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    background-color: white ;
+}
+
+.centre{
+    margin: auto;
+    width: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+.logout{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.logout_image{
+    height: 2.5rem;
+    width: 2.5rem;
+    margin: 0.8rem 1rem;
+    border-radius: 50%;
+}
+
+.logout_text{
+margin: 0.5rem 1rem;
+}
+
+.logout_logo{
+    position: absolute;
+    right: 1rem;
+    top: 1.7rem;
+}
+
+.active{
+    display: flex;
+    margin: auto;
+    height: 4rem;
+    width: 90%;
+    border-radius: 10px;
+    color: black;
+    background-color: white;
+    align-items: center;
+    padding-left: 1.5rem;
+}
+
+.inactive{
+    display: flex;
+    margin: auto;
+    height: 4rem;
+    width: 90%;
+    border-radius: 10px;
+    color: white;
+    background-color: #191919;
+    align-items: center;
+    padding: 1.5rem;
+
+}
+
+.unused{
+    margin-left: 1rem;
+    color: white;
+}
+
+.used{
+    margin-left: 1rem;
+    color: black
+}
+
+.inactive:hover{
+    background-color: #575757;
+}
+
+.admin_heading{
+    font-size: 2rem;
+    letter-spacing: -2px;
+    font-weight: 500;
+    margin-left: 3rem;
+}
+
+.admin_hr{
+    width: 95%;
+    color: #575757;
+    border: none;
+    border-bottom: 2px solid rgba(216,216,216,255);
+    margin-top: -1px;
+}
+
+.data_div{
+    margin: auto;
+    width: 95%;
+    height: 70vh;
+    border: 2px solid rgba(216,216,216,255);
+    padding: 1rem 2rem;
+    overflow-y: scroll;
+}
+
+.admin_toggle{
+    display: flex;
+}
+
+.roles{
+    margin: 2rem;
+    float: right;
+}
+
+.toggle_items{
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    padding-bottom: 8px;
+    margin-left: 2rem;
+}

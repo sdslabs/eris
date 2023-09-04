@@ -1,6 +1,13 @@
-@import "./components/button1.scss";
-@import "./components/button2.scss";
+@import "./components/button_submit.scss";
+@import "./components/button_auth.scss";
 @import "./components/input_box.scss";
+@import "./components/carousel.scss";
+@import "./components/search_panel.scss";
+@import "./components/admin_table.scss";
+@import "./pages/login.scss";
+@import "./pages/signup.scss";
+@import "./pages/admin.scss";
+@import "./pages/applications.scss";
 
 html,
 body {
@@ -19,24 +26,39 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
-    color: white;
-    background: black;
+    color: black;
+    background: white;
   }
 }
 
 .green {
-  color: green;
+  color: #00902B;
 }
 
-.green:hover {
+.underline:hover {
   text-decoration: underline;
 }
 
-.checkbox:checked {
-  background-color: black;
+p {
+  line-height: 0.4rem;
+  color: #393939;
+}
+
+i {
+  display: flex;
+  align-self: flex-end;
+  align-self: center;
+}
+
+::placeholder {
+  color: #B3B3B3;
+}
+
+th{
+  font-weight: normal;
 }

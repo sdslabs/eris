@@ -1,0 +1,61 @@
+.split_left{
+  width: 45.833%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  background-color: #191919  ;
+  }
+
+.split_right{
+  width: 54.167%;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.login {
+  width: 50%;
+  margin: auto;
+}
+
+.centred_img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.top {
+  padding: 1.5rem;
+}
+
+.passEye{
+  color: #939393;
+  margin-right: 0.5rem;
+}
+
+.or {
+  color: #B3B3B3;
+  font-size: 14px;
+  margin: auto;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.option_hr{
+  width: 12vw;
+  margin: 0 -1rem;
+}
+
+.tickBox{
+  padding-top: 1rem;
+  width: 100%;
+}
+
+.loginpage{
+  display:flex;
+  flex-direction: row;
+}

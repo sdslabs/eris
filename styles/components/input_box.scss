@@ -1,11 +1,11 @@
 .inputBox {
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-width: 21.5rem;
-background: #FFFFFF;
-border: 1px solid #D7D7D7;
-border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: auto;
+    background: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
 }
 
 .true {
@@ -15,10 +15,13 @@ border-radius: 4px;
 
 .input {
     border: none;
-    width: 20rem;
+    width: 100%;
     height: 3rem;
+    font-size: 1rem;
+    padding: 1rem;
 }
 
 .input:focus {
     outline: none;
 }
+
