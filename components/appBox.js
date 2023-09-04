@@ -1,5 +1,4 @@
 import React from "react";
-import Test from "../public/images/test.jpg";
 import Export from "../public/images/export.svg"
 import Image from "next/image";
 import Link from "next/link";

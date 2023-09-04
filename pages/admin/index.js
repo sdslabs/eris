@@ -6,9 +6,16 @@ import UserTable from "../../components/user_table";
 import InvitesTable from "../../components/invites_table";
 import UserAdd from "../../public/images/user_add.svg";
 import Filter from "../../public/images/filter.svg";
+import Underline from "../../public/images/active_tab.svg"
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
+const line = <FontAwesomeIcon icon={faGripLinesVertical} />;
 
 const AdminPage = () => {
   const [invitesActive, setInvitesActive] = useState(false);
+  var ifUserActive, ifInviteActive;
+  {invitesActive ? (ifInviteActive="setLine", ifUserActive=null ) : (ifInviteActive=null ,ifUserActive="setLine")}
 return (
 <div>
     <div className="left_panel">
@@ -23,8 +30,8 @@ return (
     <div className="right_panel">
     <h1 className="admin_heading">User Management</h1>
     <div className="admin_toggle">
-    <div className="toggle_items" style={{marginLeft: "3rem"}} onClick={()=>setInvitesActive(false)}>Users</div>
-    <div className="toggle_items" onClick={()=>setInvitesActive(true)}>Invites</div>
+    <div className={`toggle_items ${ifUserActive}`} style={{marginLeft: "3rem"}} onClick={()=>setInvitesActive(false)}>Users</div>
+    <div className={`toggle_items ${ifInviteActive}`} onClick={()=>setInvitesActive(true)}>Invites</div>
     </div>
     <hr className="admin_hr"/>
     <div className="search_panel">
