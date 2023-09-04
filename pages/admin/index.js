@@ -6,20 +6,16 @@ import UserTable from "../../components/user_table";
 import InvitesTable from "../../components/invites_table";
 import UserAdd from "../../public/images/user_add.svg";
 import Filter from "../../public/images/filter.svg";
-import { AdminRole } from "../../components/admin_role_filter";
 import data from "../../data/users_data.json";
 import AddUser from "../../components/add_user.js";
 
-
 const AdminPage = () => {
-  // console.log(UTable);
   // const [invitesActive, setInvitesActive] = useState(false);
   const [adminChecked, setAdminChecked] = useState(false);
   const [userChecked, setUserChecked] = useState(false);
   const [userData, setUserData] = useState(data);
   const [totalData, setTotalData] = useState(data);
   const [UTable, setUTable] = useState(<UserTable userData={[]}/>);
-  // console.log(UTable);
   function updateOnSearch(inputText){
     var recentData=[];
     if (inputText.length > 0) {
@@ -39,27 +35,29 @@ const AdminPage = () => {
     setUserData(roleData);
     setTotalData(recentData);
     setUTable(<UserTable userData={roleData}/>);
+    console.log(roleData);
     console.log("inside updateOnSearch");
     console.log(recentData);
   }
 
 function AdminRole ( role ) {
   var roleData=[];
-  // var totalData = userData + otherData;
-  // setOtherData([]);
   console.log("inside AdminRole");
   console.log(totalData);
   totalData.filter((user) => {
-    // console.log(user.role);
-    // console.log(typeof(user.role));
     var adminm = String("admin");
     var userm = String("user");
-    // console.log(typeof(userm));
-    // console.log(adminChecked);
-    if((user.role==adminm)&&(adminChecked||(role==adminm))) roleData.push(user);
-    else if((user.role==userm)&&(userChecked||(role==userm))) roleData.push(user);
+    var adminCheckedVal=adminChecked;
+    if (role==adminm) {
+      adminCheckedVal=!adminChecked
+    }
+    var userCheckedVal=userChecked;
+    if (role==userm) {
+      userCheckedVal=!userChecked
+    }
+    if((user.role==adminm)&&(adminCheckedVal)) roleData.push(user);
+    else if((user.role==userm)&&(userCheckedVal)) roleData.push(user);
     else console.log("No");
-    // console.log(user.role==adminm);
     return user.role.match("admin");
   },);
   console.log(roleData);
@@ -68,12 +66,6 @@ function AdminRole ( role ) {
   console.log("UTable details");
   console.log(UTable);
 };
-// function getUTable() {
-//   console.log("Nehaaa");
-//   setUTable(UTable);
-// }
-// useEffect(() => {
-//   getUTable}, [UTable]);
 return (
   <div>
     <div className="left_panel">
@@ -104,11 +96,11 @@ return (
       text2="Add User"
       img1={Filter}
       img2={UserAdd}/>
-    </div></div>
+    </div>
     <div className="data_div">
       {UTable}
     </div>
-    </div> 
+    </div> </div>
   );
 };
 

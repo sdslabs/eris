@@ -9,20 +9,9 @@ const UserTable = ({ userData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {setIsOpen(!isOpen);}
 
-  // const [number, setNumber] = useState(1); 
-  // const [postPerPage] = useState(2);
-  // const post = userData;
-  const post=userData;
+  const post = userData;
   const [number, setNumber] = useState(1); // No of pages
-  const [postPerPage] = useState(2);
-
-  // useEffect(() => {
-  //   const fetchApi = async () => {
-  //     const data = userData;
-  //     setPost(data);
-  //   };
-  //   fetchApi();
-  // }, []);
+  const [postPerPage] = useState(3);
   
   const lastPost = number * postPerPage;
   const firstPost = lastPost - postPerPage;
