@@ -7,7 +7,7 @@ import Carousel from "../../components/carousel";
 const passwordReset = () => {
   return (
 <div>
-  <div className="split_left">
+  {/* <div className="split_left">
     <div className="top">
       <Image src={Labs} alt="labs" />
     </div>
@@ -28,7 +28,7 @@ const passwordReset = () => {
           text={"Login"}/>
       </div>
     </div>
-  </div>
+  </div> */}
 </div>
   );
 };

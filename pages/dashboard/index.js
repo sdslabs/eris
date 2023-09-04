@@ -1,37 +1,62 @@
-import React, { useState, useEffect } from "react";
+import {React, useState} from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
 
-    const [LogoutToken, setLogoutToken] = useState("");
+  const [logoutError, setLogoutError] = useState("");
 
-    let sendRequest = async (e) => {
-      e.preventDefault();
+    let sendRequest = async () => {
       try {
-        let res = await axios(process.env.NEXT_PUBLIC_LOGOUT, {
-          method: "POST",
-          body: JSON.stringify({
-            logoutToken: LogoutToken
-          }),
+        const getResponse = await axios.get(process.env.NEXT_PUBLIC_LOGOUT, {
+          withCredentials: true,
         });
+        console.log(getResponse.data.logoutToken);
+        const res = await axios.post(
+          process.env.NEXT_PUBLIC_LOGOUT,
+          {
+            logoutToken: getResponse.data.logoutToken,
+            url: process.env.NEXT_PUBLIC_REDIRECT,
+          },
+          {
+            withCredentials: true,
+          }
+        );
+        if (res.status === 200) {
+          console.log("logged out");
+          return true
+        } else {
+          setMessage("Some error occured");
+          setLogoutError("Logout failed. Try again.");
+          return false
+        }
       } catch (err) {
         console.log(err);
+        setLogoutError("Logout failed. Try again.");
+        return false
       }
     };
 
-    useEffect(() =>{
-        const createFLow= async ()=>{
-         const response=await axios.get(process.env.NEXT_PUBLIC_LOGOUT,{withCredentials: true})
-         setLogoutToken(response.logoutToken)
-        }
-        createFLow()
-       }, []);
+const router = useRouter();
+const redirect = () =>{
+  router.push('/');
+}
 
   return (
-    <div>
-    <button onClick={sendRequest}>
+    <div >
+      <div className="active">
+    <button className="button_submit" onClick={async ()=>{
+                  if(await sendRequest()){
+                    console.log("redirect");
+                     redirect();
+                  }else{
+                    console.log("error")
+                  }
+                }}>
         Logout
     </button>
+    <p className="text-danger">{logoutError}</p>
+      </div>
     </div>
   );
 };

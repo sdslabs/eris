@@ -1,11 +1,11 @@
-//require("dotenv").config({ path: __dirname + '/../.env' })
 import ButtonAuth from "../components/button_auth";
 import Labs from "../public/images/labs logo.png";
 import Google from "../public/images/google\ icon.svg";
 import axios from "axios";
 import Image from "next/image";
 import Carousel from "../components/carousel";
-import React, { useState, useEffect } from 'react';
+import { React, useState } from "react";
+import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -17,8 +17,6 @@ const LoginPage = () => {
   const [inputActive2, setInputActive2] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const [eyeCrossed, setEyeCrossed] = useState(false);
-  const [FlowID, setFlowID] = useState("");
-  const [CsrfToken, setCsrfToken] = useState("");
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
@@ -28,61 +26,64 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  let sendRequest = async (e) => {
-    e.preventDefault();
+  let sendRequest = async () => {
     try {
-      let res = await axios(process.env.NEXT_PUBLIC_LOGIN, {
-        method: "POST",
-        body: JSON.stringify({
-          flowID: FlowID,
-          csrf_token: CsrfToken,
+      const getResponse = await axios.get(process.env.NEXT_PUBLIC_LOGIN, {
+        withCredentials: true,
+      });
+      const res = await axios.post(
+        process.env.NEXT_PUBLIC_LOGIN,
+        {
+          flowID: getResponse.data.flowID,
+          csrf_token: getResponse.data.csrf_token,
           password: pass,
           identifier: email,
-        }),
-
-      });
-      let resJson = await res.json();
+        },
+        {
+          withCredentials: true,
+        }
+      );
       if (res.status === 200) {
         setEmail("");
         setPass("");
-        console.log();
+        console.log("logged in");
+        return true
       } else {
         setMessage("Some error occured");
+        return false
       }
     } catch (err) {
       console.log(err);
+      return false
     }
   };
 
-useEffect(() =>{
- const createFLow= async ()=>{
-  const response = await axios.get(process.env.NEXT_PUBLIC_LOGIN,{withCredentials: true});
-  setFlowID(response.flowID)
-  setCsrfToken(response.csrf_token)
-  }
- createFLow()
-}, []);
+const router = useRouter();
+const redirect = () =>{
 
-return (
-  <div className="loginpage">
-    <div className="split_left">
-      <div className="top">
-        <Image src={Labs} alt="labs" />
-      </div>
-      <div className="centred_img">
-        <Carousel />
-      </div>
-    </div>
-    <div className="split_right ">
-      <div className="login">
-        <div>
-          <h1>
-            Log<span className="green">in</span>
-          </h1>
+  router.push('dashboard');
+}
+
+  return (
+    <div className="loginpage">
+      <div className="split_left">
+        <div className="top">
+          <Image src={Labs} alt="labs" />
         </div>
-        <div className="form">
-          <form onSubmit={sendRequest}>
+        <div className="centred_img">
+          <Carousel />
+        </div>
+      </div>
+      <div className="split_right ">
+        <div className="login">
+          <div>
+            <h1>
+              Log<span className="green">in</span>
+            </h1>
+          </div>
+          <div className="form">
             <div>
               <p>Email address</p>
               <div className={"inputBox" + " " + inputActive1}>
@@ -119,7 +120,7 @@ return (
                   {eyeCrossed ? eye : crossedEye}
                 </i>{" "}
               </div>
-              {/* <p className="text-danger">{passwordError}</p> */}
+              <p className="text-danger">{passwordError}</p>
             </div>
             <div className="tickBox">
               <input type="checkbox" className="checkbox" />
@@ -133,40 +134,49 @@ return (
               </Link>
             </div>
             <div>
-              <button type="submit" className="button_submit">
+              <button
+                type="submit"
+                className="button_submit"
+                onClick={async ()=>{
+                  if(await sendRequest()){
+                    console.log("redirect");
+                     redirect();
+                  }else{
+                    console.log("error")
+                    setPasswordError("Invalid email or password");
+                  }
+                }}
+              >
                 Login
               </button>
             </div>
-          </form>
-          <p>
-            Dont have an account?{" "}
-            <Link className="green underline" href="/signup">
-              Sign up{" "}
-            </Link>
-          </p>
-          <table className="or">
-            <tbody>
-              <tr>
-                <td>
-                  <hr className="option_hr" />
-                </td>
-                <td>OR</td>
-                <td>
-                  <hr className="option_hr" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="oauth">
-          <ButtonAuth
-          text={"Continue with Google"}
-          img={Google}/>
+            <p>
+              Dont have an account?{" "}
+              <Link className="green underline" href="/signup">
+                Sign up{" "}
+              </Link>
+            </p>
+            <table className="or">
+              <tbody>
+                <tr>
+                  <td>
+                    <hr className="option_hr" />
+                  </td>
+                  <td>OR</td>
+                  <td>
+                    <hr className="option_hr" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="oauth">
+            <ButtonAuth text={"Continue with Google"} />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default LoginPage;

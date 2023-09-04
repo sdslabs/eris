@@ -1,6 +1,7 @@
 .signup{
-    width: 50%;
     margin: auto;
+    margin-top:5rem;
+    width: 50%;
 }
 
 .top{
@@ -32,7 +33,7 @@
 }
 
 .icon_hr{
-    width: 5vw;
+    width: 4.5vw;
     margin: -0.7rem -3rem;
 }
 
@@ -44,3 +45,57 @@
 .text-danger{
     color: red;
 }
+
+.icon_table{
+    margin: auto;
+}
+
+.pass-rules{
+    position: absolute;
+    top: 10rem;
+    left: 50%;
+    margin: 2rem auto;
+    background-color: white;
+    color: #393939;
+}
+
+.green-box{
+    background-color: #E5F5E0;
+    border-radius: 10px;
+    padding: 0 0.5rem;
+}
+.red-box{
+    background-color: #FDEDEC;
+    border-radius: 10px;
+    padding: 0 0.5rem;
+}
+
+  .slide-in {
+    animation: slide-in 0.5s forwards;
+  }
+
+  @keyframes slide-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @media only screen and (max-width: 768px){
+    .signup {
+      width: 80%;
+      margin-top: 1rem;
+    }
+    }
+

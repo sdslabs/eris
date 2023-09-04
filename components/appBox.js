@@ -12,7 +12,7 @@ const AppBox = ({ img, name, des, href }) => {
         <div className="app_data">
             <p className="app_name" style={{marginTop:"5px"}}><b>{name}</b></p>
             <p className="app_description">{des}</p>
-            <p className="green underline"><Link target={"_blank"} href={href}>{href}</Link><Image src={Export} /></p>
+            <p className="green underline"><Link target={"_blank"} href={href}>{href}</Link><Image src={Export} alt="export"/></p>
         </div>
     </div>
   );
