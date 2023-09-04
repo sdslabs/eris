@@ -36,10 +36,10 @@ return (
       <input type="checkbox" style={{marginLeft:"2rem"}} /> User
     </div>
     <Buttons
-      text1="Filter"
-      text2="Add User"
-      img1={Filter}
-      img2={UserAdd}/>
+      filter_text="Filter"
+      addu_text="Add User"
+      filter_image={Filter}
+      addu_image={UserAdd}/>
     </div>
     <div className="data_div">
     {invitesActive ? <InvitesTable /> : <UserTable />}

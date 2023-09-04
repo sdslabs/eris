@@ -3,11 +3,11 @@ import Export from "../public/images/export.svg"
 import Image from "next/image";
 import Link from "next/link";
 
-const AppBox = ({ app_img, name, des, href }) => {
+const AppBox = ({ img, name, des, href }) => {
 
   return (
     <div className="app_box">
-        <div className="app_image"><Image className="app_image" src={app_img} alt="test" /></div>
+        <div className="app_image"><Image className="app_image" src={img} alt="test" /></div>
         <div className="app_data">
             <p className="app_name" style={{marginTop:"5px"}}><b>{name}</b></p>
             <p className="app_description">{des}</p>

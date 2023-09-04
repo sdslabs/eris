@@ -12,7 +12,7 @@ const Buttons = ({ filter_text, addu_text, filter_image, addu_image }) => {
         </button>
         <button className="add_user_btn">
             <Image style={{marginRight: "8px"}} src={addu_image} alt="user management" />
-            {addu_text}addu_image
+            {addu_text}
         </button>
     </div>
 

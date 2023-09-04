@@ -26,10 +26,10 @@ return (
     <Searchbar
     text={"Search application"}/>
     <Buttons
-    text1="Sort"
-    text2="Add App"
-    img1={Sort}
-    img2={AppAdd}/>
+    filter_text="Sort"
+    addu_text="Add App"
+    filter_image={Sort}
+    addu_image={AppAdd}/>
     </div>
     <div className="applications">
     <div className="application_list">
