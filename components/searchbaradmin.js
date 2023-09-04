@@ -6,7 +6,6 @@ import Buttons from "./admin_buttons";
 import UserAdd from "../public/images/user_add.svg";
 import Filter from "../public/images/filter.svg";
 import UserTable from "./user_table";
-import { AdminRole } from "./admin_role_filter";
 import { Checkbox } from "@mui/material";
 import AdminPage from "../pages/admin";
 
