@@ -14,8 +14,6 @@ const line = <FontAwesomeIcon icon={faGripLinesVertical} />;
 
 const AdminPage = () => {
   const [invitesActive, setInvitesActive] = useState(false);
-  var ifUserActive, ifInviteActive;
-  {invitesActive ? (ifInviteActive="setLine", ifUserActive=null ) : (ifInviteActive=null ,ifUserActive="setLine")}
 return (
 <div>
     <div className="left_panel">
@@ -30,8 +28,8 @@ return (
     <div className="right_panel">
     <h1 className="admin_heading">User Management</h1>
     <div className="admin_toggle">
-    <div className={`toggle_items ${ifUserActive}`} style={{marginLeft: "3rem"}} onClick={()=>setInvitesActive(false)}>Users</div>
-    <div className={`toggle_items ${ifInviteActive}`} onClick={()=>setInvitesActive(true)}>Invites</div>
+    <div className={`toggle_items ${invitesActive ? "" : "setLine"}`} style={{marginLeft: "3rem"}} onClick={()=>setInvitesActive(false)}>Users</div>
+    <div className={`toggle_items ${invitesActive ? "setLine" : ""}`} onClick={()=>setInvitesActive(true)}>Invites</div>
     </div>
     <hr className="admin_hr"/>
     <div className="search_panel">
