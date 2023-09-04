@@ -8,14 +8,22 @@ import UserAdd from "../../public/images/user_add.svg";
 import Filter from "../../public/images/filter.svg";
 import data from "../../data/users_data.json";
 import AddUser from "../../components/add_user.js";
+import Underline from "../../public/images/active_tab.svg"
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
+const line = <FontAwesomeIcon icon={faGripLinesVertical} />;
 
 const AdminPage = () => {
-  // const [invitesActive, setInvitesActive] = useState(false);
+  const [invitesActive, setInvitesActive] = useState(false);
+  var ifUserActive, ifInviteActive;
+  {invitesActive ? (ifInviteActive="setLine", ifUserActive=null ) : (ifInviteActive=null ,ifUserActive="setLine")}
   const [adminChecked, setAdminChecked] = useState(false);
   const [userChecked, setUserChecked] = useState(false);
   const [userData, setUserData] = useState(data);
   const [totalData, setTotalData] = useState(data);
   const [UTable, setUTable] = useState(<UserTable userData={[]}/>);
+  const [ITable, setITable] = useState(<InvitesTable userData={[]}/>);
   function updateOnSearch(inputText){
     var recentData=[];
     if (inputText.length > 0) {
@@ -66,6 +74,7 @@ function AdminRole ( role ) {
   console.log("UTable details");
   console.log(UTable);
 };
+
 return (
   <div>
     <div className="left_panel">
@@ -80,8 +89,8 @@ return (
     <div className="right_panel">
     <h1 className="admin_heading">User Management</h1>
     <div className="admin_toggle">
-    <div className="toggle_items" style={{marginLeft: "3rem"}}>Users</div>
-    <div className="toggle_items">Invites</div>
+    <div className={`toggle_items ${ifUserActive}`} style={{marginLeft: "3rem"}} onClick={()=>setInvitesActive(false)}>Users</div>
+    <div className={`toggle_items ${ifInviteActive}`} onClick={()=>setInvitesActive(true)}>Invites</div>
     </div>
     <hr className="admin_hr"/>
     <div className="search_panel">
@@ -99,6 +108,7 @@ return (
     </div>
     <div className="data_div">
       {UTable}
+    {invitesActive ? <InvitesTable /> : <UserTable />}
     </div>
     </div> </div>
   );
