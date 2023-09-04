@@ -1,11 +1,8 @@
 import {React, useState, useEffect} from "react";
-import Popup from "./popup";
 import Data from "../data/users_data.json"
+import UserPopup from "./user_mgmt";
 
-const UserTable = ({ text }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => {setIsOpen(!isOpen);}
-
+const UserTable = () => {
   const [post, setPost] = useState([]);
   const [number, setNumber] = useState(1); // No of pages
   const [postPerPage] = useState(2);
@@ -50,21 +47,7 @@ const UserTable = ({ text }) => {
                       <td> {Val.role} </td>
                       <td> {Val.github} </td>
                       <td>
-                        <input
-                          className="popup_button"
-                          type="button"
-                          value=":"
-                          onClick={togglePopup}
-                        />
-                        {isOpen && <Popup content={
-                        <>
-                          <div className="popup_content">Remove user</div>
-                          <div className="popup_content">Ban user</div>
-                          <div className="popup_content">Make user</div>
-                        </>
-                        }
-                        handleClose={togglePopup}
-                        />}
+                        <UserPopup />
                       </td>
                     </tr>
                   </>

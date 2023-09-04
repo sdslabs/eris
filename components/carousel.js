@@ -7,18 +7,18 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 
 
-const Caro = ({ text, type, onClick }) => {
+const Caro = () => {
 
   return (
 
       <Carousel interval={2000} autoPlay infiniteLoop showArrows={false} showStatus={false} showThumbs={false}>
-        <div className="slide">  
+        <div className="slide">
           <Image src={Think} alt="labs" />
           <div className="slick_centre">
           <h1 className="carousel_heading">THINK</h1>
           </div>
         </div>
-        
+
         <div className="slide">
           <Image src={Build} alt="labs" />
           <div className="slick_centre" style={{"margin-top":"-1rem"}}>

@@ -8,7 +8,7 @@ import Sort from "../../public/images/sort.svg"
 import AppAdd from "../../public/images/app_add.svg"
 import Test from "../../public/images/test.jpg"
 
-const AdminPage = ({ refs }) => {
+const AdminPage = () => {
 return (
 <div>
     <div className="left_panel">

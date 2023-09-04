@@ -6,11 +6,6 @@ import UserTable from "../../components/user_table";
 import InvitesTable from "../../components/invites_table";
 import UserAdd from "../../public/images/user_add.svg";
 import Filter from "../../public/images/filter.svg";
-import Underline from "../../public/images/active_tab.svg"
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
-const line = <FontAwesomeIcon icon={faGripLinesVertical} />;
 
 const AdminPage = () => {
   const [invitesActive, setInvitesActive] = useState(false);

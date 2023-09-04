@@ -1,7 +1,7 @@
 import React from "react";
 import data from "../data/invites_data.json"
 
-const InvitesTable = ({ text }) => {
+const InvitesTable = () => {
 
   return (
     <div>
