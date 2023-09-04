@@ -65,3 +65,19 @@
 .text-danger{
   color: #FF0000;
 }
+
+@media only screen and (max-width: 768px){
+  .split_left{
+display: none;
+  }
+
+  .split_right{
+    width: 100%;
+  }
+
+  .login {
+    width: 80%;
+    margin-top: 1rem;
+  }
+
+  }
