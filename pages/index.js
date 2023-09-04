@@ -1,5 +1,6 @@
 import ButtonAuth from "../components/button_auth";
 import Labs from "../public/images/labs logo.png";
+import Google from "../public/images/google\ icon.svg";
 import axios from "axios";
 import Image from "next/image";
 import Carousel from "../components/carousel";
