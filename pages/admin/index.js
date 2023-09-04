@@ -23,8 +23,8 @@ return (
     <div className="right_panel">
     <h1 className="admin_heading">User Management</h1>
     <div className="admin_toggle">
-    <div className="toggle_items" style={{marginLeft: "3rem"}}>Users</div>
-    <div className="toggle_items">Invites</div>
+    <div className="toggle_items" style={{marginLeft: "3rem"}} onClick={()=>setInvitesActive(false)}>Users</div>
+    <div className="toggle_items" onClick={()=>setInvitesActive(true)}>Invites</div>
     </div>
     <hr className="admin_hr"/>
     <div className="search_panel">
@@ -42,7 +42,7 @@ return (
       img2={UserAdd}/>
     </div>
     <div className="data_div">
-    <UserTable />
+    {invitesActive ? <InvitesTable /> : <UserTable />}
     </div>
     </div>
 </div>
