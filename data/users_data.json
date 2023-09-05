@@ -4,28 +4,28 @@
     "email": "",
     "role": "admin",
     "github": "",
-    "user_status": 0
+    "userstatus": 0
 }, {
     "id": 2,
     "name": "linklinks",
     "email": "",
     "role": "admin",
     "github": "",
-    "user_status": 1
+    "userstatus": 1
 }, {
     "id": 3,
     "name": "centizu",
     "email": "",
     "role": "admin",
     "github": "",
-    "user_status": 0
+    "userstatus": 0
 }, {
     "id": 4,
     "name": "dynabox",
     "email": "",
     "role": "admin",
     "github": "",
-    "userstatus": 1
+    "userstatus": 2
 }, {
     "id": 5,
     "name": "avaveo",
@@ -53,7 +53,7 @@
     "email": "",
     "role": "user",
     "github": "",
-    "userstatus": 0
+    "userstatus": 2
 }, {
     "id": 9,
     "name": "podcat",
