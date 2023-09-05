@@ -29,8 +29,6 @@ const AdminPage = () => {
   const [userTotalData, setUserTotalData] = useState(data);
   const [UTable, setUTable] = useState(<UserTable userData={[]}/>);
   const [ITable, setITable] = useState(<InvitesTable invitesData={InvitesData}/>);
-  console.log("invitesActive");
-  console.log(invitesActive);
   function updateOnSearch(inputText){
     var recentData=[];
     if (inputText.length > 0) {
@@ -63,21 +61,14 @@ const AdminPage = () => {
       else if(user.userstatus==0&&bannedUser) filterData.push(user);
       return user.name.match("admin");
     },);
-    console.log("roleData");
-    console.log(roleData);
     setUserData(filterData);
     setUserTotalData(recentData);
     setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown}/>);
   }
   else{
     setInviteData(recentData);
-    console.log("roleData invite");
-    console.log(roleData);
     setITable(<InvitesTable invitesData={recentData} filterDropDown={filterDropDown}/>);
   }
-    console.log(roleData);
-    console.log("inside updateOnSearch");
-    console.log(recentData);
   }
 
   function setTableFilter(filterDropDown)
@@ -97,7 +88,6 @@ const AdminPage = () => {
     var filterData=[];
     if(type=="apply") {
       roleData.filter((user) => {
-        console.log(user.userstatus);
         if(user.userstatus==1&&activeUser) filterData.push(user);
         else if(user.userstatus==2&&inactiveUser) filterData.push(user);
         else if(user.userstatus==0&&bannedUser) filterData.push(user);
@@ -110,8 +100,6 @@ const AdminPage = () => {
 
 function AdminRole ( role ) {
   var roleData=[];
-  console.log("inside AdminRole");
-  console.log(userTotalData);
   userTotalData.filter((user) => {
     var adminm = String("admin");
     var userm = String("user");
@@ -125,22 +113,17 @@ function AdminRole ( role ) {
     }
     if((user.role==adminm)&&(adminCheckedVal)) roleData.push(user);
     else if((user.role==userm)&&(userCheckedVal)) roleData.push(user);
-    else console.log("No");
     return user.role.match("admin");
   },);
   var filterData=[];
     roleData.filter((user) => {
-      console.log(user.userstatus);
       if(user.userstatus==1&&activeUser) filterData.push(user);
       else if(user.userstatus==2&&inactiveUser) filterData.push(user);
       else if(user.userstatus==0&&bannedUser) filterData.push(user);
       return user.name.match("admin");
     },);
-  console.log(roleData);
   setUserData(filterData);
   setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown}/>);
-  console.log("UTable details");
-  console.log(UTable);
 };
 
 return (
@@ -164,7 +147,6 @@ return (
     <div className="search_panel">
     <Searchbar updateOnSearch={updateOnSearch}/>
     {(() => {
-      console.log("helllllllllo"); 
       if(!invitesActive){
       return(
     <div className="roles" >
@@ -192,14 +174,34 @@ return (
     </div>
     <div className="data_div">
     <>{(() => {
-      console.log("hii"); 
       if(filterDropDown&&(!invitesActive)){
       return(
         <>
         <div id="filterDropdown" class="dropdown-content">
-          <div><input type="checkbox" id="user_active" onChange={()=>{setActiveUser(!activeUser)}}/> Active User</div>
-          <div><input type="checkbox" id="user_inactive" onChange={()=>{setInactiveUser(!inactiveUser)}}/> Inactive User</div>
-          <div><input type="checkbox" id="user_banned" onChange={()=>{setBannedUser(!bannedUser)}}/> Banned User</div>
+          <div>{(() => {
+      if(activeUser){
+      return(<input type="checkbox" id="user_active" onChange={()=>{setActiveUser(!activeUser)}} checked="true"/>)
+    }
+    else{
+      return(<input type="checkbox" id="user_active" onChange={()=>{setActiveUser(!activeUser)}}/>)
+    }
+    })()}Active User</div>
+          <div>{(() => {
+      if(inactiveUser){
+      return(<input type="checkbox" id="user_inactive" onChange={()=>{setInactiveUser(!inactiveUser)}} checked="true"/>)
+    }
+    else{
+      return(<input type="checkbox" id="user_inactive" onChange={()=>{setInactiveUser(!inactiveUser)}}/>)
+    }
+    })()} Inactive User</div>
+          <div>{(() => {
+      if(bannedUser){
+      return(<input type="checkbox" id="user_banned" onChange={()=>{setBannedUser(!bannedUser)}} checked="true"/>)
+    }
+    else{
+      return(<input type="checkbox" id="user_banned" onChange={()=>{setBannedUser(!bannedUser)}}/>)
+    }
+    })()}Banned User</div>
           <div><button id="apply_filter" onClick={()=>{Userfilter("apply")}}>
           {/* <Image style={{marginRight: "8px"}} src={ApplyFilter} alt="user management" /> */}
             {"Apply Filter"}
