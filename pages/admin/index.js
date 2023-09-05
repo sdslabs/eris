@@ -8,11 +8,10 @@ import UserAdd from "../../public/images/user_add.svg";
 import Filter from "../../public/images/filter.svg";
 import data from "../../data/users_data.json";
 import InvitesData from "../../data/invites_data.json";
-import AddUser from "../../components/add_user.js";
-import Underline from "../../public/images/active_tab.svg"
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "@mui/material";
 const line = <FontAwesomeIcon icon={faGripLinesVertical} />;
 
 const AdminPage = () => {
@@ -21,7 +20,11 @@ const AdminPage = () => {
   {invitesActive ? (ifInviteActive="setLine", ifUserActive=null ) : (ifInviteActive=null ,ifUserActive="setLine")}
   const [adminChecked, setAdminChecked] = useState(false);
   const [userChecked, setUserChecked] = useState(false);
+  const [activeUser, setActiveUser] = useState(false);
+  const [inactiveUser, setInactiveUser] = useState(false);
+  const [bannedUser, setBannedUser] = useState(false);
   const [userData, setUserData] = useState([]);
+  const [filterDropDown, setShowFilterDropDown] = useState(false);
   const [invitesData, setInviteData] = useState(InvitesData);
   const [userTotalData, setUserTotalData] = useState(data);
   const [UTable, setUTable] = useState(<UserTable userData={[]}/>);
@@ -53,21 +56,56 @@ const AdminPage = () => {
       else if(user.role.match("user")&&userChecked) roleData.push(user);
       return user.name.match("admin");
     },);
+    var filterData=[];
+    roleData.filter((user) => {
+      if(user.userstatus==1&&activeUser) filterData.push(user);
+      else if(user.userstatus==2&&inactiveUser) filterData.push(user);
+      else if(user.userstatus==0&&bannedUser) filterData.push(user);
+      return user.name.match("admin");
+    },);
     console.log("roleData");
     console.log(roleData);
-    setUserData(roleData);
+    setUserData(filterData);
     setUserTotalData(recentData);
-    setUTable(<UserTable userData={roleData}/>);
+    setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown}/>);
   }
   else{
     setInviteData(recentData);
     console.log("roleData invite");
     console.log(roleData);
-    setITable(<InvitesTable invitesData={recentData}/>);
+    setITable(<InvitesTable invitesData={recentData} filterDropDown={filterDropDown}/>);
   }
     console.log(roleData);
     console.log("inside updateOnSearch");
     console.log(recentData);
+  }
+
+  function setTableFilter(filterDropDown)
+  {
+    if(!invitesActive) setUTable(<UserTable userData={userData} filterDropDown={filterDropDown}/>);
+    else setITable(<InvitesTable invitesData={invitesData} filterDropDown={filterDropDown}/>);
+  }
+
+  function Userfilter(type)
+  {
+    var roleData=[];
+      userTotalData.filter((user) => {
+      if(user.role.match("admin")&&adminChecked) roleData.push(user);
+      else if(user.role.match("user")&&userChecked) roleData.push(user);
+      return user.name.match("admin");
+    },);
+    var filterData=[];
+    if(type=="apply") {
+      roleData.filter((user) => {
+        console.log(user.userstatus);
+        if(user.userstatus==1&&activeUser) filterData.push(user);
+        else if(user.userstatus==2&&inactiveUser) filterData.push(user);
+        else if(user.userstatus==0&&bannedUser) filterData.push(user);
+      return user.name.match("admin");
+    },);
+  }
+  setUserData(filterData);
+  setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown}/>);
   }
 
 function AdminRole ( role ) {
@@ -90,9 +128,17 @@ function AdminRole ( role ) {
     else console.log("No");
     return user.role.match("admin");
   },);
+  var filterData=[];
+    roleData.filter((user) => {
+      console.log(user.userstatus);
+      if(user.userstatus==1&&activeUser) filterData.push(user);
+      else if(user.userstatus==2&&inactiveUser) filterData.push(user);
+      else if(user.userstatus==0&&bannedUser) filterData.push(user);
+      return user.name.match("admin");
+    },);
   console.log(roleData);
-  setUserData(roleData);
-  setUTable(<UserTable userData={roleData}/>);
+  setUserData(filterData);
+  setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown}/>);
   console.log("UTable details");
   console.log(UTable);
 };
@@ -118,7 +164,7 @@ return (
     <div className="search_panel">
     <Searchbar updateOnSearch={updateOnSearch}/>
     {(() => {
-      console.log("hii"); 
+      console.log("helllllllllo"); 
       if(!invitesActive){
       return(
     <div className="roles" >
@@ -129,15 +175,46 @@ return (
       )
 }
 })()}
-    <Buttons
-      text1="Filter"
-      text2="Add User"
-      img1={Filter}
-      img2={UserAdd}/>
+    <div className="buttons">
+      <>
+      {(() => { if(!invitesActive)
+      {return (<button className="filter_btn" onClick={()=>{setShowFilterDropDown(!filterDropDown), setTableFilter(!filterDropDown)}}>
+          <Image style={{marginRight: "8px"}} src={Filter} alt="user management" />
+            {"Filter"}
+        </button>
+      )}})()}
+        </>
+        <button className="add_user_btn">
+            <Image style={{marginRight: "8px"}} src={UserAdd} alt="user management" />
+            {"Add User"}
+        </button>
+    </div>
     </div>
     <div className="data_div">
+    <>{(() => {
+      console.log("hii"); 
+      if(filterDropDown&&(!invitesActive)){
+      return(
+        <>
+        <div id="filterDropdown" class="dropdown-content">
+          <div><input type="checkbox" id="user_active" onChange={()=>{setActiveUser(!activeUser)}}/> Active User</div>
+          <div><input type="checkbox" id="user_inactive" onChange={()=>{setInactiveUser(!inactiveUser)}}/> Inactive User</div>
+          <div><input type="checkbox" id="user_banned" onChange={()=>{setBannedUser(!bannedUser)}}/> Banned User</div>
+          <div><button id="apply_filter" onClick={()=>{Userfilter("apply")}}>
+          {/* <Image style={{marginRight: "8px"}} src={ApplyFilter} alt="user management" /> */}
+            {"Apply Filter"}
+            </button></div>
+            <div><button id="reset_filter" onClick={()=>{Userfilter("reset")}}>
+          {/* <Image style={{marginRight: "8px"}} src={ResetFilter} alt="user management" /> */}
+            {"Reset Filter"}
+            </button></div>
+      </div></>
+      )
+}
+})()}</>
       {/* {UTable} */}
     {invitesActive ? ITable : UTable}
+    
     </div>
     </div> </div>
   );
