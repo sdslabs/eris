@@ -25,10 +25,14 @@ const AdminPage = () => {
   const [bannedUser, setBannedUser] = useState(false);
   const [userData, setUserData] = useState([]);
   const [filterDropDown, setShowFilterDropDown] = useState(false);
-  const [invitesData, setInviteData] = useState(InvitesData);
+  const [filterInviteDropDown, setFilterInviteDropDown] = useState(false);
+  const [acceptedUser, setAcceptedUser] = useState(false);
+  const [pendingUser, setPendingUser] = useState(false);
+  const [invitesData, setInviteData] = useState([]);
+  const [invitesTotalData, setInvitesTotalData] = useState(InvitesData);
   const [userTotalData, setUserTotalData] = useState(data);
-  const [UTable, setUTable] = useState(<UserTable userData={[]}/>);
-  const [ITable, setITable] = useState(<InvitesTable invitesData={InvitesData}/>);
+  const [UTable, setUTable] = useState(<UserTable userData={[]} filterDropDown={false}/>);
+  const [ITable, setITable] = useState(<InvitesTable invitesData={[]} filterDropDown={false}/>);
   function updateOnSearch(inputText){
     var recentData=[];
     if (inputText.length > 0) {
@@ -66,15 +70,27 @@ const AdminPage = () => {
     setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown}/>);
   }
   else{
-    setInviteData(recentData);
-    setITable(<InvitesTable invitesData={recentData} filterDropDown={filterDropDown}/>);
+    recentData.filter((user) => {
+      if(user.invitestatus==0&&pendingUser) filterData.push(user);
+      else if(user.invitestatus==1&&acceptedUser) filterData.push(user);
+    return user.name.match("admin");
+  },);
+    setInvitesTotalData(recentData);
+    setInviteData(filterData);
+    setITable(<InvitesTable invitesData={recentData} filterDropDown={filterInviteDropDown}/>);
   }
   }
 
   function setTableFilter(filterDropDown)
   {
     if(!invitesActive) setUTable(<UserTable userData={userData} filterDropDown={filterDropDown}/>);
-    else setITable(<InvitesTable invitesData={invitesData} filterDropDown={filterDropDown}/>);
+    else setITable(<InvitesTable invitesData={invitesData} filterDropDown={filterInviteDropDown}/>);
+  }
+
+  function setInviteTableFilter (filterInviteDropDown)
+  {
+    if(!invitesActive) setUTable(<UserTable userData={userData} filterDropDown={filterDropDown}/>);
+    else setITable(<InvitesTable invitesData={invitesData} filterDropDown={filterInviteDropDown}/>);
   }
 
   function Userfilter(type)
@@ -94,8 +110,30 @@ const AdminPage = () => {
       return user.name.match("admin");
     },);
   }
+  else{
+    setActiveUser(false);
+    setInactiveUser(false);
+    setBannedUser(false);
+  }
   setUserData(filterData);
   setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown}/>);
+  }
+  function Invitefilter(type)
+  {
+    var filterData=[];
+    if(type=="apply") {
+      invitesTotalData.filter((user) => {
+        if(user.invitestatus==0&&pendingUser) filterData.push(user);
+        else if(user.invitestatus==1&&acceptedUser) filterData.push(user);
+      return user.name.match("admin");
+    },);
+  }
+  else{
+    setAcceptedUser(false);
+    setPendingUser(false);
+  }
+  setInviteData(filterData);
+  setITable(<InvitesTable invitesData={filterData} filterDropDown={filterInviteDropDown}/>);
   }
 
 function AdminRole ( role ) {
@@ -159,12 +197,19 @@ return (
 })()}
     <div className="buttons">
       <>
-      {(() => { if(!invitesActive)
+      {(() => { 
+        if(!invitesActive)
       {return (<button className="filter_btn" onClick={()=>{setShowFilterDropDown(!filterDropDown), setTableFilter(!filterDropDown)}}>
           <Image style={{marginRight: "8px"}} src={Filter} alt="user management" />
             {"Filter"}
         </button>
-      )}})()}
+      )}
+      else {return (<button className="filter_btn" onClick={()=>{setFilterInviteDropDown(!filterInviteDropDown), setInviteTableFilter(!filterInviteDropDown)}}>
+          <Image style={{marginRight: "8px"}} src={Filter} alt="user management" />
+            {"Filter"}
+        </button>
+      )}
+      })()}
         </>
         <button className="add_user_btn">
             <Image style={{marginRight: "8px"}} src={UserAdd} alt="user management" />
@@ -213,8 +258,39 @@ return (
       </div></>
       )
 }
-})()}</>
-      {/* {UTable} */}
+else if(filterInviteDropDown&&(invitesActive)){
+  return(
+    <>
+    <div id="filterDropdown" class="dropdown-content">
+      <div>{(() => {
+  if(acceptedUser){
+  return(<input type="checkbox" id="user_accepted" onChange={()=>{setAcceptedUser(!acceptedUser)}} checked="true"/>)
+}
+else{
+  return(<input type="checkbox" id="user_accepted" onChange={()=>{setAcceptedUser(!acceptedUser)}}/>)
+}
+})()}Accepted User</div>
+      <div>{(() => {
+  if(pendingUser){
+  return(<input type="checkbox" id="user_pending" onChange={()=>{setPendingUser(!pendingUser)}} checked="true"/>)
+}
+else{
+  return(<input type="checkbox" id="user_pending" onChange={()=>{setPendingUser(!pendingUser)}}/>)
+}
+})()}Pending User</div>
+      <div><button id="apply_filter" onClick={()=>{Invitefilter("apply")}}>
+      {/* <Image style={{marginRight: "8px"}} src={ApplyFilter} alt="user management" /> */}
+        {"Apply Filter"}
+        </button></div>
+        <div><button id="reset_filter" onClick={()=>{Invitefilter("reset")}}>
+      {/* <Image style={{marginRight: "8px"}} src={ResetFilter} alt="user management" /> */}
+        {"Reset Filter"}
+        </button></div>
+  </div></>
+  )
+}
+}
+)()}</>
     {invitesActive ? ITable : UTable}
     
     </div>
