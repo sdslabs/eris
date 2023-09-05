@@ -18,15 +18,11 @@ export const Searchbar = ({ type, updateOnSearch}) => {
     var lowerCase = e.target.value.toLowerCase();
     if(lowerCase!=inputText) 
     {
-      console.log("Finally!");
       updateOnSearch(lowerCase);
     }
     setInputText(lowerCase);
   };
   currentData=data;
-  console.log("length of input text");
-  console.log(inputText);
-  console.log(currentData);
   return (
     
     (<div className={"searchbar" + " " + inputActive}  text={"Search user by name or email"}>

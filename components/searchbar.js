@@ -11,7 +11,6 @@ const Searchbar = ({ type, text}) => {
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
-  console.log(inputText);
   if (inputText.length > 0) {
     data.filter((user) => {
     return user.name.match(inputText);

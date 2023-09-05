@@ -8,7 +8,6 @@ import Image from "next/image";
 const InvitesTable = ({ invitesData, filterDropDown }) => {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {setIsOpen(!isOpen);}
-  console.log(invitesData);
   const post = invitesData;
   const [number, setNumber] = useState(1); // No of pages
   const [postPerPage] = useState(3);
@@ -25,8 +24,6 @@ const InvitesTable = ({ invitesData, filterDropDown }) => {
   const ChangePage = (pageNumber) => {
     setNumber(pageNumber);
   };
-  console.log("inside data display");
-  console.log(invitesData);
   return (
     <div style={{zIndex:2, marginTop:mTop}}>
       <table className="invites_table">

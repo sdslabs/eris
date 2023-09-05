@@ -26,8 +26,6 @@ const UserTable = ({ userData, filterDropDown }) => {
   const ChangePage = (pageNumber) => {
     setNumber(pageNumber);
   };
-  console.log("inside data display");
-  console.log(userData);
   return (
     <div style={{ marginTop:mTop}}>
       <table className="user_table">
