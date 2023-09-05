@@ -4,8 +4,9 @@ import {currentData} from "./searchbaradmin.js"
 import defaultFace from "../public/images/default_face.svg"
 import bannedUser from "../public/images/banned.svg"
 import Image from "next/image";
+import zIndex from "@mui/material/styles/zIndex";
 
-const UserTable = ({ userData }) => {
+const UserTable = ({ userData, filterDropDown }) => {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {setIsOpen(!isOpen);}
 
@@ -21,14 +22,14 @@ const UserTable = ({ userData }) => {
   for (let i = 1; i <= Math.ceil(post.length / postPerPage); i++) {
     pageNumber.push(i);
   }
-
+  const mTop = filterDropDown? "-11%":"0%";
   const ChangePage = (pageNumber) => {
     setNumber(pageNumber);
   };
   console.log("inside data display");
   console.log(userData);
   return (
-    <div>
+    <div style={{ marginTop:mTop}}>
       <table className="user_table">
         <tbody>
         <tr>

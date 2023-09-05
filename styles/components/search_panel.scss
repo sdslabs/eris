@@ -63,3 +63,13 @@
     font-size: 0.9rem;
     margin: 1.5rem 0.5rem;
   }
+  .dropdown-content{
+    display: flex;
+    margin-right: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    align-self: flex-end;
+    background-color: #FFFFFF;
+    z-index:1;
+    margin-left: auto;
+  }

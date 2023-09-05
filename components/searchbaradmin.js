@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Search from "../public/images/search_icon.svg";
 import Image from "next/image";
 import data from "../data/users_data.json";
-import Buttons from "./admin_buttons";
 import UserAdd from "../public/images/user_add.svg";
 import Filter from "../public/images/filter.svg";
 import UserTable from "./user_table";

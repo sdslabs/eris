@@ -5,7 +5,7 @@ import PendingUser from "../public/images/pending.svg"
 import AcceptedUser from "../public/images/accepted.svg"
 import Image from "next/image";
 
-const InvitesTable = ({ invitesData }) => {
+const InvitesTable = ({ invitesData, filterDropDown }) => {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {setIsOpen(!isOpen);}
   console.log(invitesData);
@@ -17,7 +17,7 @@ const InvitesTable = ({ invitesData }) => {
   const firstPost = lastPost - postPerPage;
   const currentPost = post.slice(firstPost, lastPost);
   const pageNumber = [];
-
+  const mTop = filterDropDown? "0%":"0%";
   for (let i = 1; i <= Math.ceil(post.length / postPerPage); i++) {
     pageNumber.push(i);
   }
@@ -28,7 +28,7 @@ const InvitesTable = ({ invitesData }) => {
   console.log("inside data display");
   console.log(invitesData);
   return (
-    <div>
+    <div style={{zIndex:2, marginTop:mTop}}>
       <table className="invites_table">
         <tbody>
         <tr>
