@@ -1,6 +1,7 @@
 import {React, useState, useEffect} from "react";
 import Popup from "./popup";
 import Data from "../data/users_data.json"
+import Select from 'react-select';
 
 const UserTable = ({ text }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,8 +9,25 @@ const UserTable = ({ text }) => {
 
   const [post, setPost] = useState([]);
   const [number, setNumber] = useState(1); // No of pages
-  const [postPerPage] = useState(2);
-
+  const [postPerPage,setPostPerPage] = useState({value:2, label:"2/Page"});
+  const options=[
+  {
+    value:2, 
+    label:"2/Page"
+  },
+  {
+    value:5,
+    label:"5/Page"
+  },
+  {
+    value:10,
+    label:"10/Page"
+  },
+  {
+    value:20,
+    label:"20/Page"
+  },
+  ]
   useEffect(() => {
     const fetchApi = async () => {
       const data = Data;
@@ -18,12 +36,12 @@ const UserTable = ({ text }) => {
     fetchApi();
   }, []);
 
-  const lastPost = number * postPerPage;
-  const firstPost = lastPost - postPerPage;
+  const lastPost = number * postPerPage.value;
+  const firstPost = lastPost - postPerPage.value;
   const currentPost = post.slice(firstPost, lastPost);
   var pageNumberArr = [];
 
-  const numberOfPages=Math.ceil(post.length / postPerPage);
+  const numberOfPages=Math.ceil(post.length / postPerPage.value);
   var left=1;
   var right=Math.min(left+4, numberOfPages);
   for(var i=left; i<=right; i++){
@@ -128,6 +146,13 @@ const UserTable = ({ text }) => {
             <button className="page_change" onClick={() => ChangePage({numberOfPages})}>
             {"Jump to Last"}
             </button>
+       </div>
+       <div className="dropdown">
+       <Select
+        defaultValue={postPerPage}
+        onChange={setPostPerPage}
+        options={options}
+      />
        </div>
        <div className="go_to_page">
             Go To 

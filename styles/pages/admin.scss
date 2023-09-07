@@ -133,7 +133,7 @@ margin: 0.5rem 1rem;
     justify-content: center;
     align-items: center;
     margin-top: 1rem;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .item_count{
@@ -180,4 +180,9 @@ margin: 0.5rem 1rem;
     border-radius: 5px;
     padding: 0.5rem;
     margin-left: 0.5rem;
+}
+
+.dropdown{
+    margin-top: 1rem;
+    color: rgb(153, 153, 153);
 }
