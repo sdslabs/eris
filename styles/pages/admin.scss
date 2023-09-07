@@ -127,6 +127,20 @@ margin: 0.5rem 1rem;
     border-bottom: 2px solid black;
 }
 
+.page_control{
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.item_count{
+    margin-top: 1rem;
+    color: rgb(98, 98, 98)
+}
+
 .pagination{
     display: flex;
     justify-content: center;
@@ -152,4 +166,18 @@ margin: 0.5rem 1rem;
     border: 1px solid #59D887;
     padding: 0.5rem 1rem;
     border-radius: 5px;
+}
+
+.go_to_page{
+    margin-top: 1rem;
+    color: rgb(98, 98, 98)
+}
+
+.page_input{
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
 }

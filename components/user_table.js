@@ -104,7 +104,12 @@ const UserTable = ({ text }) => {
               })}
         </tbody>
       </table>
+      <div className="page_control" >
+        <div className="item_count">Total {currentPost.length} items</div>
         <div className="pagination" >
+            <button className="page_change" onClick={() => ChangePage(1)}>
+            {"Jump to First"}
+            </button>
             <button className="page_change" onClick={() => ChangePage(number - 1)}>
             {"<"}
             </button>
@@ -120,7 +125,15 @@ const UserTable = ({ text }) => {
             <button className="page_change" onClick={() => ChangePage(number + 1)}>
             {">"}
             </button> 
+            <button className="page_change" onClick={() => ChangePage({numberOfPages})}>
+            {"Jump to Last"}
+            </button>
        </div>
+       <div className="go_to_page">
+            Go To 
+            <input className="page_input" type="text" onChange={(e) => ChangePage(Number(e.target.value))} />
+       </div>
+      </div>
     </div>
   );
 };
