@@ -21,15 +21,47 @@ const UserTable = ({ text }) => {
   const lastPost = number * postPerPage;
   const firstPost = lastPost - postPerPage;
   const currentPost = post.slice(firstPost, lastPost);
-  const pageNumber = [];
+  var pageNumberArr = [];
 
-  for (let i = 1; i <= Math.ceil(post.length / postPerPage); i++) {
-    pageNumber.push(i);
+  const numberOfPages=Math.ceil(post.length / postPerPage);
+  var left=1;
+  var right=Math.min(left+4, numberOfPages);
+  for(var i=left; i<=right; i++){
+    pageNumberArr.push(i);
   }
-
   const ChangePage = (pageNumber) => {
-    setNumber(pageNumber);
+    if(pageNumber>numberOfPages || pageNumber<1){
+      return;
+    }
+    if(pageNumber>=left && pageNumber<=right){
+      setNumber(pageNumber);
+    }
+    else if(pageNumber<left){
+      pageNumberArr=[]
+      right=pageNumber;
+      left=Math.max(right-4, 1);
+      for(var i=left; i<=right; i++){
+        pageNumberArr.push(i);
+      }
+      setNumber(pageNumber);
+    }
+    else if(pageNumber>right){
+      pageNumberArr=[]
+      left=pageNumber;
+      right=Math.min(left+4, numberOfPages);
+      for(var i=left; i<=right; i++){
+        pageNumberArr.push(i);
+      }
+      setNumber(pageNumber);
+    }
   };
+  const classgenerator = (elem) => {
+    if(elem===number){
+      return "page_change_selected";
+    }else{
+      return "page_change";
+    }
+  }
   return (
     <div>
       <table className="user_table">
@@ -72,22 +104,22 @@ const UserTable = ({ text }) => {
               })}
         </tbody>
       </table>
-      <div className="pagination" >
-            <button className="page_change" onClick={() => setNumber(number - 1)}>
+        <div className="pagination" >
+            <button className="page_change" onClick={() => ChangePage(number - 1)}>
             {"<"}
             </button>
-            {pageNumber.map((Elem) => {
+            {pageNumberArr.map((Elem) => {
               return (
                 <>
-                  <button className="page_change" onClick={() => ChangePage(Elem)}>
+                  <button className={classgenerator(Elem)} onClick={() => ChangePage(Elem)}>
                     {Elem}
                   </button>
                 </>
               );
             })}
-            <button className="page_change" onClick={() => setNumber(number + 1)}>
+            <button className="page_change" onClick={() => ChangePage(number + 1)}>
             {">"}
-            </button>
+            </button> 
        </div>
     </div>
   );
