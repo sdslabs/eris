@@ -72,23 +72,23 @@ const UserTable = ({ text }) => {
               })}
         </tbody>
       </table>
-      <div>
-            <button onClick={() => setNumber(number - 1)}>
-              Previous
+      <div className="pagination" >
+            <button className="page_change" onClick={() => setNumber(number - 1)}>
+            {"<"}
             </button>
             {pageNumber.map((Elem) => {
               return (
                 <>
-                  <button onClick={() => ChangePage(Elem)}>
+                  <button className="page_change" onClick={() => ChangePage(Elem)}>
                     {Elem}
                   </button>
                 </>
               );
             })}
-            <button onClick={() => setNumber(number + 1)}>
-              Next
+            <button className="page_change" onClick={() => setNumber(number + 1)}>
+            {">"}
             </button>
-          </div>
+       </div>
     </div>
   );
 };
