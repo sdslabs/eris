@@ -11,15 +11,25 @@ const EditAppBox = ({ img, name, des, href, domains, organisations, handleAppBox
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [dropdownValue, setDropdownValue] = useState("");
+  const [organisationsToUse, setOrganisationsState] = useState(organisations);
 
   const handleSelect = (event) => {
     const selectedItem = event.target.value;
+    var organisationsCurrent = organisationsToUse
+    var index = organisationsCurrent.indexOf(selectedItem);
+    if (index !== -1) {
+      organisationsCurrent.splice(index, 1);
+    }
+    setOrganisationsState(organisationsCurrent)
     setSelectedItems([...selectedItems, selectedItem]);
     setDropdownValue("");
   };
 
   const handleDelete = (itemToDelete) => {
     const newSelectedItems = selectedItems.filter((item) => item !== itemToDelete);
+    var organisationsCurrent = organisationsToUse
+    organisationsCurrent.push(itemToDelete)
+    setOrganisationsState(organisationsCurrent)
     setSelectedItems(newSelectedItems);
   };
 
@@ -63,23 +73,6 @@ const EditAppBox = ({ img, name, des, href, domains, organisations, handleAppBox
         </div>
       </div>
       <div>
-      <select value={dropdownValue} onChange={handleSelect}>
-        <option value=""></option>
-        <option value="DSG">DSG</option>
-        <option value="InfoSec">InfoSec</option>
-        <option value="PAG">PAG</option>
-        <option value="SDSLabs">SDSLabs</option>
-      </select>
-      <div>
-        {selectedItems.map((item) => (
-          <span key={item} className="keyword">
-            {item}
-            <span className="delete" onClick={() => handleDelete(item)}>
-              &#10005;
-            </span>
-          </span>
-        ))}
-      </div>
     </div>
         <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Name</p> <br/>
@@ -92,11 +85,37 @@ const EditAppBox = ({ img, name, des, href, domains, organisations, handleAppBox
         <div className="app_box_children">
           <p style={{marginBottom: "-0.5rem"}}>Organisations</p> <br/>
           <div className="org_div">
-          {organisations.map((item, index) => (
-            <div key={index} className="org_item">
-              {item}
-            </div>
-          ))}
+          {selectedItems.map((item) => (
+              <span key={item} className="org_item">
+                {item}
+                <span className="delete_org" onClick={() => handleDelete(item)}>
+                  &#10005;
+                </span>
+              </span>
+            ))}
+          <div className="org_select_container">
+          <select className="org_div_select"
+                value={dropdownValue}
+                onChange={handleSelect}>
+        <option value=""></option>
+        {(() => { 
+        var index = organisationsToUse.indexOf("DSG");
+        if (index !== -1) {
+        return <option value="DSG">DSG</option>}})()}
+        {(() => { 
+        var index = organisationsToUse.indexOf("Infosec");
+        if (index !== -1) {
+        return <option value="Infosec">Infosec</option>}})()}
+        {(() => { 
+        var index = organisationsToUse.indexOf("PAG");
+        if (index !== -1) {
+        return <option value="PAG">PAG</option>}})()}
+        {(() => { 
+        var index = organisationsToUse.indexOf("SDSLabs");
+        if (index !== -1) {
+        return <option value="SDSLabs">SDSLabs</option>}})()}
+      </select>
+          </div>
           </div>
         </div>
         <div className="app_box_children">
