@@ -65,11 +65,13 @@
   }
   .dropdown-content{
     display: flex;
+    width:10rem;
     margin-right: 0;
     flex-direction: column;
-    align-items: flex-end;
-    align-self: flex-end;
-    background-color: #FFFFFF;
+    border-width: 1px;
+    border-color: #191919;
+    background-color: #ffffff;
     z-index:1;
-    margin-left: auto;
+    margin-left: -17rem;
+    margin-top: -2rem;
   }

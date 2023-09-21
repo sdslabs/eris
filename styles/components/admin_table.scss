@@ -7,6 +7,9 @@
     scroll-behavior: smooth;
     border-collapse: collapse;
 }
+.user_table, .invites_table {
+    width: 72rem;
+}
 
 th{
     padding: 0 1rem;
