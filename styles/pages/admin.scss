@@ -105,7 +105,7 @@ margin: 0.5rem 1rem;
     height: 70vh;
     border: 2px solid rgba(216,216,216,255);
     padding: 1rem 2rem;
-    // overflow-y: no-scroll;
+    overflow-y: scroll;
     display: flex;
     flex-direction: row;
 }
