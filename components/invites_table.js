@@ -16,7 +16,6 @@ const InvitesTable = ({ invitesData, filterDropDown }) => {
   const firstPost = lastPost - postPerPage;
   const currentPost = post.slice(firstPost, lastPost);
   const pageNumber = [];
-  const mTop = filterDropDown? "0%":"0%";
   for (let i = 1; i <= Math.ceil(post.length / postPerPage); i++) {
     pageNumber.push(i);
   }
@@ -25,7 +24,7 @@ const InvitesTable = ({ invitesData, filterDropDown }) => {
     setNumber(pageNumber);
   };
   return (
-    <div style={{zIndex:2, marginTop:mTop}}>
+    <div>
       <table className="invites_table">
         <tbody>
         <tr>
