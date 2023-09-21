@@ -196,6 +196,7 @@ return (
 }
 })()}
     <div className="buttons">
+      
       <>
       {(() => { 
         if(!invitesActive)
@@ -218,7 +219,9 @@ return (
     </div>
     </div>
     <div className="data_div">
-    <>{(() => {
+      
+    <div>{invitesActive ? ITable : UTable}</div>
+    <div>{(() => {
       if(filterDropDown&&(!invitesActive)){
       return(
         <>
@@ -247,10 +250,10 @@ return (
       return(<input type="checkbox" id="user_banned" onChange={()=>{setBannedUser(!bannedUser)}}/>)
     }
     })()}Banned User</div>
-          <div><button id="apply_filter" onClick={()=>{Userfilter("apply")}}>
+          <div><button id="apply_filter" class="filter_button" onClick={()=>{Userfilter("apply")}}>
             {"Apply Filter"}
             </button></div>
-            <div><button id="reset_filter" onClick={()=>{Userfilter("reset")}}>
+            <div><button id="reset_filter" class="filter_button" onClick={()=>{Userfilter("reset")}}>
             {"Reset Filter"}
             </button></div>
       </div></>
@@ -276,18 +279,17 @@ else{
   return(<input type="checkbox" id="user_pending" onChange={()=>{setPendingUser(!pendingUser)}}/>)
 }
 })()}Pending User</div>
-      <div><button id="apply_filter" onClick={()=>{Invitefilter("apply")}}>
+      <div><button id="apply_filter" class="filter_button" onClick={()=>{Invitefilter("apply")}}>
         {"Apply Filter"}
         </button></div>
-        <div><button id="reset_filter" onClick={()=>{Invitefilter("reset")}}>
+        <div><button id="reset_filter" class="filter_button" onClick={()=>{Invitefilter("reset")}}>
         {"Reset Filter"}
         </button></div>
   </div></>
   )
 }
 }
-)()}</>
-    {invitesActive ? ITable : UTable}
+)()}</div>
     
     </div>
     </div> </div>

@@ -22,7 +22,7 @@ const UserTable = ({ userData, filterDropDown }) => {
   for (let i = 1; i <= Math.ceil(post.length / postPerPage); i++) {
     pageNumber.push(i);
   }
-  const mTop = filterDropDown? "-11%":"0%";
+  const mTop = filterDropDown? "0%":"0%";
   const ChangePage = (pageNumber) => {
     setNumber(pageNumber);
   };
