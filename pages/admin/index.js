@@ -248,11 +248,9 @@ return (
     }
     })()}Banned User</div>
           <div><button id="apply_filter" onClick={()=>{Userfilter("apply")}}>
-          {/* <Image style={{marginRight: "8px"}} src={ApplyFilter} alt="user management" /> */}
             {"Apply Filter"}
             </button></div>
             <div><button id="reset_filter" onClick={()=>{Userfilter("reset")}}>
-          {/* <Image style={{marginRight: "8px"}} src={ResetFilter} alt="user management" /> */}
             {"Reset Filter"}
             </button></div>
       </div></>
@@ -279,11 +277,9 @@ else{
 }
 })()}Pending User</div>
       <div><button id="apply_filter" onClick={()=>{Invitefilter("apply")}}>
-      {/* <Image style={{marginRight: "8px"}} src={ApplyFilter} alt="user management" /> */}
         {"Apply Filter"}
         </button></div>
         <div><button id="reset_filter" onClick={()=>{Invitefilter("reset")}}>
-      {/* <Image style={{marginRight: "8px"}} src={ResetFilter} alt="user management" /> */}
         {"Reset Filter"}
         </button></div>
   </div></>
