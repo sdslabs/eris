@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Popup from "../components/user_mgmt_pop";
 const eye = <FontAwesomeIcon icon={faEye} />;
 const crossedEye = <FontAwesomeIcon icon={faEyeSlash} />;
 
@@ -82,6 +83,7 @@ const redirect = () =>{
               Log<span className="green">in</span>
             </h1>
           </div>
+          <Popup content="Remove User"/>
           <div className="form">
             <div>
               <p>Email address</p>
