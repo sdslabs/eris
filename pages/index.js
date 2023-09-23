@@ -83,7 +83,6 @@ const redirect = () =>{
               Log<span className="green">in</span>
             </h1>
           </div>
-          <Popup content="Remove User"/>
           <div className="form">
             <div>
               <p>Email address</p>
