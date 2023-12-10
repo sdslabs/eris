@@ -13,24 +13,8 @@ const SettingsPage = () => {
   const [totpEnabled, setTotpEnabled] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(process.env.NEXT_PUBLIC_SETTINGS, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response.data);
-
-        if (response.data.qr == "" && response.data.totp_secret == "" && response.data.csrf_token != "") {
-          setTotpEnabled(true);
-        } else {
-          setTotpEnabled(false);
-          setQrLink(response.data.qr);
-          setCsrfToken(response.data.csrf_token);
-          setFlowID(response.data.flowID);
-          setTotp_secret(response.data.totp_secret);
-        }
-      });
-  }, []);
+    fetchNewQR();
+  }, [totpEnabled]);
 
   function verifyTOTP() {
     const objData = { csrf_token, totp_code, flowID, method: "totp", totp_unlink: false };
@@ -50,6 +34,7 @@ const SettingsPage = () => {
 
   function unlinkTOTP() {
     const objData = { csrf_token, totp_code, flowID, method: "totp", totp_unlink: true };
+    console.log(objData);
 
     axios
       .post(process.env.NEXT_PUBLIC_TOGGLETOTP, objData, {
@@ -64,18 +49,39 @@ const SettingsPage = () => {
       });
   }
 
+  function fetchNewQR() {
+    axios
+      .get(process.env.NEXT_PUBLIC_SETTINGS, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        if (response.data.qr === "" && response.data.totp_secret === "" && response.data.csrf_token !== "") {
+          setTotpEnabled(true);
+          setCsrfToken(response.data.csrf_token);
+          setFlowID(response.data.flowID);
+        } else {
+          setTotpEnabled(false);
+          setQrLink(response.data.qr);
+          setCsrfToken(response.data.csrf_token);
+          setFlowID(response.data.flowID);
+          setTotp_secret(response.data.totp_secret);
+        }
+      });
+  }
+
   return (
     <>
       {!totpEnabled ? (
         <>
-          <Image src={qrLink} alt="qr" width={200} height={200} />
+          {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
           <div>
             If you cannot scan the QR, use this code:
             <pre>
               <code>{totp_secret}</code>
             </pre>
           </div>
-
           <label for="code">Enter Verification Code</label>
           <input
             type="text"
