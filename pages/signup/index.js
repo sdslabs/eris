@@ -16,7 +16,7 @@ const SignupPage = () => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const handleButtonClick = (event) => {
-    event.preventDefault();
+    event.preventDefault();   
     setShowSignup(!showSignup);
   };
   const handlePasswordButton = (event) => {

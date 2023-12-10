@@ -48,22 +48,32 @@ const LoginPage = () => {
         setEmail("");
         setPass("");
         console.log("logged in");
-        return true
+        return true;
       } else {
         setMessage("Some error occured");
-        return false
+        return false;
       }
     } catch (err) {
       console.log(err);
-      return false
+      return false;
     }
   };
 
-const router = useRouter();
-const redirect = () =>{
-
-  router.push('dashboard');
-}
+  const router = useRouter();
+  const redirect = () => {
+    axios
+      .get(process.env.NEXT_PUBLIC_SETTINGS, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data.qr == "" && response.data.totp_secret == "" && response.data.csrf_token != "") {
+          router.push("confidential");
+        } else {
+          router.push("dashboard");
+        }
+      })
+      .catch(() => router.push("confidential"));
+  };
 
   return (
     <div className="loginpage">
@@ -124,11 +134,7 @@ const redirect = () =>{
             <div className="tickBox">
               <input type="checkbox" className="checkbox" />
               <label className="remember">Remember me</label>
-              <Link
-                className=" underline green"
-                href="/recover"
-                style={{ float: "right" }}
-              >
+              <Link className=" underline green" href="/recover" style={{ float: "right" }}>
                 Forgot password?
               </Link>
             </div>
@@ -136,12 +142,12 @@ const redirect = () =>{
               <button
                 type="submit"
                 className="button_submit"
-                onClick={async ()=>{
-                  if(await sendRequest()){
+                onClick={async () => {
+                  if (await sendRequest()) {
                     console.log("redirect");
-                     redirect();
-                  }else{
-                    console.log("error")
+                    redirect();
+                  } else {
+                    console.log("error");
                     setPasswordError("Invalid email or password");
                   }
                 }}
