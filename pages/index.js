@@ -31,7 +31,7 @@ const LoginPage = () => {
   let sendRequest = async () => {
     try {
       const getResponse = await axios.get(process.env.NEXT_PUBLIC_LOGIN, {
-        withCredentials: true,
+      withCredentials: true,
       });
       const res = await axios.post(
         process.env.NEXT_PUBLIC_LOGIN,

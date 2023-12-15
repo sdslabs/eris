@@ -5,7 +5,8 @@
     "role": "admin",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 0
 }, {
     "id": 2,
     "name": "linklinks",
@@ -13,7 +14,8 @@
     "role": "admin",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 1
 }, {
     "id": 3,
     "name": "centizu",
@@ -21,7 +23,8 @@
     "role": "admin",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 1
 }, {
     "id": 4,
     "name": "dynabox",
@@ -29,7 +32,8 @@
     "role": "admin",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 0
 }, {
     "id": 5,
     "name": "avaveo",
@@ -37,7 +41,8 @@
     "role": "user",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 1
 }, {
     "id": 6,
     "name": "demivee",
@@ -45,7 +50,8 @@
     "role": "user",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 1
 }, {
     "id": 7,
     "name": "jayo",
@@ -53,7 +59,8 @@
     "role": "user",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 1
 }, {
     "id": 8,
     "name": "blognation",
@@ -61,7 +68,8 @@
     "role": "user",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 0
 }, {
     "id": 9,
     "name": "podcat",
@@ -69,7 +77,8 @@
     "role": "user",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 0
 }, {
     "id": 10,
     "name": "layo",
@@ -77,5 +86,6 @@
     "role": "user",
     "date": "2015-01-01T00:00:00.000Z",
     "invitedby": "admin",
-    "github": ""
+    "github": "",
+    "invitestatus": 1
 }]
