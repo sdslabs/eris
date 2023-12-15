@@ -1,9 +1,11 @@
 @import "./components/button_submit.scss";
 @import "./components/button_auth.scss";
+@import "./components/button_popup.scss";
 @import "./components/input_box.scss";
 @import "./components/carousel.scss";
 @import "./components/search_panel.scss";
 @import "./components/admin_table.scss";
+@import "./components/popup.scss";
 @import "./pages/login.scss";
 @import "./pages/signup.scss";
 @import "./pages/admin.scss";
@@ -40,6 +42,10 @@ a {
   color: #00902B;
 }
 
+.perm{
+  text-decoration: underline;
+}
+
 .underline:hover {
   text-decoration: underline;
 }
@@ -61,4 +67,10 @@ i {
 
 th{
   font-weight: normal;
+}
+
+input[type=text]{
+  padding: 0.5rem;
+  width: 100%;
+  color: #393939;
 }

@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Popup from "../components/user_mgmt_pop";
 const eye = <FontAwesomeIcon icon={faEye} />;
 const crossedEye = <FontAwesomeIcon icon={faEyeSlash} />;
 
@@ -30,7 +31,7 @@ const LoginPage = () => {
   let sendRequest = async () => {
     try {
       const getResponse = await axios.get(process.env.NEXT_PUBLIC_LOGIN, {
-        withCredentials: true,
+      withCredentials: true,
       });
       const res = await axios.post(
         process.env.NEXT_PUBLIC_LOGIN,

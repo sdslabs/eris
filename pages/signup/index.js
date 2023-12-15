@@ -34,55 +34,52 @@ const SignupPage = () => {
         </div>
       </div>
       <div className="split_right ">
-        <div className="signup">
-          {(() => {
-            if (showSignup) {
-              return (
-                <div>
-                  <div>
-                    <Icons />
-                  </div>
-                  <Signup
-                    handleClick={handleButtonClick}
-                    name={name}
-                    email={email}
-                    number={number}
-                    setEmail={setEmail}
-                    setName={setName}
-                    setNumber={setNumber}
-                  />
-                </div>
-              );
-            } else if (!showSignup && showPasswordScreen) {
-              return (
-                <div>
-                  <div>
-                    <IconsPass />
-                  </div>
-                  <SetPassword
-                    handleClick={handlePasswordButton}
-                    className="slide-in"
-                    name={name}
-                    email={email}
-                    number={number}
-                    setEmail={setEmail}
-                    setName={setName}
-                    setNumber={setNumber}
-                  />
-                </div>
-              );
-            } else {
-              return (
-                <div>
-                  <div>
-                    <IconsVerify />
-                  </div>
-                  <Verify className="slide-in" email={email} />
-                </div>
-              );
-            }
-          })()}
-        </div>
+        <div className='signup'>
+        {(() => {
+        if (showSignup) {
+          return (
+            <div>
+              <div>
+                <Icons />
+              </div>
+              <Signup
+              handleClick={handleButtonClick}
+              name={name} email={email}
+              number={number}
+              setEmail={setEmail}
+              setName={setName}
+              setNumber={setNumber} />
+            </div>
+          )
+        } else if (!showSignup && showPasswordScreen) {
+          return (
+            <div>
+              <div>
+                <IconsPass/>
+              </div>
+              <SetPassword
+              handleClick={handlePasswordButton}
+              className='slide-in'
+              name={name}
+              email={email}
+              number={number}
+              setEmail={setEmail}
+              setName={setName}
+              setNumber={setNumber}/>
+            </div>
+          )
+        } else {
+          return (
+            <div>
+              <div>
+                <IconsVerify/>
+              </div>
+              <Verify className='slide-in' email={email}/>
+            </div>
+          )
+        }
+      })()}
+          </div>
       </div>
     </div>
   );

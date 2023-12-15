@@ -1,0 +1,50 @@
+.button_popup {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 24px;
+    background: #191919;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 4px;
+    color: #FFFFFF;
+    border: 0;
+    background-color: #C8201B;
+    font-size: 16px;
+    margin-top: 3rem;
+  }
+  
+  .inactive2  {
+      border: 0;
+      background-color: #6B6B6B;
+  }
+  
+  .button_popup:hover{
+    background-color: #940303;
+  }
+  
+  .button_popup:disabled{
+    background-color: #393939;
+  }
+
+  .button_popup_keep {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 24px;
+    background: #000000;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 4px;
+    border: 1.25px solid;
+    border-color: #191919;
+    background-color: #ffffff;
+    font-size: 16px;
+    margin-top: 3rem;
+    color: #191919;
+  }
+  .button_popup_keep:hover{
+    background-color: #dddddd;
+  }
