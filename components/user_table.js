@@ -1,13 +1,19 @@
 import {React, useState, useEffect} from "react";
+import UserPopup from "./user_mgmt";
 import Popup from "./popup";
 import Data from "../data/users_data.json"
 import Select from 'react-select';
+import {currentData} from "./searchbaradmin.js"
+import defaultFace from "../public/images/default_face.svg"
+import bannedUser from "../public/images/banned.svg"
+import Image from "next/image";
+import zIndex from "@mui/material/styles/zIndex";
 
-const UserTable = ({ text }) => {
+const UserTable = ({ userData, filterDropDown }) => {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {setIsOpen(!isOpen);}
 
-  const [post, setPost] = useState([]);
+  const post = userData;
   const [number, setNumber] = useState(1); // No of pages
   const [postPerPage,setPostPerPage] = useState({value:2, label:"2/Page"});
   const options=[
@@ -85,8 +91,9 @@ const UserTable = ({ text }) => {
       <table className="user_table">
         <tbody>
         <tr>
-          <th style={{width: "30%"}}><b>NAME</b></th>
-          <th style={{width: "35%"}}><b>EMAIL</b></th>
+          <th style={{width: "25%"}}><b>NAME</b></th>
+          <th style={{width:"10%"}}></th>
+          <th style={{width: "30%"}}><b>EMAIL</b></th>
           <th style={{width: "10%"}}><b>ROLE</b></th>
           <th style={{width: "20%"}}><b>GITHUB</b></th>
           <th style={{width: "5%"}}></th>
@@ -95,26 +102,13 @@ const UserTable = ({ text }) => {
                 return (
                   <>
                     <tr key={Val.id} className="users_data">
-                      <td> {Val.name} </td>
+                      <td style={{verticalAlign: "middle"}}> <Image src={defaultFace}/> {Val.name}</td> 
+                      <td>{isBanned(Val.userstatus)} </td>
                       <td> {Val.email} </td>
                       <td> {Val.role} </td>
                       <td> {Val.github} </td>
                       <td>
-                        <input
-                          className="popup_button"
-                          type="button"
-                          value=":"
-                          onClick={togglePopup}
-                        />
-                        {isOpen && <Popup content={
-                        <>
-                          <div className="popup_content">Remove user</div>
-                          <div className="popup_content">Ban user</div>
-                          <div className="popup_content">Make user</div>
-                        </>
-                        }
-                        handleClose={togglePopup}
-                        />}
+                        <UserPopup />
                       </td>
                     </tr>
                   </>
@@ -162,6 +156,13 @@ const UserTable = ({ text }) => {
     </div>
   );
 };
+
+function isBanned (userstatus) {
+  if (userstatus==0) {
+    // banned user
+    return <Image src={bannedUser} alt="banned user"/>;
+  }
+}
 
 export default UserTable;
 

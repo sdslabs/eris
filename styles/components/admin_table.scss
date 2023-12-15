@@ -1,11 +1,14 @@
-.user_table, .user_data, .admin_table, .admin_data{
+.user_table, .user_data, .admin_table, .admin_data, .invites_data, .invites_table{
     width: 100%;
     text-align: left;
 }
 
-.user_table, .admin_table{
+.user_table, .admin_table, .invites_table{
     scroll-behavior: smooth;
     border-collapse: collapse;
+}
+.user_table, .invites_table {
+    width: 72rem;
 }
 
 th{

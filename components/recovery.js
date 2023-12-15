@@ -1,13 +1,12 @@
 import ButtonSubmit from "./button_submit";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import axios from "axios";
-let confirm = "";
 
 const DoRecovery = ({ email , setEmail }) => {
 
-	const func = async (event) => {
+	let confirm = "";
 
+	const func = async (event) => {
 		event.preventDefault();
 		const getResponse = await axios.get(process.env.NEXT_PUBLIC_RECOVERY, {
 			withCredentials :true,
@@ -32,23 +31,21 @@ const DoRecovery = ({ email , setEmail }) => {
 			}
 			else {
 				console.log("error");
-			}mail
+			}
 		}
 		catch (err) {
 			console.log(err);
 		}
 	};
-	const router = useRouter();
 	const redirect = () => {
 		confirm="mail sent";
 	}
-
 
 	return (
 		<div>
 			<p>Email address</p>
 			<div className="form">
-			<input	
+			<input
 				type="text"
 				className="input"
 				vale={email}
@@ -63,7 +60,6 @@ const DoRecovery = ({ email , setEmail }) => {
 				func = {func}
 			/>
 		</div>
-
 	);
 };
 
