@@ -128,6 +128,65 @@ margin: 0.5rem 1rem;
     border-bottom: 2px solid black;
 }
 
+.page_control{
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.item_count{
+    margin-top: 1rem;
+    color: rgb(98, 98, 98)
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 0.75rem;
+}
+
+.page_change{
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    font-size: 1rem;
+    border: 1px solid rgb(153, 153, 153);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.page_change_selected{
+    text-decoration: none;
+    color: #59D887;
+    background-color: white;
+    font-size: 1rem;
+    border: 1px solid #59D887;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.go_to_page{
+    margin-top: 1rem;
+    color: rgb(98, 98, 98)
+}
+
+.page_input{
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.dropdown{
+    margin-top: 1rem;
+    color: rgb(153, 153, 153);
+  
 .filter_button{
     width: 100%;
 }
