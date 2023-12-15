@@ -43,7 +43,13 @@ const SignupPage = () => {
               <div>
                 <Icons />
               </div>
-              <Signup handleClick={handleButtonClick} name={name} email={email} number={number} setEmail={setEmail} setName={setName} setNumber={setNumber}/>
+              <Signup
+              handleClick={handleButtonClick}
+              name={name} email={email}
+              number={number}
+              setEmail={setEmail}
+              setName={setName}
+              setNumber={setNumber} />
             </div>
           )
         } else if (!showSignup && showPasswordScreen) {
@@ -52,7 +58,15 @@ const SignupPage = () => {
               <div>
                 <IconsPass/>
               </div>
-              <SetPassword handleClick={handlePasswordButton} className='slide-in' name={name} email={email} number={number} setEmail={setEmail} setName={setName} setNumber={setNumber}/>
+              <SetPassword
+              handleClick={handlePasswordButton}
+              className='slide-in'
+              name={name}
+              email={email}
+              number={number}
+              setEmail={setEmail}
+              setName={setName}
+              setNumber={setNumber}/>
             </div>
           )
         } else {

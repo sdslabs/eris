@@ -40,6 +40,10 @@ a {
   color: #00902B;
 }
 
+.perm{
+  text-decoration: underline;
+}
+
 .underline:hover {
   text-decoration: underline;
 }
@@ -61,4 +65,10 @@ i {
 
 th{
   font-weight: normal;
+}
+
+input[type=text]{
+  padding: 0.5rem;
+  width: 100%;
+  color: #393939;
 }

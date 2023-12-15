@@ -168,6 +168,7 @@ return (
   <div>
     <div className="left_panel">
     <LeftPanel
+        page = {"user"}
         activity1={"active"}
         activity2={"inactive"}
         activity3={"inactive"}
@@ -178,8 +179,8 @@ return (
     <div className="right_panel">
     <h1 className="admin_heading">User Management</h1>
     <div className="admin_toggle">
-    <div className={`toggle_items ${ifUserActive}`} style={{marginLeft: "3rem"}} onClick={()=>setInvitesActive(false)}>Users</div>
-    <div className={`toggle_items ${ifInviteActive}`} onClick={()=>setInvitesActive(true)}>Invites</div>
+    <div className={`toggle_items ${invitesActive ? "" : "setLine"}`} style={{marginLeft: "3rem"}} onClick={()=>setInvitesActive(false)}>Users</div>
+    <div className={`toggle_items ${invitesActive ? "setLine" : ""}`} onClick={()=>setInvitesActive(true)}>Invites</div>
     </div>
     <hr className="admin_hr"/>
     <div className="search_panel">
