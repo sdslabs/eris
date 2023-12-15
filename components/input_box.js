@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const Input = ({ type, text}) => {
+const Input = ({ type, text }) => {
   const [inputActive, setInputActive] = useState(false);
-  
+
   return (
     <div className={"inputBox" + " " + inputActive}>
-    <input 
+    <input
     type={type}
     onFocus={() => setInputActive(!inputActive)}
     onBlur={() => setInputActive(!inputActive)}

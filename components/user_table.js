@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from "react";
+import UserPopup from "./user_mgmt";
 import Popup from "./popup";
 import {currentData} from "./searchbaradmin.js"
 import defaultFace from "../public/images/default_face.svg"
@@ -47,21 +48,7 @@ const UserTable = ({ userData, filterDropDown }) => {
                       <td> {Val.role} </td>
                       <td> {Val.github} </td>
                       <td>
-                        <input
-                          className="popup_button"
-                          type="button"
-                          value=":"
-                          onClick={togglePopup}
-                        />
-                        {isOpen && <Popup content={
-                        <>
-                          <div className="popup_content">Remove user</div>
-                          <div className="popup_content">Ban user</div>
-                          <div className="popup_content">Make user</div>
-                        </>
-                        }
-                        handleClose={togglePopup}
-                        />}
+                        <UserPopup />
                       </td>
                     </tr>
                   </>

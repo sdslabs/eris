@@ -6,13 +6,7 @@ import UserTable from "../../components/user_table";
 import InvitesTable from "../../components/invites_table";
 import UserAdd from "../../public/images/user_add.svg";
 import Filter from "../../public/images/filter.svg";
-import data from "../../data/users_data.json";
-import InvitesData from "../../data/invites_data.json";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "@mui/material";
-const line = <FontAwesomeIcon icon={faGripLinesVertical} />;
 
 const AdminPage = () => {
   const [invitesActive, setInvitesActive] = useState(false);
@@ -218,6 +212,11 @@ return (
             {"Add User"}
         </button>
     </div>
+    <Buttons
+      filter_text="Filter"
+      addu_text="Add User"
+      filter_image={Filter}
+      addu_image={UserAdd}/>
     </div>
     <div className="data_div">
       

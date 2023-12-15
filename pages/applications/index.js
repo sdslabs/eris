@@ -67,16 +67,18 @@ return (
     <div className="right_panel">
        <h1 className="admin_heading">Applications</h1>
     <div className="search_panel">
-      <Searchbar
-      text={"Search application"}/>
-      <Buttons
-      text1="Sort"
-      text2="Add App"
-      sort={handleSort}
-      handleAppBox={handleAppBox}
-      handleEditAppBox={handleEditAppBox}
-      img1={Sort}
-      img2={AppAdd}/>
+
+    <Searchbar
+    text={"Search application"}/>
+    <Buttons
+    filter_text="Sort"
+    addu_text="Add App"
+    sort={handleSort}
+    handleAppBox={handleAppBox}
+    handleEditAppBox={handleEditAppBox}
+    filter_image={Sort}
+    addu_image={AppAdd}/>
+      
     </div>
     <div className="applications">
       <div className="application_list">

@@ -1,7 +1,7 @@
 import React from "react";
-import Create_2 from "../public/images/Create_done.svg";
-import Verify_1 from "../public/images/Verify.svg";
-import Set_2 from "../public/images/Set_2.svg";
+import Create_end from "../public/images/Create_done.svg";
+import Verify from "../public/images/Verify.svg";
+import Set_here from "../public/images/Set_2.svg";
 import Image from "next/image";
 
 const IconsPass = () => {
@@ -11,11 +11,11 @@ const IconsPass = () => {
         <table className="icon_table">
         <tbody>
         <tr>
-          <td><Image className="icon" src={Create_2} alt="create" /></td>
+          <td><Image className="icon" src={Create_end} alt="create" /></td>
           <td><hr className="icon_hr" /></td>
-          <td><Image className="icon" src={Set_2} alt="set" /></td>
+          <td><Image className="icon" src={Set_here} alt="set" /></td>
           <td><hr className="icon_hr" /></td>
-          <td><Image className="icon" src={Verify_1} alt="verify" /></td>
+          <td><Image className="icon" src={Verify} alt="verify" /></td>
         </tr>
         </tbody>
       </table>
