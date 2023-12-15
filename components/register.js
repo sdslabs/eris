@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import {React, useState } from 'react';
 import ButtonAuth from "./button_auth";
 
 import Link from "next/link";
