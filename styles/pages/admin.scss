@@ -101,11 +101,12 @@ margin: 0.5rem 1rem;
 
 .data_div{
     margin: auto;
-    width: 95%;
+    width: 98%;
     height: 70vh;
     border: 2px solid rgba(216,216,216,255);
     padding: 1rem 2rem;
-    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
 }
 
 .admin_toggle{
@@ -125,4 +126,8 @@ margin: 0.5rem 1rem;
 
 .setLine{
     border-bottom: 2px solid black;
+}
+
+.filter_button{
+    width: 100%;
 }

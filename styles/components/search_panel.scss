@@ -63,3 +63,14 @@
     font-size: 0.9rem;
     margin: 1.5rem 0.5rem;
   }
+  .dropdown-content{
+    display: flex;
+    width:10rem;
+    margin-right: 0;
+    flex-direction: column;
+    border-width: 1px;
+    border-color: #191919;
+    background-color: #ffffff;
+    margin-left: -17rem;
+    margin-top: -2rem;
+  }
