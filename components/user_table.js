@@ -1,7 +1,6 @@
 import {React, useState, useEffect} from "react";
 import UserPopup from "./user_mgmt";
 import Popup from "./popup";
-import Data from "../data/users_data.json"
 import Select from 'react-select';
 import {currentData} from "./searchbaradmin.js"
 import defaultFace from "../public/images/default_face.svg"
@@ -36,13 +35,6 @@ const UserTable = ({ userData, filterDropDown }) => {
     label:"20/Page"
   },
   ]
-  useEffect(() => {
-    axios.get(process.env.NEXT_PUBLIC_LIST).then((response) => {
-      const data = response.data.identities;
-      console.log(data);
-      setPost(data);
-    });
-  }, []);
 
   const lastPost = number * postPerPage.value;
   const firstPost = lastPost - postPerPage.value;
@@ -104,13 +96,13 @@ const UserTable = ({ userData, filterDropDown }) => {
                 return (
                   <>
                     <tr key={Val.id} className="users_data">
-                      <td style={{verticalAlign: "middle"}}> <Image src={defaultFace}/> {Val.name}</td> 
-                      <td>{isBanned(Val.userstatus)} </td>
-                      <td> {Val.email} </td>
-                      <td> {Val.role} </td>
-                      <td> {Val.github} </td>
+                      <td style={{verticalAlign: "middle"}}> <Image src={defaultFace} alt="profile"/> {Val.traits.name}</td> 
+                      <td>{isBanned(Val.state)} </td>
+                      <td> {Val.traits.email} </td>
+                      <td> {Val.traits.role} </td>
+                      <td> {Val.traits.github} </td> 
                       <td>
-                        <UserPopup />
+                        <UserPopup identityId = {Val.id} />
                       </td>
                     </tr>
                   </>
@@ -160,7 +152,7 @@ const UserTable = ({ userData, filterDropDown }) => {
 };
 
 function isBanned (userstatus) {
-  if (userstatus==0) {
+  if (userstatus=="inactive") {
     // banned user
     return <Image src={bannedUser} alt="banned user"/>;
   }

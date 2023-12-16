@@ -3,17 +3,18 @@ import ButtonPopup from "./button_popup";
 import ButtonKeep from "./button_keep";
 import Logo from "../public/images/remove_user.svg";
 import Cross from "../public/images/cross.png";
+import Image from "next/image";
 
 const Popup = props => {
   return (
     <div className="user_popup">
       <div className="popup_banner">
       {props.content}
-      <img src={Cross} alt="Cross icon" />
+      <Image src={Cross} alt="Cross icon" />
       </div>
       <div className="popup_lower">
         <div className="popup_logo">
-          <img src={Logo} alt="Image Here" />
+          <Image src={Logo} alt="Image Here" />
           {/* <Logo/> */}
         </div>
         <div className="user_popup_content">

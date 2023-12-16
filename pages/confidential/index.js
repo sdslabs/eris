@@ -16,7 +16,6 @@ const SettingsPage = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data);
         setCsrfToken(response.data.csrf_token);
         setFlowID(response.data.flowID);
       });
@@ -24,14 +23,12 @@ const SettingsPage = () => {
 
   function verifyTOTP() {
     const objData = { csrf_token, totp: totp_code, flowID };
-    console.log(objData);
 
     axios
       .post(process.env.NEXT_PUBLIC_MFA, objData, {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.status == "MFA Successful") {
           console.log("MFA Successful");
           router.push("dashboard");
@@ -44,7 +41,7 @@ const SettingsPage = () => {
 
   return (
     <>
-      <label for="code">Enter TOTP Code</label>
+      <label htmlFor="code">Enter TOTP Code</label>
       <input
         type="text"
         name="code"

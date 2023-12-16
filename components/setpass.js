@@ -17,7 +17,6 @@ const SetPassword = ({ handleClick, name, number, email, setEmail, setName, setN
     const getResponse = await axios.get(process.env.NEXT_PUBLIC_SIGNUP, {
       withCredentials: true,
     });
-    console.log(getResponse.data.flowID);
     try {
       let res = await axios.post(
         process.env.NEXT_PUBLIC_SIGNUP,

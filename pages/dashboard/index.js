@@ -11,7 +11,6 @@ const Dashboard = () => {
       const getResponse = await axios.get(process.env.NEXT_PUBLIC_LOGOUT, {
         withCredentials: true,
       });
-      console.log(getResponse.data.logoutToken);
       const res = await axios.post(
         process.env.NEXT_PUBLIC_LOGOUT,
         {
@@ -48,9 +47,6 @@ const Dashboard = () => {
         <Link className=" underline green" href="/settings" style={{ float: "right" }}>
           Settings
         </Link>
-        {/* <Link className=" underline green" href="/confidential" style={{ float: "right" }}>
-          MFA
-        </Link> */}
         <button
           className="button_submit"
           onClick={async () => {

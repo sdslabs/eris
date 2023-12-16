@@ -15,11 +15,12 @@ const Caro = () => {
           <Image src={Think} alt="labs" />
           <div className="slick_centre">
           <h1 className="carousel_heading">THINK</h1>
+          </div>
         </div>
 
         <div className="slide">
           <Image src={Build} alt="labs" />
-          <div className="slick_centre" style={{"margin-top":"-1rem"}}>
+          <div className="slick_centre" style={{"marginTop":"-1rem"}}>
           <h1 className="carousel_heading">BUILD</h1>
         </div>
       </div>

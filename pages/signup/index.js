@@ -19,7 +19,7 @@ const SignupPage = () => {
     event.preventDefault();   
     setShowSignup(!showSignup);
   };
-  const handlePasswordButton = (event) => {
+  const handlePasswordButton = () => {
     setShowPasswordScreen(!showPasswordScreen);
   };
 

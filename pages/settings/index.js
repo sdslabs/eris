@@ -24,7 +24,6 @@ const SettingsPage = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.status == "Totp Toggled") {
           alert("Totp successful");
           setTotpEnabled(true);
@@ -34,14 +33,12 @@ const SettingsPage = () => {
 
   function unlinkTOTP() {
     const objData = { csrf_token, totp_code, flowID, method: "totp", totp_unlink: true };
-    console.log(objData);
 
     axios
       .post(process.env.NEXT_PUBLIC_TOGGLETOTP, objData, {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.status == "Totp Toggled") {
           alert("Totp unlinked successfuly");
           setTotpEnabled(false);
@@ -55,7 +52,6 @@ const SettingsPage = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data);
 
         if (response.data.qr === "" && response.data.totp_secret === "" && response.data.csrf_token !== "") {
           setTotpEnabled(true);
@@ -82,7 +78,7 @@ const SettingsPage = () => {
               <code>{totp_secret}</code>
             </pre>
           </div>
-          <label for="code">Enter Verification Code</label>
+          <label htmlFor="code">Enter Verification Code</label>
           <input
             type="text"
             name="code"

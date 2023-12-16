@@ -7,6 +7,8 @@ import InvitesTable from "../../components/invites_table";
 import UserAdd from "../../public/images/user_add.svg";
 import Filter from "../../public/images/filter.svg";
 import Image from "next/image";
+import InvitesData from "../../data/invites_data.json";
+import axios from "axios";
 
 const AdminPage = () => {
   const [invitesActive, setInvitesActive] = useState(false);
@@ -24,14 +26,24 @@ const AdminPage = () => {
   const [pendingUser, setPendingUser] = useState(false);
   const [invitesData, setInviteData] = useState([]);
   const [invitesTotalData, setInvitesTotalData] = useState(InvitesData);
-  const [userTotalData, setUserTotalData] = useState(data);
+  const [userTotalData, setUserTotalData] = useState([]);
   const [UTable, setUTable] = useState(<UserTable userData={[]} filterDropDown={false}/>);
   const [ITable, setITable] = useState(<InvitesTable invitesData={[]} filterDropDown={false}/>);
+
+  useEffect(()=>{
+    axios.get(process.env.NEXT_PUBLIC_LIST).then((response) => {
+      const data = response.data.identities;
+      setUserTotalData(data);
+      setUTable(<UserTable userData={data} filterDropDown={false}/>)
+    });
+  },[])
+
+
   function updateOnSearch(inputText){
     var recentData=[];
     if (inputText.length > 0) {
       if(!invitesActive) {
-        data.filter((user) => {
+        userTotalData.filter((user) => {
       if(user.name.match(inputText)) recentData.push(user);
       return user.name.match(inputText);
     });
@@ -43,7 +55,7 @@ const AdminPage = () => {
       });
     }
   }
-    else if(!invitesActive) recentData = data;
+    else if(!invitesActive) recentData = userTotalData;
     else recentData = InvitesData;
     if(!invitesActive) {
       var roleData=[];
