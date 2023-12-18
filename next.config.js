@@ -12,6 +12,8 @@ const nextConfig = {
     NEXT_PUBLIC_MFA: process.env.NEXT_PUBLIC_MFA,
     NEXT_PUBLIC_TOGGLETOTP: process.env.NEXT_PUBLIC_TOGGLETOTP,
     NEXT_PUBLIC_BAN: process.env.NEXT_PUBLIC_BAN,
+    NEXT_PUBLIC_DELETE: process.env.NEXT_PUBLIC_DELETE,
+    NEXT_PUBLIC_VERIFY: process.env.NEXT_PUBLIC_VERIFY,
   },
 };
 

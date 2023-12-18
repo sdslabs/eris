@@ -19,12 +19,12 @@ const Popup = props => {
         </div>
         <div className="user_popup_content">
           <div className="popup_prompt">Are you sure you want to remove user?</div>
-          <div className="popup_warning">Once removed the user’s current data will be erased permanently after 15 days.</div>
+          <div className="popup_warning">Once removed the user&#39;s current data will be erased permanently after 15 days.</div>
           <div className="popup_buttons">
             {/* <button className="popup_button">Yes</button> */}
             {/* <button className="popup_button">No</button> */}
             <ButtonKeep text="Keep User" func={props.func} />
-            <ButtonPopup text="Remove User" func={props.func} />
+            <ButtonPopup text="Remove User" func={props.handleDeleteUser} />
           </div>
         </div>  
       </div>

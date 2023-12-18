@@ -22,6 +22,14 @@ const UserPopup = ({identityId}) => {
     });
   }
 
+  function handleDeleteUser(id) {
+    axios.post(process.env.NEXT_PUBLIC_DELETE,{identity:id}).then((response) => {
+      if (response.status === 200) {
+        alert("User Deleted");
+      }
+    });
+  }
+
   return (
     <div className="icon_box">
       <input className="popup_button" type="button" value=":" onClick={togglePopup} />
@@ -39,7 +47,7 @@ const UserPopup = ({identityId}) => {
           handleClose={togglePopup}
         />
       )}
-      {isTabOpen && <UserPop content={<>make popup</>} />}
+      {isTabOpen && <UserPop  handleDeleteUser={()=> handleDeleteUser(identityId)} content={<>make popup</>} />}
     </div>
   );
 };
