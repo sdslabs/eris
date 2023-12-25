@@ -2,7 +2,40 @@ import { React, useState } from "react";
 import Image from "next/image";
 import { useEffect } from "react";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, Input } from "@mui/material";
+
+const axiosInstance = axios.create({ withCredentials: true });
+
+function ChangePassword({ flowID, csrf_token }) {
+  const [newPassword, setNewPassword] = useState("");
+
+  async function handleChangePassword() {
+    const objData = {
+      flowID,
+      csrf_token,
+      password: newPassword,
+    };
+    const response = await axiosInstance.post(process.env.NEXT_PUBLIC_CHANGE_PASSWORD, objData);
+    if (response.status == 200) {
+      alert(response.data.status);
+    }
+  }
+
+  return (
+    <div>
+      <label htmlFor="newPassword">Enter New Password</label>
+      <input
+        type="text"
+        name="newPassword"
+        id="newPassword"
+        onChange={(e) => {
+          setNewPassword(e.target.value);
+        }}
+      />
+      <Button onClick={handleChangePassword}>Change</Button>
+    </div>
+  );
+}
 
 const SettingsPage = () => {
   const [qrLink, setQrLink] = useState("");
@@ -16,55 +49,39 @@ const SettingsPage = () => {
     fetchNewQR();
   }, [totpEnabled]);
 
-  function verifyTOTP() {
-    const objData = { csrf_token, totp_code, flowID, method: "totp", totp_unlink: false };
+  async function verifyTOTP() {
+    const objData = { csrf_token, totp_code, flowID, totp_unlink: false };
 
-    axios
-      .post(process.env.NEXT_PUBLIC_TOGGLETOTP, objData, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        if (response.data.status == "Totp Toggled") {
-          alert("Totp successful");
-          setTotpEnabled(true);
-        }
-      });
+    const response = await axiosInstance.post(process.env.NEXT_PUBLIC_TOGGLETOTP, objData);
+    if (response.data.status == "Totp Toggled") {
+      alert("Totp successful");
+      setTotpEnabled(true);
+    }
   }
 
-  function unlinkTOTP() {
-    const objData = { csrf_token, totp_code, flowID, method: "totp", totp_unlink: true };
+  async function unlinkTOTP() {
+    const objData = { csrf_token, totp_code, flowID, totp_unlink: true };
 
-    axios
-      .post(process.env.NEXT_PUBLIC_TOGGLETOTP, objData, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        if (response.data.status == "Totp Toggled") {
-          alert("Totp unlinked successfuly");
-          setTotpEnabled(false);
-        }
-      });
+    let response = await axiosInstance.post(process.env.NEXT_PUBLIC_TOGGLETOTP, objData);
+    if (response.data.status == "Totp Toggled") {
+      alert("Totp unlinked successfuly");
+      setTotpEnabled(false);
+    }
   }
 
-  function fetchNewQR() {
-    axios
-      .get(process.env.NEXT_PUBLIC_SETTINGS, {
-        withCredentials: true,
-      })
-      .then((response) => {
-
-        if (response.data.qr === "" && response.data.totp_secret === "" && response.data.csrf_token !== "") {
-          setTotpEnabled(true);
-          setCsrfToken(response.data.csrf_token);
-          setFlowID(response.data.flowID);
-        } else {
-          setTotpEnabled(false);
-          setQrLink(response.data.qr);
-          setCsrfToken(response.data.csrf_token);
-          setFlowID(response.data.flowID);
-          setTotp_secret(response.data.totp_secret);
-        }
-      });
+  async function fetchNewQR() {
+    let response = await axiosInstance.get(process.env.NEXT_PUBLIC_SETTINGS);
+    if (response.data.qr === "" && response.data.totp_secret === "" && response.data.csrf_token !== "") {
+      setTotpEnabled(true);
+      setCsrfToken(response.data.csrf_token);
+      setFlowID(response.data.flowID);
+    } else {
+      setTotpEnabled(false);
+      setQrLink(response.data.qr);
+      setCsrfToken(response.data.csrf_token);
+      setFlowID(response.data.flowID);
+      setTotp_secret(response.data.totp_secret);
+    }
   }
 
   return (
@@ -92,6 +109,7 @@ const SettingsPage = () => {
       ) : (
         <Button onClick={unlinkTOTP}>Unlink TOTP</Button>
       )}
+      <ChangePassword flowID={flowID} csrf_token={csrf_token} />
     </>
   );
 };
