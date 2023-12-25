@@ -1,71 +1,57 @@
-import ButtonAuth from "../components/button_auth";
-import Labs from "../public/images/labs logo.png";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Image from "next/image";
-import Carousel from "../components/carousel";
-import { React, useState } from "react";
-import { useRouter } from "next/router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import Popup from "../components/user_mgmt_pop";
+import { useRouter } from "next/router";
+import { React, useState } from "react";
+import ButtonAuth from "../components/button_auth";
+import ButtonSubmit from "../components/button_submit";
+import Carousel from "../components/carousel";
+import Hr_or from "../components/hr_or";
+import Input from "../components/input_box";
+import Labs from "../public/images/labs logo.png";
 const eye = <FontAwesomeIcon icon={faEye} />;
 const crossedEye = <FontAwesomeIcon icon={faEyeSlash} />;
 
-const LoginPage = () => {
-  const [inputActive1, setInputActive1] = useState(false);
-  const [inputActive2, setInputActive2] = useState(false);
-  const [passwordShown, setPasswordShown] = useState(false);
-  const [eyeCrossed, setEyeCrossed] = useState(false);
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
-  const toggleEye = () => {
-    setEyeCrossed(eyeCrossed ? false : true);
-  };
+const axiosInstance = axios.create({ withCredentials: true });
 
+const LoginPage = () => {
+  const [passwordShown, setPasswordShown] = useState(false);
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  let sendRequest = async () => {
+  async function sendRequest() {
     try {
-      const getResponse = await axios.get(process.env.NEXT_PUBLIC_LOGIN, {
-        withCredentials: true,
-      });
-      const res = await axios.post(
-        process.env.NEXT_PUBLIC_LOGIN,
-        {
-          flowID: getResponse.data.flowID,
-          csrf_token: getResponse.data.csrf_token,
-          password: pass,
-          identifier: email,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_LOGIN);
+      const objData = {
+        flowID: getResponse.data.flowID,
+        csrf_token: getResponse.data.csrf_token,
+        identifier: email,
+        password,
+      };
+      const res = await axiosInstance.post(process.env.NEXT_PUBLIC_LOGIN, objData);
       if (res.status === 200) {
         setEmail("");
-        setPass("");
+        setPassword("");
         console.log("logged in");
         return true;
       } else {
-        setMessage("Some error occured");
+        setPasswordError("Some error occured");
         return false;
       }
     } catch (err) {
       console.log(err);
       return false;
     }
-  };
+  }
 
   const router = useRouter();
-  const redirect = () => {
-    axios
-      .get(process.env.NEXT_PUBLIC_SETTINGS, {
-        withCredentials: true,
-      })
+
+  function redirect() {
+    axiosInstance
+      .get(process.env.NEXT_PUBLIC_SETTINGS)
       .then((response) => {
         if (response.data.qr == "" && response.data.totp_secret == "" && response.data.csrf_token != "") {
           router.push("confidential");
@@ -73,8 +59,18 @@ const LoginPage = () => {
           router.push("dashboard");
         }
       })
-      .catch(() => router.push("confidential"));
-  };
+      .catch((err) => console.log(err));
+  }
+
+  async function handleSubmitLogin() {
+    if (await sendRequest()) {
+      console.log("redirect");
+      redirect();
+    } else {
+      console.log("error");
+      setPasswordError("Invalid email or password");
+    }
+  }
 
   return (
     <div className="loginpage">
@@ -96,40 +92,19 @@ const LoginPage = () => {
           <div className="form">
             <div>
               <p>Email address</p>
-              <div className={"inputBox" + " " + inputActive1}>
-                <input
-                  type="text"
-                  onFocus={() => setInputActive1(!inputActive1)}
-                  onBlur={() => setInputActive1(!inputActive1)}
-                  className="input"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></input>
-              </div>
-              <p>Password</p>
+              <Input type="text" text="Enter your email address" handleChange={(e) => setEmail(e.target.value)} />
 
-              <div className={"inputBox" + " " + inputActive2}>
-                {" "}
-                <input
-                  type={passwordShown ? "text" : "password"}
-                  className="input"
-                  placeholder="Enter your password"
-                  value={pass}
-                  onFocus={() => setInputActive2(!inputActive2)}
-                  onBlur={() => setInputActive2(!inputActive2)}
-                  onChange={(e) => setPass(e.target.value)}
-                ></input>
-                <i
-                  className="passEye"
-                  onClick={() => {
-                    toggleEye();
-                    togglePasswordVisiblity();
-                  }}
-                >
-                  {eyeCrossed ? eye : crossedEye}
-                </i>{" "}
-              </div>
+              <p>Password</p>
+              <Input
+                type={passwordShown ? "text" : "password"}
+                text="Enter your password"
+                handleChange={(e) => setPassword(e.target.value)}
+              >
+                <i className="passEye" onClick={() => setPasswordShown(!passwordShown)}>
+                  {passwordShown ? eye : crossedEye}
+                </i>
+              </Input>
+
               <p className="text-danger">{passwordError}</p>
             </div>
             <div className="tickBox">
@@ -139,42 +114,15 @@ const LoginPage = () => {
                 Forgot password?
               </Link>
             </div>
-            <div>
-              <button
-                type="submit"
-                className="button_submit"
-                onClick={async () => {
-                  if (await sendRequest()) {
-                    console.log("redirect");
-                    redirect();
-                  } else {
-                    console.log("error");
-                    setPasswordError("Invalid email or password");
-                  }
-                }}
-              >
-                Login
-              </button>
-            </div>
+            <ButtonSubmit text="Login" func={handleSubmitLogin} />
+
             <p>
               Dont have an account?{" "}
               <Link className="green underline" href="/signup">
                 Sign up{" "}
               </Link>
             </p>
-            <table className="or">
-              <tbody>
-                <tr>
-                  <td>
-                    <hr className="option_hr" />
-                  </td>
-                  <td>OR</td>
-                  <td>
-                    <hr className="option_hr" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <Hr_or />
           </div>
           <div className="oauth">
             <ButtonAuth text={"Continue with Google"} />

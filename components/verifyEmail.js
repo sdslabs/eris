@@ -1,8 +1,9 @@
-import ButtonSubmit from "./button_submit";
-import { useRouter } from "next/router";
-import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
+import ButtonSubmit from "./button_submit";
+
+const axiosInstance = axios.create({ withCredentials: true });
 
 const VerifyEmailPage = ({ email }) => {
   const router = useRouter();
@@ -14,24 +15,24 @@ const VerifyEmailPage = ({ email }) => {
     sendEmail(email);
   }, [email]);
 
-  function sendEmail(email) {
-    axios
-      .get(process.env.NEXT_PUBLIC_VERIFY, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        axios.post(
-          process.env.NEXT_PUBLIC_VERIFY,
-          {
-            flowID: response.data.flowID,
-            csrf_token: response.data.csrf_token,
-            email: email,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-      });
+  async function sendEmail(email) {
+    try {
+      let response = await axiosInstance.get(process.env.NEXT_PUBLIC_VERIFY, { signal: controller.signal });
+      const objData = {
+        flowID: response.data.flowID,
+        csrf_token: response.data.csrf_token,
+        email,
+      };
+      response = await axiosInstance.post(process.env.NEXT_PUBLIC_VERIFY, objData);
+
+      if (response.status == 200) {
+        alert(response.data.message);
+      } else {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -51,10 +52,9 @@ const VerifyEmailPage = ({ email }) => {
         </div>
         <p>
           Didnt get the email?{" "}
-          <Link href={() => sendEmail(email)} className="green underline">
-            {" "}
+          <span className="green underline" onClick={() => sendEmail(email)}>
             Resend Email
-          </Link>{" "}
+          </span>
         </p>
       </div>
     </div>
