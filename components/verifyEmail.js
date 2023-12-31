@@ -1,16 +1,14 @@
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { handleGetVerifyFlow, handlePostVerifyFlow } from "../api/verificationFlow";
 import ButtonSubmit from "./button_submit";
 import IconsVerify from "./icons_verify";
 
-const axiosInstance = axios.create({ withCredentials: true });
-
-const VerifyEmailPage = ({ email }) => {
+function VerifyEmailPage({ email }) {
   const router = useRouter();
-  const redirect = () => {
+  function redirect() {
     router.push("dashboard");
-  };
+  }
 
   useEffect(() => {
     sendEmail(email);
@@ -18,18 +16,13 @@ const VerifyEmailPage = ({ email }) => {
 
   async function sendEmail(email) {
     try {
-      let response = await axiosInstance.get(process.env.NEXT_PUBLIC_VERIFY);
-      const objData = {
-        flowID: response.data.flowID,
-        csrf_token: response.data.csrf_token,
-        email,
-      };
-      response = await axiosInstance.post(process.env.NEXT_PUBLIC_VERIFY, objData);
+      const { flowID, csrf_token } = await handleGetVerifyFlow();
+      const res = await handlePostVerifyFlow(flowID, csrf_token, email);
 
-      if (response.status == 200) {
-        alert(response.data.message);
+      if (res === "Account Verification Mail Sent") {
+        alert(res);
       } else {
-        console.log(response.data);
+        alert("Some error occured");
       }
     } catch (error) {
       console.error(error);
@@ -63,6 +56,6 @@ const VerifyEmailPage = ({ email }) => {
       </div>
     </div>
   );
-};
+}
 
 export default VerifyEmailPage;
