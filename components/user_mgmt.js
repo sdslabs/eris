@@ -1,33 +1,32 @@
 import React, { useState } from "react";
 import Popup from "./popup";
 import UserPop from "./user_mgmt_pop";
-import axios from "axios";
+import { handleBanIdentityFlow, handleDeleteIdentityFlow } from "../api/adminFlow";
 
-const UserPopup = ({identityId}) => {
+function UserPopup({ identityId }) {
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
 
   const [isTabOpen, setIsTabOpen] = useState(false);
-  const toggleTabPopup = () => {
-    setIsOpen(!isOpen);
-  };
 
-  function handleBanUser(id) {
-    axios.post(process.env.NEXT_PUBLIC_BAN,{identity:id}).then((response) => {
-      if (response.status === 200) {
-        alert("User banned");
-      }
-    });
+  async function handleBanUser(id) {
+    try {
+      await handleBanIdentityFlow(id);
+      alert("User banned");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  function handleDeleteUser(id) {
-    axios.post(process.env.NEXT_PUBLIC_DELETE,{identity:id}).then((response) => {
-      if (response.status === 200) {
-        alert("User Deleted");
-      }
-    });
+  async function handleDeleteUser(id) {
+    try {
+      await handleDeleteIdentityFlow(id);
+      alert("User Deleted");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -40,16 +39,18 @@ const UserPopup = ({identityId}) => {
               <div className="popup_content" onClick={() => setIsTabOpen(!isTabOpen)}>
                 Remove user
               </div>
-              <div className="popup_content" onClick={()=>handleBanUser(identityId)}>Ban user</div>
+              <div className="popup_content" onClick={() => handleBanUser(identityId)}>
+                Ban user
+              </div>
               <div className="popup_content">Make user</div>
             </>
           }
           handleClose={togglePopup}
         />
       )}
-      {isTabOpen && <UserPop  handleDeleteUser={()=> handleDeleteUser(identityId)} content={<>make popup</>} />}
+      {isTabOpen && <UserPop handleDeleteUser={() => handleDeleteUser(identityId)} content={<>make popup</>} />}
     </div>
   );
-};
+}
 
 export default UserPopup;
