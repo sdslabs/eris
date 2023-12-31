@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Input = ({ type, text, handleChange, children }) => {
+const Input = ({ name, type, text, handleChange, handleKeyUp, children }) => {
   const [inputActive, setInputActive] = useState(false);
 
   return (
@@ -12,6 +12,8 @@ const Input = ({ type, text, handleChange, children }) => {
         className="input"
         placeholder={text}
         onChange={handleChange}
+        name={name}
+        onKeyUp={handleKeyUp}
       />
       {children}
     </div>

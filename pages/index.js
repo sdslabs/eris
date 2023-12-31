@@ -1,74 +1,51 @@
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { React, useState } from "react";
+import { handleGetLoginFlow, handlePostLoginFlow } from "../api/loginFlow";
 import ButtonAuth from "../components/button_auth";
 import ButtonSubmit from "../components/button_submit";
 import Carousel from "../components/carousel";
 import Hr_or from "../components/hr_or";
 import Input from "../components/input_box";
+import Password from "../components/password";
 import Labs from "../public/images/labs logo.png";
-const eye = <FontAwesomeIcon icon={faEye} />;
-const crossedEye = <FontAwesomeIcon icon={faEyeSlash} />;
-
-const axiosInstance = axios.create({ withCredentials: true });
 
 const LoginPage = () => {
-  const [passwordShown, setPasswordShown] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  async function sendRequest() {
+  async function handleSubmitLogin() {
     try {
-      const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_LOGIN);
-      const objData = {
-        flowID: getResponse.data.flowID,
-        csrf_token: getResponse.data.csrf_token,
-        identifier: email,
-        password,
-      };
-      const res = await axiosInstance.post(process.env.NEXT_PUBLIC_LOGIN, objData);
-      if (res.status === 200) {
-        setEmail("");
-        setPassword("");
-        console.log("logged in");
-        return true;
-      } else {
-        setPasswordError("Some error occured");
-        return false;
-      }
+      const { flowID, csrf_token } = await handleGetLoginFlow();
+      await handlePostLoginFlow(flowID, csrf_token, email, password);
+      setEmail("");
+      setPassword("");
+      await redirect();
     } catch (err) {
-      console.log(err);
-      return false;
+      console.error(err);
+      if (err.code === "ERR_NETWORK") {
+        setPasswordError("Couldn't connect to server");
+      } else {
+        setPasswordError("Invalid email or password");
+      }
     }
   }
 
   const router = useRouter();
 
-  function redirect() {
-    axiosInstance
-      .get(process.env.NEXT_PUBLIC_SETTINGS)
-      .then((response) => {
-        if (response.data.qr == "" && response.data.totp_secret == "" && response.data.csrf_token != "") {
-          router.push("confidential");
-        } else {
-          router.push("dashboard");
-        }
-      })
-      .catch((err) => console.log(err));
-  }
+  async function redirect() {
+    try {
+      const { qr, totp_secret } = await handleGetSettingsFlow();
 
-  async function handleSubmitLogin() {
-    if (await sendRequest()) {
-      console.log("redirect");
-      redirect();
-    } else {
-      console.log("error");
-      setPasswordError("Invalid email or password");
+      if (qr === "" && totp_secret === "") {
+        router.push("confidential");
+      } else {
+        router.push("dashboard");
+      }
+    } catch (error) {
+      console.error(err);
     }
   }
 
@@ -95,17 +72,11 @@ const LoginPage = () => {
               <Input type="text" text="Enter your email address" handleChange={(e) => setEmail(e.target.value)} />
 
               <p>Password</p>
-              <Input
-                type={passwordShown ? "text" : "password"}
+              <Password
                 text="Enter your password"
-                handleChange={(e) => setPassword(e.target.value)}
-              >
-                <i className="passEye" onClick={() => setPasswordShown(!passwordShown)}>
-                  {passwordShown ? eye : crossedEye}
-                </i>
-              </Input>
-
-              <p className="text-danger">{passwordError}</p>
+                handlePasswordChange={(e) => setPassword(e.target.value.trim())}
+                passwordError={passwordError}
+              />
             </div>
             <div className="tickBox">
               <input type="checkbox" className="checkbox" />
@@ -114,7 +85,7 @@ const LoginPage = () => {
                 Forgot password?
               </Link>
             </div>
-            <ButtonSubmit text="Login" func={handleSubmitLogin} />
+            <ButtonSubmit text="Login" func={handleSubmitLogin} email={email} password={password} />
 
             <p>
               Dont have an account?{" "}

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import ButtonSubmit from "./button_submit";
+import IconsVerify from "./icons_verify";
 
 const axiosInstance = axios.create({ withCredentials: true });
 
@@ -17,7 +18,7 @@ const VerifyEmailPage = ({ email }) => {
 
   async function sendEmail(email) {
     try {
-      let response = await axiosInstance.get(process.env.NEXT_PUBLIC_VERIFY, { signal: controller.signal });
+      let response = await axiosInstance.get(process.env.NEXT_PUBLIC_VERIFY);
       const objData = {
         flowID: response.data.flowID,
         csrf_token: response.data.csrf_token,
@@ -36,26 +37,29 @@ const VerifyEmailPage = ({ email }) => {
   }
 
   return (
-    <div className="slide-in">
-      <div>
-        <h1>
-          Email <span className="green">Verification</span>
-        </h1>
-      </div>
-      <div className="form">
+    <div>
+      <IconsVerify />
+      <div className="slide-in">
         <div>
-          <p>An email has been sent to</p>
-          <p className="green">{email}</p>
+          <h1>
+            Email <span className="green">Verification</span>
+          </h1>
         </div>
-        <div>
-          <ButtonSubmit text={"Continue to Dashboard"} func={redirect} />
+        <div className="form">
+          <div>
+            <p>An email has been sent to</p>
+            <p className="green">{email}</p>
+          </div>
+          <div>
+            <ButtonSubmit text={"Continue to Dashboard"} func={redirect} />
+          </div>
+          <p>
+            Didnt get the email?{" "}
+            <span className="green underline" onClick={() => sendEmail(email)}>
+              Resend Email
+            </span>
+          </p>
         </div>
-        <p>
-          Didnt get the email?{" "}
-          <span className="green underline" onClick={() => sendEmail(email)}>
-            Resend Email
-          </span>
-        </p>
       </div>
     </div>
   );

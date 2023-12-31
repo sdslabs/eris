@@ -1,23 +1,17 @@
-import { React, useState } from "react";
+import { Button } from "@mui/material";
 import Image from "next/image";
-import { useEffect } from "react";
-import axios from "axios";
-import { Button, Input } from "@mui/material";
-
-const axiosInstance = axios.create({ withCredentials: true });
+import { React, useEffect, useState } from "react";
+import { handleGetSettingsFlow, handlePostChangePasswordFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
 
 function ChangePassword({ flowID, csrf_token }) {
   const [newPassword, setNewPassword] = useState("");
 
   async function handleChangePassword() {
-    const objData = {
-      flowID,
-      csrf_token,
-      password: newPassword,
-    };
-    const response = await axiosInstance.post(process.env.NEXT_PUBLIC_CHANGE_PASSWORD, objData);
-    if (response.status == 200) {
-      alert(response.data.status);
+    try {
+      await handlePostChangePasswordFlow(flowID, csrf_token, newPassword);
+      alert("Password changed successfully");
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -39,7 +33,7 @@ function ChangePassword({ flowID, csrf_token }) {
 
 const SettingsPage = () => {
   const [qrLink, setQrLink] = useState("");
-  const [totp_secret, setTotp_secret] = useState("");
+  const [totpSecret, setTotpSecret] = useState("");
   const [flowID, setFlowID] = useState("");
   const [csrf_token, setCsrfToken] = useState("");
   const [totp_code, setTotpCode] = useState("");
@@ -49,38 +43,42 @@ const SettingsPage = () => {
     fetchNewQR();
   }, [totpEnabled]);
 
-  async function verifyTOTP() {
-    const objData = { csrf_token, totp_code, flowID, totp_unlink: false };
-
-    const response = await axiosInstance.post(process.env.NEXT_PUBLIC_TOGGLETOTP, objData);
-    if (response.data.status == "Totp Toggled") {
+  async function linkTOTP() {
+    try {
+      await handlePostToggleTOTPFlow(flowID, csrf_token, totp_code, false);
       alert("Totp successful");
       setTotpEnabled(true);
+    } catch (error) {
+      console.error(error);
     }
   }
 
   async function unlinkTOTP() {
-    const objData = { csrf_token, totp_code, flowID, totp_unlink: true };
-
-    let response = await axiosInstance.post(process.env.NEXT_PUBLIC_TOGGLETOTP, objData);
-    if (response.data.status == "Totp Toggled") {
+    try {
+      await handlePostToggleTOTPFlow(flowID, csrf_token, totp_code, true);
       alert("Totp unlinked successfuly");
       setTotpEnabled(false);
+    } catch (error) {
+      console.error(error);
     }
   }
 
   async function fetchNewQR() {
-    let response = await axiosInstance.get(process.env.NEXT_PUBLIC_SETTINGS);
-    if (response.data.qr === "" && response.data.totp_secret === "" && response.data.csrf_token !== "") {
-      setTotpEnabled(true);
-      setCsrfToken(response.data.csrf_token);
-      setFlowID(response.data.flowID);
-    } else {
-      setTotpEnabled(false);
-      setQrLink(response.data.qr);
-      setCsrfToken(response.data.csrf_token);
-      setFlowID(response.data.flowID);
-      setTotp_secret(response.data.totp_secret);
+    try {
+      const { qr, totp_secret, flowID, csrf_token } = await handleGetSettingsFlow();
+
+      setCsrfToken(csrf_token);
+      setFlowID(flowID);
+
+      if (qr === "" && totp_secret === "") {
+        setTotpEnabled(true);
+      } else {
+        setTotpEnabled(false);
+        setQrLink(qr);
+        setTotpSecret(totp_secret);
+      }
+    } catch (error) {
+      console.error(err);
     }
   }
 
@@ -92,7 +90,7 @@ const SettingsPage = () => {
           <div>
             If you cannot scan the QR, use this code:
             <pre>
-              <code>{totp_secret}</code>
+              <code>{totpSecret}</code>
             </pre>
           </div>
           <label htmlFor="code">Enter Verification Code</label>
@@ -104,7 +102,7 @@ const SettingsPage = () => {
               setTotpCode(e.target.value);
             }}
           />
-          <Button onClick={verifyTOTP}>Save</Button>
+          <Button onClick={linkTOTP}>Save</Button>
         </>
       ) : (
         <Button onClick={unlinkTOTP}>Unlink TOTP</Button>
