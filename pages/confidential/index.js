@@ -1,58 +1,39 @@
-import { React, useState } from "react";
-import Image from "next/image";
-import { useEffect } from "react";
-import axios from "axios";
-import { Button } from "@mui/material";
 import { useRouter } from "next/router";
+import { React, useState } from "react";
+import { handleGetMFAFlow, handlePostMFAFlow } from "../../api/mfaFlow";
+import ButtonSubmit from "../../components/button_submit";
+import Password from "../../components/password";
 
-const SettingsPage = () => {
-  const [flowID, setFlowID] = useState("");
-  const [csrf_token, setCsrfToken] = useState("");
-  const [totp_code, setTotpCode] = useState("");
+function MFAPage() {
+  const [totpCode, setTotpCode] = useState("");
 
-  useEffect(() => {
-    axios
-      .get(process.env.NEXT_PUBLIC_MFA, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        setCsrfToken(response.data.csrf_token);
-        setFlowID(response.data.flowID);
-      });
-  }, []);
+  function handleTOTPChange(e) {
+    setTotpCode(e.target.value.trim());
+  }
 
-  function verifyTOTP() {
-    const objData = { csrf_token, totp: totp_code, flowID };
-
-    axios
-      .post(process.env.NEXT_PUBLIC_MFA, objData, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        if (response.data.status == "MFA Successful") {
-          console.log("MFA Successful");
-          router.push("dashboard");
-        } else {
-          alert(`ERROR:MFA Failed`);
-        }
-      });
+  async function verifyTOTP() {
+    try {
+      const { flowID, csrf_token } = await handleGetMFAFlow();
+      const res = await handlePostMFAFlow(flowID, csrf_token, totpCode);
+      if (res === "MFA Successful") {
+        router.push("dashboard");
+      } else {
+        alert("ERROR:MFA Failed");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("ERROR:MFA Failed");
+    }
   }
   const router = useRouter();
 
   return (
-    <>
+    <div>
       <label htmlFor="code">Enter TOTP Code</label>
-      <input
-        type="text"
-        name="code"
-        id="code"
-        onChange={(e) => {
-          setTotpCode(e.target.value);
-        }}
-      />
-      <Button onClick={verifyTOTP}>Save</Button>
-    </>
+      <Password text="Enter TOTP Code here" onChange={handleTOTPChange} name="code" />
+      <ButtonSubmit text="Authenticate" password={totpCode} func={verifyTOTP} />
+    </div>
   );
-};
+}
 
-export default SettingsPage;
+export default MFAPage;
