@@ -1,12 +1,10 @@
+import Image from "next/image";
+import { useState } from "react";
+import { handleGetRecoveryFlow, handlePostRecoveryFlow } from "../../api/recoveryFlow";
 import ButtonSubmit from "../../components/button_submit";
+import Carousel from "../../components/carousel";
 import Input from "../../components/input_box";
 import Labs from "../../public/images/labs logo.png";
-import Image from "next/image";
-import Carousel from "../../components/carousel";
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-const axiosInstance = axios.create({ withCredentials: true });
 
 function LeftSide() {
   return (
@@ -24,23 +22,19 @@ function LeftSide() {
 const RecoveryPage = () => {
   const [email, setEmail] = useState("");
 
-  function handleSendRecoveryLink() {
-    console.log(email);
-    axiosInstance.get(process.env.NEXT_PUBLIC_RECOVERY).then((response) => {
-      const objData = {
-        flowID: response.data.flowID,
-        csrf_token: response.data.csrf_token,
-        email,
-      };
-      axiosInstance.post(process.env.NEXT_PUBLIC_RECOVERY, objData).then((response) => {
-        if (response.data.message == "Mail sent with recovery link") {
-          alert(response.data.message);
-        } else {
-          console.log(response.data);
-          alert("Some error occurred");
-        }
-      });
-    });
+  async function handleSendRecoveryLink() {
+    try {
+      const { flowID, csrf_token } = await handleGetRecoveryFlow();
+      const res = await handlePostRecoveryFlow(flowID, csrf_token, email);
+      if (res == "Mail sent with recovery link") {
+        alert(res);
+      } else {
+        alert("Some error occurred");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Some error occurred");
+    }
   }
 
   return (
@@ -63,7 +57,7 @@ const RecoveryPage = () => {
               />
             </div>
             <div>
-              <ButtonSubmit text={"Send reset link"} func={handleSendRecoveryLink} />
+              <ButtonSubmit text={"Send reset link"} email={email} func={handleSendRecoveryLink} />
             </div>
           </div>
         </div>
