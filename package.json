@@ -24,7 +24,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.1",
     "react-responsive-carousel": "^3.2.23",
-    "react-select": "^5.7.4",
+    "react-select": "^5.8.0",
     "sass": "^1.56.0"
   },
   "devDependencies": {

@@ -1,45 +1,47 @@
-import Image from "next/image";
 import { React, useEffect, useState } from "react";
 import { handleGetIdentitiesFlow } from "../../api/adminFlow";
-import Buttons from "../../components/admin_buttons";
+import InviteFilterDropdown from "../../components/inviteFilterDropdown";
+import InvitesPanel from "../../components/invitePanel";
 import InvitesTable from "../../components/invites_table";
 import LeftPanel from "../../components/leftPanel";
-import { Searchbar } from "../../components/searchbaradmin";
-import UserTable from "../../components/user_table";
+import SearchBarAdmin from "../../components/searchBarAdmin";
+import UserFilterDropdown from "../../components/userFilterDropdown";
+import UserTable from "../../components/userTable";
+import UsersPanel from "../../components/usersPanel";
 import InvitesData from "../../data/invites_data.json";
-import Filter from "../../public/images/filter.svg";
-import UserAdd from "../../public/images/user_add.svg";
 
-const AdminPage = () => {
+function AdminPage() {
+  //User Data
+  const [totalUsersData, setTotalUsersData] = useState([]);
+  const [currData, setCurrData] = useState([]);
+  const [currFilteredData, setCurrFilteredData] = useState([]);
+  //Checkboxes
   const [invitesActive, setInvitesActive] = useState(false);
-  var ifUserActive, ifInviteActive;
-  {
-    invitesActive
-      ? ((ifInviteActive = "setLine"), (ifUserActive = null))
-      : ((ifInviteActive = null), (ifUserActive = "setLine"));
-  }
   const [adminChecked, setAdminChecked] = useState(false);
   const [userChecked, setUserChecked] = useState(false);
   const [activeUser, setActiveUser] = useState(false);
   const [inactiveUser, setInactiveUser] = useState(false);
   const [bannedUser, setBannedUser] = useState(false);
-  const [userData, setUserData] = useState([]);
+  //Dropdowns
   const [filterDropDown, setShowFilterDropDown] = useState(false);
-  const [filterInviteDropDown, setFilterInviteDropDown] = useState(false);
+
+  //Invites Data
+  const [invitesTotalData, setInvitesTotalData] = useState(InvitesData);
+  const [invitesData, setInviteData] = useState([]);
+  //Checkboxes
   const [acceptedUser, setAcceptedUser] = useState(false);
   const [pendingUser, setPendingUser] = useState(false);
-  const [invitesData, setInviteData] = useState([]);
-  const [invitesTotalData, setInvitesTotalData] = useState(InvitesData);
-  const [userTotalData, setUserTotalData] = useState([]);
-  const [UTable, setUTable] = useState(<UserTable userData={[]} filterDropDown={false} />);
-  const [ITable, setITable] = useState(<InvitesTable invitesData={[]} filterDropDown={false} />);
+  //Dropdowns
+  const [filterInviteDropDown, setFilterInviteDropDown] = useState(false);
+  const [ITable, setITable] = useState();
 
   useEffect(() => {
     async function getIdentities() {
       try {
         const identities = await handleGetIdentitiesFlow();
-        setUserTotalData(identities);
-        setUTable(<UserTable userData={identities} filterDropDown={false} />);
+        setTotalUsersData(identities);
+        setCurrData(identities);
+        setCurrFilteredData(identities);
       } catch (error) {
         console.error(error);
       }
@@ -48,38 +50,50 @@ const AdminPage = () => {
   }, []);
 
   function updateOnSearch(inputText) {
+    console.log(inputText);
     var recentData = [];
     if (inputText.length > 0) {
       if (!invitesActive) {
-        userTotalData.filter((user) => {
-          if (user.name.match(inputText)) recentData.push(user);
-          return user.name.match(inputText);
+        recentData = totalUsersData.filter((identity) => {
+          if (identity.traits.name.match(inputText)) {
+            return identity;
+          }
         });
       } else {
-        InvitesData.filter((user) => {
-          if (user.name.match(inputText)) recentData.push(user);
-          return user.name.match(inputText);
+        recentData = InvitesData.filter((identity) => {
+          if (identity.traits.name.match(inputText)) {
+            return identity;
+          }
         });
       }
-    } else if (!invitesActive) recentData = userTotalData;
-    else recentData = InvitesData;
+    } else if (!invitesActive) {
+      recentData = totalUsersData;
+    } else {
+      recentData = InvitesData;
+    }
+
     if (!invitesActive) {
-      var roleData = [];
-      recentData.filter((user) => {
-        if (user.role.match("admin") && adminChecked) roleData.push(user);
-        else if (user.role.match("user") && userChecked) roleData.push(user);
-        return user.name.match("admin");
+      const roleData = totalUsersData.filter((identity) => {
+        if (identity.traits.role === "user" && userChecked) {
+          return identity;
+        } else if (identity.traits.role == "admin" && adminChecked) {
+          return identity;
+        } else if (!userChecked && !adminChecked) {
+          return identity;
+        }
       });
-      var filterData = [];
-      roleData.filter((user) => {
-        if (user.userstatus == 1 && activeUser) filterData.push(user);
-        else if (user.userstatus == 2 && inactiveUser) filterData.push(user);
-        else if (user.userstatus == 0 && bannedUser) filterData.push(user);
-        return user.name.match("admin");
+
+      const filteredData = roleData.filter((identity) => {
+        if (activeUser && identity.state === "active") {
+          return identity;
+        } else if (bannedUser && identity.state === "inactive") {
+          return identity;
+        } else if (!activeUser && !bannedUser) {
+          return identity;
+        }
       });
-      setUserData(filterData);
-      setUserTotalData(recentData);
-      setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown} />);
+      setCurrFilteredData(filteredData);
+      setCurrData(filteredData);
     } else {
       recentData.filter((user) => {
         if (user.invitestatus == 0 && pendingUser) filterData.push(user);
@@ -92,39 +106,38 @@ const AdminPage = () => {
     }
   }
 
-  function setTableFilter(filterDropDown) {
-    if (!invitesActive) setUTable(<UserTable userData={userData} filterDropDown={filterDropDown} />);
-    else setITable(<InvitesTable invitesData={invitesData} filterDropDown={filterInviteDropDown} />);
-  }
-
-  function setInviteTableFilter(filterInviteDropDown) {
-    if (!invitesActive) setUTable(<UserTable userData={userData} filterDropDown={filterDropDown} />);
-    else setITable(<InvitesTable invitesData={invitesData} filterDropDown={filterInviteDropDown} />);
-  }
-
-  function Userfilter(type) {
-    var roleData = [];
-    userTotalData.filter((user) => {
-      if (user.role.match("admin") && adminChecked) roleData.push(user);
-      else if (user.role.match("user") && userChecked) roleData.push(user);
-      return user.name.match("admin");
+  function userFilter(type) {
+    const roleData = totalUsersData.filter((identity) => {
+      if (identity.traits.role === "user" && userChecked) {
+        return identity;
+      } else if (identity.traits.role == "admin" && adminChecked) {
+        return identity;
+      } else if (!userChecked && !adminChecked) {
+        return identity;
+      }
     });
-    var filterData = [];
-    if (type == "apply") {
-      roleData.filter((user) => {
-        if (user.userstatus == 1 && activeUser) filterData.push(user);
-        else if (user.userstatus == 2 && inactiveUser) filterData.push(user);
-        else if (user.userstatus == 0 && bannedUser) filterData.push(user);
-        return user.name.match("admin");
+
+    if (type === "apply") {
+      const filteredData = roleData.filter((identity) => {
+        if (activeUser && identity.state === "active") {
+          return identity;
+        } else if (bannedUser && identity.state === "inactive") {
+          return identity;
+        } else if (!activeUser && !bannedUser) {
+          return identity;
+        }
       });
+      setCurrFilteredData(filteredData);
+      setCurrData(filteredData);
     } else {
       setActiveUser(false);
       setInactiveUser(false);
       setBannedUser(false);
+      setCurrData(totalUsersData);
+      setCurrFilteredData(totalUsersData);
     }
-    setUserData(filterData);
-    setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown} />);
   }
+
   function Invitefilter(type) {
     var filterData = [];
     if (type == "apply") {
@@ -142,46 +155,38 @@ const AdminPage = () => {
   }
 
   function AdminRole(role) {
-    var roleData = [];
-    userTotalData.filter((user) => {
-      var adminm = String("admin");
-      var userm = String("user");
-      var adminCheckedVal = adminChecked;
-      if (role == adminm) {
-        adminCheckedVal = !adminChecked;
+    let adminC, userC;
+    if (role == "admin") {
+      adminC = adminChecked ? false : true;
+      userC = userChecked;
+    } else {
+      userC = userChecked ? false : true;
+      adminC = adminChecked;
+    }
+    const roleData = currFilteredData.filter((identity) => {
+      if (identity.traits.role === "user" && userC) {
+        return identity;
+      } else if (identity.traits.role == "admin" && adminC) {
+        return identity;
+      } else if (!userC && !adminC) {
+        return identity;
       }
-      var userCheckedVal = userChecked;
-      if (role == userm) {
-        userCheckedVal = !userChecked;
-      }
-      if (user.role == adminm && adminCheckedVal) roleData.push(user);
-      else if (user.role == userm && userCheckedVal) roleData.push(user);
-      return user.role.match("admin");
     });
-    var filterData = [];
-    roleData.filter((user) => {
-      if (user.userstatus == 1 && activeUser) filterData.push(user);
-      else if (user.userstatus == 2 && inactiveUser) filterData.push(user);
-      else if (user.userstatus == 0 && bannedUser) filterData.push(user);
-      return user.name.match("admin");
-    });
-    setUserData(filterData);
-    setUTable(<UserTable userData={filterData} filterDropDown={filterDropDown} />);
+
+    setCurrData(roleData);
   }
 
   return (
     <div>
-      <div className="left_panel">
-        <LeftPanel
-          page={"user"}
-          activity1={"active"}
-          activity2={"inactive"}
-          activity3={"inactive"}
-          state1={"used"}
-          state2={"unused"}
-          state3={"unused"}
-        />
-      </div>
+      <LeftPanel
+        page={"user"}
+        activity1={"active"}
+        activity2={"inactive"}
+        activity3={"inactive"}
+        state1={"used"}
+        state2={"unused"}
+        state3={"unused"}
+      />
       <div className="right_panel">
         <h1 className="admin_heading">User Management</h1>
         <div className="admin_toggle">
@@ -198,277 +203,57 @@ const AdminPage = () => {
         </div>
         <hr className="admin_hr" />
         <div className="search_panel">
-          <Searchbar updateOnSearch={updateOnSearch} />
-          {(() => {
-            if (!invitesActive) {
-              return (
-                <div className="roles">
-                  <b>Role </b>
-                  <input
-                    type="checkbox"
-                    style={{ marginLeft: "1rem" }}
-                    id="admin_role"
-                    onChange={() => {
-                      setAdminChecked(!adminChecked);
-                      AdminRole("admin");
-                    }}
-                  />{" "}
-                  Admin
-                  <input
-                    type="checkbox"
-                    style={{ marginLeft: "2rem" }}
-                    id="user_role"
-                    onChange={() => {
-                      setUserChecked(!userChecked);
-                      AdminRole("user");
-                    }}
-                  />{" "}
-                  User
-                </div>
-              );
-            }
-          })()}
-          <div className="buttons">
-            <>
-              {(() => {
-                if (!invitesActive) {
-                  return (
-                    <button
-                      className="filter_btn"
-                      onClick={() => {
-                        setShowFilterDropDown(!filterDropDown), setTableFilter(!filterDropDown);
-                      }}
-                    >
-                      <Image style={{ marginRight: "8px" }} src={Filter} alt="user management" />
-                      {"Filter"}
-                    </button>
-                  );
-                } else {
-                  return (
-                    <button
-                      className="filter_btn"
-                      onClick={() => {
-                        setFilterInviteDropDown(!filterInviteDropDown), setInviteTableFilter(!filterInviteDropDown);
-                      }}
-                    >
-                      <Image style={{ marginRight: "8px" }} src={Filter} alt="user management" />
-                      {"Filter"}
-                    </button>
-                  );
-                }
-              })()}
-            </>
-            <button className="add_user_btn">
-              <Image style={{ marginRight: "8px" }} src={UserAdd} alt="user management" />
-              {"Add User"}
-            </button>
-          </div>
-          <Buttons filter_text="Filter" addu_text="Add User" filter_image={Filter} addu_image={UserAdd} />
+          <SearchBarAdmin updateOnSearch={updateOnSearch} />
+          {invitesActive ? (
+            <InvitesPanel setFilterInviteDropDown={setFilterInviteDropDown} />
+          ) : (
+            <UsersPanel
+              setShowFilterDropDown={setShowFilterDropDown}
+              setAdminChecked={setAdminChecked}
+              setUserChecked={setUserChecked}
+              AdminRole={AdminRole}
+            />
+          )}
         </div>
         <div className="data_div">
-          <div>{invitesActive ? ITable : UTable}</div>
+          <div>
+            {invitesActive ? (
+              <InvitesTable invitesData={[]} filterDropDown={false} />
+            ) : (
+              <UserTable userData={currData} filterDropDown={false} />
+            )}
+          </div>
           <div>
             {(() => {
               if (filterDropDown && !invitesActive) {
                 return (
-                  <>
-                    <div id="filterDropdown" class="dropdown-content">
-                      <div>
-                        {(() => {
-                          if (activeUser) {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_active"
-                                onChange={() => {
-                                  setActiveUser(!activeUser);
-                                }}
-                                checked="true"
-                              />
-                            );
-                          } else {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_active"
-                                onChange={() => {
-                                  setActiveUser(!activeUser);
-                                }}
-                              />
-                            );
-                          }
-                        })()}
-                        Active User
-                      </div>
-                      <div>
-                        {(() => {
-                          if (inactiveUser) {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_inactive"
-                                onChange={() => {
-                                  setInactiveUser(!inactiveUser);
-                                }}
-                                checked="true"
-                              />
-                            );
-                          } else {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_inactive"
-                                onChange={() => {
-                                  setInactiveUser(!inactiveUser);
-                                }}
-                              />
-                            );
-                          }
-                        })()}{" "}
-                        Inactive User
-                      </div>
-                      <div>
-                        {(() => {
-                          if (bannedUser) {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_banned"
-                                onChange={() => {
-                                  setBannedUser(!bannedUser);
-                                }}
-                                checked="true"
-                              />
-                            );
-                          } else {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_banned"
-                                onChange={() => {
-                                  setBannedUser(!bannedUser);
-                                }}
-                              />
-                            );
-                          }
-                        })()}
-                        Banned User
-                      </div>
-                      <div>
-                        <button
-                          id="apply_filter"
-                          class="filter_button"
-                          onClick={() => {
-                            Userfilter("apply");
-                          }}
-                        >
-                          {"Apply Filter"}
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          id="reset_filter"
-                          class="filter_button"
-                          onClick={() => {
-                            Userfilter("reset");
-                          }}
-                        >
-                          {"Reset Filter"}
-                        </button>
-                      </div>
-                    </div>
-                  </>
+                  <UserFilterDropdown
+                    activeUsers={activeUser}
+                    inactiveUsers={inactiveUser}
+                    bannedUsers={bannedUser}
+                    setActiveUsers={setActiveUser}
+                    setInactiveUsers={setInactiveUser}
+                    setBannedUsers={setBannedUser}
+                    Userfilter={userFilter}
+                  />
                 );
               } else if (filterInviteDropDown && invitesActive) {
                 return (
-                  <>
-                    <div id="filterDropdown" class="dropdown-content">
-                      <div>
-                        {(() => {
-                          if (acceptedUser) {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_accepted"
-                                onChange={() => {
-                                  setAcceptedUser(!acceptedUser);
-                                }}
-                                checked="true"
-                              />
-                            );
-                          } else {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_accepted"
-                                onChange={() => {
-                                  setAcceptedUser(!acceptedUser);
-                                }}
-                              />
-                            );
-                          }
-                        })()}
-                        Accepted User
-                      </div>
-                      <div>
-                        {(() => {
-                          if (pendingUser) {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_pending"
-                                onChange={() => {
-                                  setPendingUser(!pendingUser);
-                                }}
-                                checked="true"
-                              />
-                            );
-                          } else {
-                            return (
-                              <input
-                                type="checkbox"
-                                id="user_pending"
-                                onChange={() => {
-                                  setPendingUser(!pendingUser);
-                                }}
-                              />
-                            );
-                          }
-                        })()}
-                        Pending User
-                      </div>
-                      <div>
-                        <button
-                          id="apply_filter"
-                          class="filter_button"
-                          onClick={() => {
-                            Invitefilter("apply");
-                          }}
-                        >
-                          {"Apply Filter"}
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          id="reset_filter"
-                          class="filter_button"
-                          onClick={() => {
-                            Invitefilter("reset");
-                          }}
-                        >
-                          {"Reset Filter"}
-                        </button>
-                      </div>
-                    </div>
-                  </>
+                  <InviteFilterDropdown
+                    setAcceptedUsers={setAcceptedUser}
+                    setPendingUsers={setPendingUser}
+                    acceptedUsers={acceptedUser}
+                    pendingUsers={pendingUser}
+                    Invitefilter={Invitefilter}
+                  />
                 );
               }
             })()}
           </div>
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
-};
+}
 
 export default AdminPage;
