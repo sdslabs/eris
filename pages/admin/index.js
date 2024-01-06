@@ -192,12 +192,16 @@ function AdminPage() {
         <div className="admin_toggle">
           <div
             className={`toggle_items ${invitesActive ? "" : "setLine"}`}
-            style={{ marginLeft: "3rem" }}
+            style={{ marginLeft: "3rem", cursor: "pointer"}}
             onClick={() => setInvitesActive(false)}
           >
             Users
           </div>
-          <div className={`toggle_items ${invitesActive ? "setLine" : ""}`} onClick={() => setInvitesActive(true)}>
+          <div
+            className={`toggle_items ${invitesActive ? "setLine" : ""}`}
+            style={{cursor: "pointer"}}
+            onClick={() => setInvitesActive(true)}
+          >
             Invites
           </div>
         </div>

@@ -1,6 +1,6 @@
-import { Button } from "@mui/material";
 import Image from "next/image";
 import { React, useEffect, useState } from "react";
+import Input from "../../components/input_box";
 import { handleGetSettingsFlow, handlePostChangePasswordFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
 
 function ChangePassword({ flowID, csrf_token }) {
@@ -17,8 +17,8 @@ function ChangePassword({ flowID, csrf_token }) {
 
   return (
     <div>
-      <label htmlFor="newPassword">Enter New Password</label>
-      <input
+      <label htmlFor="newPassword"><p>Enter New Password</p></label>
+      <Input
         type="text"
         name="newPassword"
         id="newPassword"
@@ -26,7 +26,7 @@ function ChangePassword({ flowID, csrf_token }) {
           setNewPassword(e.target.value);
         }}
       />
-      <Button onClick={handleChangePassword}>Change</Button>
+      <button className="button_submit" style={{marginTop: "1rem"}} onClick={handleChangePassword}>Change</button>
     </div>
   );
 }
@@ -83,18 +83,18 @@ const SettingsPage = () => {
   }
 
   return (
-    <>
+    <div className="settings">
       {!totpEnabled ? (
         <>
           {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
-          <div>
-            If you cannot scan the QR, use this code:
+          <div style={{margin: "2rem 0"}}>
+            <p>If you cannot scan the QR, use this code:</p>
             <pre>
               <code>{totpSecret}</code>
             </pre>
           </div>
-          <label htmlFor="code">Enter Verification Code</label>
-          <input
+          <label htmlFor="code"><p>Enter Verification Code</p></label>
+          <Input
             type="text"
             name="code"
             id="code"
@@ -102,13 +102,13 @@ const SettingsPage = () => {
               setTotpCode(e.target.value);
             }}
           />
-          <Button onClick={linkTOTP}>Save</Button>
+          <button className="button_submit" style={{margin: "1rem 0 2rem 0"}} onClick={linkTOTP}>Save</button>
         </>
       ) : (
         <Button onClick={unlinkTOTP}>Unlink TOTP</Button>
       )}
       <ChangePassword flowID={flowID} csrf_token={csrf_token} />
-    </>
+    </div>
   );
 };
 
