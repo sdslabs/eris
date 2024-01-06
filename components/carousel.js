@@ -4,8 +4,7 @@ import Build from "../public/images/illustration_build.svg";
 import Ship from "../public/images/illustration_ship.svg";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
-
+import { Carousel } from "react-responsive-carousel";
 
 const Caro = () => {
 
@@ -21,19 +20,18 @@ const Caro = () => {
 
         <div className="slide">
           <Image src={Build} alt="labs" />
-          <div className="slick_centre" style={{"margin-top":"-1rem"}}>
+          <div className="slick_centre" style={{"marginTop":"-1rem"}}>
           <h1 className="carousel_heading">BUILD</h1>
-          </div>
         </div>
+      </div>
 
-        <div className="slide">
-          <Image src={Ship} alt="labs" />
-          <div className="slick_centre">
+      <div className="slide">
+        <Image src={Ship} alt="labs" />
+        <div className="slick_centre">
           <h1 className="carousel_heading">SHIP</h1>
-          </div>
         </div>
-      </Carousel>
-
+      </div>
+    </Carousel>
   );
 };
 

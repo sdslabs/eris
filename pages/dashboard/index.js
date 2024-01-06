@@ -1,65 +1,36 @@
-import {React, useState} from "react";
-import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { React, useState } from "react";
+import { handleGetLogoutFlow, handlePostLogoutFlow } from "../../api/logoutFlow";
 
-const Dashboard = () => {
-
+function Dashboard() {
+  const router = useRouter();
   const [logoutError, setLogoutError] = useState("");
 
-    let sendRequest = async () => {
-      try {
-        const getResponse = await axios.get(process.env.NEXT_PUBLIC_LOGOUT, {
-          withCredentials: true,
-        });
-        console.log(getResponse.data.logoutToken);
-        const res = await axios.post(
-          process.env.NEXT_PUBLIC_LOGOUT,
-          {
-            logoutToken: getResponse.data.logoutToken,
-            url: process.env.NEXT_PUBLIC_REDIRECT,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-        if (res.status === 200) {
-          console.log("logged out");
-          return true
-        } else {
-          setMessage("Some error occured");
-          setLogoutError("Logout failed. Try again.");
-          return false
-        }
-      } catch (err) {
-        console.log(err);
-        setLogoutError("Logout failed. Try again.");
-        return false
-      }
-    };
-
-const router = useRouter();
-const redirect = () =>{
-  router.push('/');
-}
+  async function handleLogout() {
+    try {
+      const logoutToken = await handleGetLogoutFlow();
+      await handlePostLogoutFlow(logoutToken);
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+      setLogoutError("Logout failed. Try again.");
+    }
+  }
 
   return (
-    <div >
+    <div>
       <div className="active">
-    <button className="button_submit" onClick={async ()=>{
-                  if(await sendRequest()){
-                    console.log("redirect");
-                     redirect();
-                  }else{
-                    console.log("error")
-                  }
-                }}>
-        Logout
-    </button>
-    <p className="text-danger">{logoutError}</p>
+        <Link className=" underline green" href="/settings" style={{ float: "right" }}>
+          Settings
+        </Link>
+        <button className="button_submit" onClick={handleLogout}>
+          Logout
+        </button>
+        <p className="text-danger">{logoutError}</p>
       </div>
     </div>
   );
-};
+}
 
 export default Dashboard;
-

@@ -1,33 +1,61 @@
-import ButtonSubmit from "./button_submit";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import { useEffect } from "react";
+import { handleGetVerifyFlow, handlePostVerifyFlow } from "../api/verificationFlow";
+import ButtonSubmit from "./button_submit";
+import IconsVerify from "./icons_verify";
 
-const VerifyEmailPage = ({email}) => {
+function VerifyEmailPage({ email }) {
+  const router = useRouter();
+  function redirect() {
+    router.push("dashboard");
+  }
 
-const router = useRouter();
-const redirect = () =>{
-  router.push('dashboard');
-}
+  useEffect(() => {
+    sendEmail(email);
+  }, [email]);
+
+  async function sendEmail(email) {
+    try {
+      const { flowID, csrf_token } = await handleGetVerifyFlow();
+      const res = await handlePostVerifyFlow(flowID, csrf_token, email);
+
+      if (res === "Account Verification Mail Sent") {
+        alert(res);
+      } else {
+        alert("Some error occured");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
-<div className="slide-in">
-      <div>
-        <h1>Email <span className="green">Verification</span></h1>
-      </div>
-      <div className="form">
+    <div>
+      <IconsVerify />
+      <div className="slide-in">
         <div>
-        <p>An email has been sent to</p>
-        <p className="green">{email}</p>
+          <h1>
+            Email <span className="green">Verification</span>
+          </h1>
         </div>
-        <div>
-          <ButtonSubmit
-            text={"Continue to Dashboard"} func={redirect}
-          />
+        <div className="form">
+          <div>
+            <p>An email has been sent to</p>
+            <p className="green">{email}</p>
+          </div>
+          <div>
+            <ButtonSubmit text={"Continue to Dashboard"} func={redirect} />
+          </div>
+          <p>
+            Didnt get the email?{" "}
+            <span className="green underline" onClick={() => sendEmail(email)}>
+              Resend Email
+            </span>
+          </p>
         </div>
-        <p>Didnt get the email? <Link href="#" className="green underline"> Resend Email</Link> </p>
       </div>
-</div>
+    </div>
   );
-};
+}
 
 export default VerifyEmailPage;

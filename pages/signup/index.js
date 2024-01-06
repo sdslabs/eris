@@ -1,89 +1,61 @@
-import { React, useState } from 'react';
-import Icons from "../../components/icons";
-import IconsPass from '../../components/icons_pass';
-import IconsVerify from '../../components/icons_verify';
-import Labs from "../../public/images/labs logo.png";
 import Image from "next/image";
+import { React, useReducer } from "react";
 import Carousel from "../../components/carousel";
-import SetPassword from '../../components/setpass';
-import Signup from '../../components/register';
-import Verify from '../../components/verifyEmail';
+import Signup from "../../components/register";
+import SetPassword from "../../components/setpass";
+import Verify from "../../components/verifyEmail";
+import Labs from "../../public/images/labs logo.png";
 
-const SignupPage = () => {
-  const [showSignup, setShowSignup] = useState(true);
-  const [showPasswordScreen, setShowPasswordScreen] = useState(true);
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const handleButtonClick = (event) => {
-    event.preventDefault()
-    setShowSignup(!showSignup);
-  };
-  const handlePasswordButton = (event) => {
-    event.preventDefault()
-    setShowPasswordScreen(!showPasswordScreen);
-  };
+const initialState = {
+  email: "",
+  name: "",
+  number: "",
+  status: "signupForm", //signupForm, passForm, verificationForm
+};
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "setEmail":
+      return { ...state, email: action.payload };
+    case "setName":
+      return { ...state, name: action.payload };
+    case "setNumber":
+      return { ...state, number: action.payload };
+    case "setStatus":
+      return { ...state, status: action.payload };
+    case "reset":
+      return { ...state, status: "verificationForm" };
+  }
+}
+
+function LeftSide() {
   return (
-    <div>
-      <div className="split_left">
-        <div className="top">
-          <Image src={Labs} alt="labs" />
-        </div>
-        <div className="centred_img">
-          <Carousel />
-        </div>
+    <div className="split_left">
+      <div className="top">
+        <Image src={Labs} alt="labs" />
       </div>
-      <div className="split_right ">
-        <div className='signup'>
-        {(() => {
-        if (showSignup) {
-          return (
-            <div>
-              <div>
-                <Icons />
-              </div>
-              <Signup
-              handleClick={handleButtonClick}
-              name={name} email={email}
-              number={number}
-              setEmail={setEmail}
-              setName={setName}
-              setNumber={setNumber} />
-            </div>
-          )
-        } else if (!showSignup && showPasswordScreen) {
-          return (
-            <div>
-              <div>
-                <IconsPass/>
-              </div>
-              <SetPassword
-              handleClick={handlePasswordButton}
-              className='slide-in'
-              name={name}
-              email={email}
-              number={number}
-              setEmail={setEmail}
-              setName={setName}
-              setNumber={setNumber}/>
-            </div>
-          )
-        } else {
-          return (
-            <div>
-              <div>
-                <IconsVerify/>
-              </div>
-              <Verify className='slide-in' email={email}/>
-            </div>
-          )
-        }
-      })()}
-          </div>
+      <div className="centred_img">
+        <Carousel />
       </div>
     </div>
   );
-};
+}
+
+function SignupPage() {
+  const [{ email, name, number, status }, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <LeftSide />
+      <div className="split_right ">
+        <div className="signup">
+          {status === "signupForm" ? <Signup dispatch={dispatch} name={name} email={email} number={number} /> : null}
+          {status === "passForm" ? <SetPassword dispatchSign={dispatch} name={name} email={email} number={number} /> : null}
+          {status === "verificationForm" ? <Verify email={email} /> : null}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default SignupPage;

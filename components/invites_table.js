@@ -101,4 +101,3 @@ function isPending (userstatus) {
 }
 
 export default InvitesTable;
-

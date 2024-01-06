@@ -1,84 +1,84 @@
+import { React, useReducer } from "react";
+import { handleGetRegisterFlow, handlePostRegisterFlow } from "../api/registerFlow";
 import ButtonSubmit from "./button_submit";
+import IconsPass from "./icons_pass";
 import PasswordValidation from "./passwordValidation";
-import { React, useState } from "react";
-import axios from "axios";
 
-const SetPassword = ({ handleClick, name, number, email, setEmail, setName, setNumber }) => {
-  const [passwordInput, setPasswordInput] = useState({
-    password: "",
-    confirmPassword: "",
-  });
-  const [passwordError, setPasswordErr] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [registrationError, setRegistrationError] = useState("");
+const initialState = {
+  password: { text: "", error: "" },
+  confirmPassword: { text: "", error: "" },
+  registrationError: "",
+};
 
-  const func = async (event) => {
-    event.preventDefault();
-    const getResponse = await axios.get(process.env.NEXT_PUBLIC_SIGNUP, {
-      withCredentials: true,
-    });
-    console.log(getResponse.data.flowID);
+function reducer(state, action) {
+  switch (action.type) {
+    case "setRegistrationError":
+      return { ...state, registrationError: action.payload };
+    case "setPassword":
+      return { ...state, password: { text: action.payload, error: "" } };
+    case "setConfirmPassword":
+      return { ...state, confirmPassword: { text: action.payload, error: "" } };
+    case "setPasswordErr":
+      return { ...state, password: { text: state.password.text, error: action.payload } };
+    case "setConfirmPasswordErr":
+      return { ...state, confirmPassword: { text: state.confirmPassword.text, error: action.payload } };
+    case "reset":
+      return initialState;
+  }
+}
+
+function SetPassword({ name, number, email, dispatchSign }) {
+  const [{ password, confirmPassword, registrationError }, dispatchPass] = useReducer(reducer, initialState);
+
+  async function handleCreateAccount() {
     try {
-      let res = await axios.post(
-        process.env.NEXT_PUBLIC_SIGNUP,
-        {
-            flowID: getResponse.data.flowID,
-            csrf_token: getResponse.data.csrf_token,
-            password: passwordInput.password,
-            traits: {
-              email: email,
-              name: name,
-              phone_number: number,
-            },
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      if (res.status == 200) {
-        setPasswordInput({
-          password: "",
-          confirmPassword: "",
-        });
-        setEmail("");
-        setName("");
-        setNumber("");
-        console.log("registered");
-        handleClick();
-      } else {
-        console.log("error");
-        setRegistrationError("Registration failed. Try again.");
-      }
+      const { flowID, csrf_token } = await handleGetRegisterFlow();
+      await handlePostRegisterFlow(flowID, csrf_token, password.text, email, name, number);
+      dispatchPass({ type: "reset" });
+      dispatchSign({ type: "reset" });
+      console.log("registered");
     } catch (err) {
-      console.log(err);
-      setRegistrationError("Password too weak. Try again with a stronger password.");
+      if (err.code === "ERR_NETWORK") {
+        dispatchPass({
+          type: "setRegistrationError",
+          payload: "Couldn't connect to server",
+        });
+      } else {
+        console.error(err);
+        dispatchPass({
+          type: "setRegistrationError",
+          payload: "Password too weak. Try again with a stronger password.",
+        });
+      }
     }
-  };
+  }
 
   return (
-    <div className="slide-out">
-      <div>
-        <h1>
-          Set <span className="green">Password</span>
-        </h1>
-      </div>
-      <div className="form">
-        <PasswordValidation
-          passwordInput={passwordInput}
-          setPasswordInput={setPasswordInput}
-          setConfirmPasswordError = {setConfirmPasswordError}
-          confirmPasswordError = {confirmPasswordError}
-          passwordError = {passwordError}
-          setPasswordErr = {setPasswordErr}
-        />
-      </div>
-      <p className="text-danger">{registrationError}</p>
-      <div>
-        <ButtonSubmit
-          text={"Confirm"} func={func} err1 = {confirmPasswordError} err2 = {passwordError} password={passwordInput.password} confirmPassword = {passwordInput.confirmPassword}/>
+    <div>
+      <IconsPass />
+      <div className="slide-out">
+        <div>
+          <h1>
+            Set <span className="green">Password</span>
+          </h1>
+        </div>
+        <div className="form">
+          <PasswordValidation password={password} confirmPassword={confirmPassword} dispatchPass={dispatchPass} />
+        </div>
+        <p className="text-danger">{registrationError}</p>
+        <div>
+          <ButtonSubmit
+            text={"Confirm"}
+            func={handleCreateAccount}
+            err1={confirmPassword.error}
+            err2={password.error}
+            password={password.text}
+            confirmPassword={confirmPassword.text}
+          />
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default SetPassword;
