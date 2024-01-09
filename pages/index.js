@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { handleGetLoginFlow, handlePostLoginFlow } from "../api/loginFlow";
+import { handleGetSettingsFlow } from "../api/settingsFlow";
 import ButtonAuth from "../components/button_auth";
 import ButtonSubmit from "../components/button_submit";
 import Carousel from "../components/carousel";
@@ -45,7 +46,7 @@ const LoginPage = () => {
         router.push("dashboard");
       }
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   }
 

@@ -8,7 +8,6 @@ import SearchBarAdmin from "../../components/searchBarAdmin";
 import UserFilterDropdown from "../../components/userFilterDropdown";
 import UserTable from "../../components/userTable";
 import UsersPanel from "../../components/usersPanel";
-import InvitesData from "../../data/invites_data.json";
 
 function AdminPage() {
   //User Data
@@ -26,22 +25,31 @@ function AdminPage() {
   const [filterDropDown, setShowFilterDropDown] = useState(false);
 
   //Invites Data
-  const [invitesTotalData, setInvitesTotalData] = useState(InvitesData);
-  const [invitesData, setInviteData] = useState([]);
+  const [invitesTotalData, setInvitesTotalData] = useState([]);
+  const [invitesCurrData, setInvitesCurrData] = useState([]);
   //Checkboxes
   const [acceptedUser, setAcceptedUser] = useState(false);
   const [pendingUser, setPendingUser] = useState(false);
   //Dropdowns
   const [filterInviteDropDown, setFilterInviteDropDown] = useState(false);
-  const [ITable, setITable] = useState();
 
   useEffect(() => {
     async function getIdentities() {
       try {
         const identities = await handleGetIdentitiesFlow();
-        setTotalUsersData(identities);
-        setCurrData(identities);
-        setCurrFilteredData(identities);
+        const userIdentities = identities.filter((identity) => identity.traits.invite_status === "self_created");
+        console.log(userIdentities);
+        const inviteIdentities = identities.filter(
+          (identity) => identity.traits.invite_status === "pending" || identity.traits.invite_status === "accepted"
+        );
+        console.log(inviteIdentities);
+
+        setTotalUsersData(userIdentities);
+        setCurrData(userIdentities);
+        setCurrFilteredData(userIdentities);
+
+        setInvitesTotalData(inviteIdentities);
+        setInvitesCurrData(inviteIdentities);
       } catch (error) {
         console.error(error);
       }
@@ -60,7 +68,7 @@ function AdminPage() {
           }
         });
       } else {
-        recentData = InvitesData.filter((identity) => {
+        recentData = invitesTotalData.filter((identity) => {
           if (identity.traits.name.match(inputText)) {
             return identity;
           }
@@ -69,7 +77,7 @@ function AdminPage() {
     } else if (!invitesActive) {
       recentData = totalUsersData;
     } else {
-      recentData = InvitesData;
+      recentData = invitesTotalData;
     }
 
     if (!invitesActive) {
@@ -95,14 +103,17 @@ function AdminPage() {
       setCurrFilteredData(filteredData);
       setCurrData(filteredData);
     } else {
-      recentData.filter((user) => {
-        if (user.invitestatus == 0 && pendingUser) filterData.push(user);
-        else if (user.invitestatus == 1 && acceptedUser) filterData.push(user);
-        return user.name.match("admin");
+      const filteredData = recentData.filter((identity) => {
+        if (pendingUser && identity.traits.invite_status === "pending") {
+          return identity;
+        } else if (acceptedUser && identity.traits.invite_status === "accepted") {
+          return identity;
+        } else if (!acceptedUser && !pendingUser) {
+          return identity;
+        }
       });
-      setInvitesTotalData(recentData);
-      setInviteData(filterData);
-      setITable(<InvitesTable invitesData={recentData} filterDropDown={filterInviteDropDown} />);
+
+      setInvitesCurrData(filteredData);
     }
   }
 
@@ -138,20 +149,22 @@ function AdminPage() {
     }
   }
 
-  function Invitefilter(type) {
-    var filterData = [];
-    if (type == "apply") {
-      invitesTotalData.filter((user) => {
-        if (user.invitestatus == 0 && pendingUser) filterData.push(user);
-        else if (user.invitestatus == 1 && acceptedUser) filterData.push(user);
-        return user.name.match("admin");
+  function inviteFilter(type) {
+    if (type === "apply") {
+      const filteredData = invitesTotalData.filter((identity) => {
+        if (pendingUser && identity.traits.invite_status === "pending") {
+          return identity;
+        } else if (acceptedUser && identity.traits.invite_status === "accepted") {
+          return identity;
+        } else if (!acceptedUser && !pendingUser) {
+          return identity;
+        }
       });
+      setInvitesCurrData(filteredData);
     } else {
       setAcceptedUser(false);
       setPendingUser(false);
     }
-    setInviteData(filterData);
-    setITable(<InvitesTable invitesData={filterData} filterDropDown={filterInviteDropDown} />);
   }
 
   function AdminRole(role) {
@@ -218,7 +231,7 @@ function AdminPage() {
         <div className="data_div">
           <div>
             {invitesActive ? (
-              <InvitesTable invitesData={[]} filterDropDown={false} />
+              <InvitesTable invitesData={invitesCurrData} filterDropDown={false} />
             ) : (
               <UserTable userData={currData} filterDropDown={false} />
             )}
@@ -244,7 +257,7 @@ function AdminPage() {
                     setPendingUsers={setPendingUser}
                     acceptedUsers={acceptedUser}
                     pendingUsers={pendingUser}
-                    Invitefilter={Invitefilter}
+                    inviteFilter={inviteFilter}
                   />
                 );
               }

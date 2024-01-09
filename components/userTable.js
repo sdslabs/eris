@@ -5,12 +5,7 @@ import bannedUser from "../public/images/banned.svg";
 import defaultFace from "../public/images/default_face.svg";
 import UserPopup from "./user_mgmt";
 
-function UserTable({ userData, filterDropDown }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
-
+function UserTable({ userData }) {
   const post = userData;
   const [number, setNumber] = useState(1); // No of pages
   const [postPerPage, setPostPerPage] = useState({ value: 2, label: "2/Page" });
