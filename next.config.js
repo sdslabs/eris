@@ -14,6 +14,8 @@ const nextConfig = {
     NEXT_PUBLIC_BAN: process.env.NEXT_PUBLIC_BAN,
     NEXT_PUBLIC_DELETE: process.env.NEXT_PUBLIC_DELETE,
     NEXT_PUBLIC_VERIFY: process.env.NEXT_PUBLIC_VERIFY,
+    NEXT_PUBLIC_GET_PROFILE: process.env.NEXT_PUBLIC_GET_PROFILE,
+    NEXT_PUBLIC_CREATE: process.env.NEXT_PUBLIC_CREATE,
   },
 };
 

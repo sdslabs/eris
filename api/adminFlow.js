@@ -28,3 +28,14 @@ export async function handleDeleteIdentityFlow(identity) {
     throw error;
   }
 }
+
+export async function handleCreateIdentityFlow(name, phone_number, email, role) {
+  try {
+    const objData = { name, email, phone_number, role };
+    const res = await axiosInstance.post(process.env.NEXT_PUBLIC_CREATE, objData);
+    console.log(res.data);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+}
