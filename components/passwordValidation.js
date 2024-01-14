@@ -120,6 +120,7 @@ function PasswordValidation({ password, confirmPassword, dispatchPass }) {
         <div className={greenBox}>
           <Password
             name="password"
+            value={password.text}
             text={"Your password must contain 8 characters"}
             handlePasswordChange={handlePasswordChange}
             handleValidation={handleValidation}
@@ -129,6 +130,7 @@ function PasswordValidation({ password, confirmPassword, dispatchPass }) {
         <div className={confirmGreenBox}>
           <Password
             name="confirmPassword"
+            value={confirmPassword.text}
             text={"Re-enter your password"}
             handlePasswordChange={handlePasswordChange}
             handleValidation={handleValidation}
