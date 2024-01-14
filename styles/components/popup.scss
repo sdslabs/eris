@@ -1,54 +1,59 @@
-.user_popup{
-    display: flex;
-    flex-direction: column;
-    width: 40rem;
-    height: 18.75rem;
-    text-align: left;
-    justify-content: space-between;
-    // background-color: #f1f1ff;
+.user_popup {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+  height: 18.75rem;
+  text-align: left;
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  justify-content: space-between;
+  z-index: 5;
+  background-color: #f1f1ff;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-.popup_banner{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 4rem;
-    padding-top: 1.25rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    color: #191919;
-    font-size: 1.25rem;
-    // font-family: Open Sans;
-    font-weight: 400;
-    justify-content: space-between;
+.popup_banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 4rem;
+  padding-top: 1.25rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  color: #191919;
+  font-size: 1.25rem;
+  // font-family: Open Sans;
+  font-weight: 400;
+  justify-content: space-between;
 }
 
-.popup_lower{
-    width: 40rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-bottom: 2.25rem;
-    height: 10.25rem;
+.popup_lower {
+  width: 40rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 2.25rem;
+  height: 10.25rem;
 }
 
-.user_popup_content{
-    color: #1D2939;
-    font-size: 16px;
-    // font-family: Open Sans;
-    font-weight: 400;
-    word-wrap: break-word;
-    width: 22.25rem
+.user_popup_content {
+  color: #1d2939;
+  font-size: 16px;
+  // font-family: Open Sans;
+  font-weight: 400;
+  word-wrap: break-word;
+  width: 22.25rem;
 }
 
-.popup_prompt{
-    font-weight: 600;
+.popup_prompt {
+  font-weight: 600;
 }
 
-.popup_buttons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.popup_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
