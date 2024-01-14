@@ -23,7 +23,7 @@ const initialState = {
   userFilterDropdown: false,
   totalInviteData: [],
   currentInviteData: [],
-  acceptedUser: false,
+  acceptedUsers: false,
   pendingUsers: false,
   inviteFilterDropdown: false,
   addUserFormActive: false,
@@ -63,7 +63,7 @@ function reducer(state, action) {
         currentUserFilteredData: state.totalUserData,
       };
     case "inviteFilterReset":
-      return { ...state, acceptedUser: false, pendingUsers: false, currentInviteData: state.totalInviteData };
+      return { ...state, acceptedUsers: false, pendingUsers: false, currentInviteData: state.totalInviteData };
     case "setInviteActive":
       return { ...state, invitesActive: true };
     case "setUserActive":
@@ -106,7 +106,7 @@ function AdminPage() {
       userFilterDropdown,
       totalInviteData,
       currentInviteData,
-      acceptedUser,
+      acceptedUsers,
       pendingUsers,
       inviteFilterDropdown,
       addUserFormActive,
@@ -154,9 +154,9 @@ function AdminPage() {
     const filteredData = recentData.filter((identity) => {
       if (pendingUsers && identity.traits.invite_status === "pending") {
         return identity;
-      } else if (acceptedUser && identity.traits.invite_status === "accepted") {
+      } else if (acceptedUsers && identity.traits.invite_status === "accepted") {
         return identity;
-      } else if (!acceptedUser && !pendingUsers) {
+      } else if (!acceptedUsers && !pendingUsers) {
         return identity;
       }
     });
@@ -278,7 +278,7 @@ function AdminPage() {
             {inviteFilterDropdown && invitesActive ? (
               <InviteFilterDropdown
                 dispatch={dispatch}
-                acceptedUsers={acceptedUser}
+                acceptedUsers={acceptedUsers}
                 pendingUsers={pendingUsers}
                 handleInviteFilter={handleInviteFilter}
               />
