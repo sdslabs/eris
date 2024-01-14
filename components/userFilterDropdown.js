@@ -1,32 +1,24 @@
 import FilterOption from "./filterOptions";
 import FilterButton from "./filterButton";
 
-function UserFilterDropdown({
-  activeUsers,
-  inactiveUsers,
-  bannedUsers,
-  setActiveUsers,
-  setInactiveUsers,
-  setBannedUsers,
-  Userfilter,
-}) {
+function UserFilterDropdown({ dispatch, activeUsers, inactiveUsers, bannedUsers, handleUserFilter }) {
   function handleActiveUsers() {
-    setActiveUsers((old) => !old);
+    dispatch({ type: "setActiveUsers" });
   }
 
   function handleInactiveUsers() {
-    setInactiveUsers((old) => !old);
+    dispatch({ type: "setInactiveUsers" });
   }
 
   function handleBannedUsers() {
-    setBannedUsers((old) => !old);
+    dispatch({ type: "setBannedUsers" });
   }
 
   function handleApplyFilter() {
-    Userfilter("apply");
+    handleUserFilter("apply");
   }
   function handleResetFilter() {
-    Userfilter("reset");
+    handleUserFilter("reset");
   }
 
   return (

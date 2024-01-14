@@ -3,7 +3,7 @@ import { React } from "react";
 import Filter from "../public/images/filter.svg";
 import UserAdd from "../public/images/user_add.svg";
 
-function UserRoleFilter({ setAdminChecked, setUserChecked, AdminRole }) {
+function UserRoleFilter({ dispatch, adminChecked, userChecked, handleRoleCheckboxes }) {
   return (
     <div className="roles">
       <b>Role </b>
@@ -12,9 +12,10 @@ function UserRoleFilter({ setAdminChecked, setUserChecked, AdminRole }) {
         style={{ marginLeft: "1rem" }}
         id="admin_role"
         onChange={() => {
-          setAdminChecked((old) => !old);
-          AdminRole("admin");
+          dispatch({ type: "setAdminChecked" });
+          handleRoleCheckboxes("admin");
         }}
+        checked={adminChecked}
       />{" "}
       Admin
       <input
@@ -22,33 +23,39 @@ function UserRoleFilter({ setAdminChecked, setUserChecked, AdminRole }) {
         style={{ marginLeft: "2rem" }}
         id="user_role"
         onChange={() => {
-          setUserChecked((old) => !old);
-          AdminRole("user");
+          dispatch({ type: "setUserChecked" });
+          handleRoleCheckboxes("user");
         }}
+        checked={userChecked}
       />{" "}
       User
     </div>
   );
 }
 
-function UsersPanel({ setShowFilterDropDown, setAdminChecked, setUserChecked, AdminRole }) {
+function UsersPanel({ dispatch, handleRoleCheckboxes, userChecked, adminChecked }) {
   return (
     <>
-      <UserRoleFilter setAdminChecked={setAdminChecked} setUserChecked={setUserChecked} AdminRole={AdminRole} />
+      <UserRoleFilter
+        userChecked={userChecked}
+        adminChecked={adminChecked}
+        dispatch={dispatch}
+        handleRoleCheckboxes={handleRoleCheckboxes}
+      />
       <div className="buttons">
         <button
           className="filter_btn"
           onClick={() => {
-            setShowFilterDropDown((old) => !old);
+            dispatch({ type: "setUserFilterDropdown" });
           }}
         >
           <Image style={{ marginRight: "8px" }} src={Filter} alt="user management" />
-          {"Filter"}
+          Filter
         </button>
 
-        <button className="add_user_btn">
+        <button className="add_user_btn" onClick={() => dispatch({ type: "showAddUserForm" })}>
           <Image style={{ marginRight: "8px" }} src={UserAdd} alt="user management" />
-          {"Add User"}
+          Add User
         </button>
       </div>
     </>

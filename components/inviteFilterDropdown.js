@@ -1,20 +1,20 @@
 import FilterOption from "./filterOptions";
 import FilterButton from "./filterButton";
 
-function InviteFilterDropdown({ setAcceptedUsers, setPendingUsers, acceptedUsers, pendingUsers, inviteFilter }) {
+function InviteFilterDropdown({ dispatch, acceptedUsers, pendingUsers, handleInviteFilter }) {
   function handleAcceptedUsers() {
-    setAcceptedUsers((old) => !old);
+    dispatch({ type: "setAcceptUserCheck" });
   }
 
   function handlePendingUsers() {
-    setPendingUsers((old) => !old);
+    dispatch({ type: "setPendingUserCheck" });
   }
 
   function handleApplyFilter() {
-    inviteFilter("apply");
+    handleInviteFilter("apply");
   }
   function handleResetFilter() {
-    inviteFilter("reset");
+    handleInviteFilter("reset");
   }
 
   return (

@@ -1,13 +1,25 @@
 import React from "react";
 
-const Popup = props => {
+function Popup({ handleBanUser, setIsTabOpen, setIsOpen }) {
   return (
     <div className="popup_box">
       <div className="box">
-        {props.content}
+        <div
+          className="popup_content"
+          onClick={() => {
+            setIsTabOpen((old) => !old);
+            setIsOpen(false);
+          }}
+        >
+          Remove user
+        </div>
+        <div className="popup_content" onClick={handleBanUser}>
+          Ban user
+        </div>
+        <div className="popup_content">Make user</div>
       </div>
     </div>
   );
-};
+}
 
 export default Popup;

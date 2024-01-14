@@ -3,23 +3,23 @@ import { React } from "react";
 import Filter from "../public/images/filter.svg";
 import UserAdd from "../public/images/user_add.svg";
 
-function InvitesPanel({ setFilterInviteDropDown, setInviteTableFilter }) {
+function InvitesPanel({ dispatch }) {
   return (
     <>
       <div className="buttons">
         <button
           className="filter_btn"
           onClick={() => {
-            setFilterInviteDropDown((old) => !old), setInviteTableFilter((old) => !old);
+            dispatch({ type: "setInviteFilterDropdown" });
           }}
         >
           <Image style={{ marginRight: "8px" }} src={Filter} alt="user management" />
-          {"Filter"}
+          Filter
         </button>
 
-        <button className="add_user_btn">
+        <button className="add_user_btn" onClick={() => dispatch({ type: "showAddUserForm" })}>
           <Image style={{ marginRight: "8px" }} src={UserAdd} alt="user management" />
-          {"Add User"}
+          Add User
         </button>
       </div>
     </>

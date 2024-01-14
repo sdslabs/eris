@@ -1,28 +1,26 @@
 import React, { useState } from "react";
-import Popup from "./popup";
-import UserPop from "./user_mgmt_pop";
 import { handleBanIdentityFlow, handleDeleteIdentityFlow } from "../api/adminFlow";
+import Popup from "./popup";
+import UserRemovePopup from "./user_mgmt_pop";
 
 function UserPopup({ identityId }) {
   const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
-
   const [isTabOpen, setIsTabOpen] = useState(false);
 
-  async function handleBanUser(id) {
+  async function handleBanUser() {
     try {
-      await handleBanIdentityFlow(id);
+      setIsOpen(false);
+      await handleBanIdentityFlow(identityId);
       alert("User banned");
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function handleDeleteUser(id) {
+  async function handleDeleteUser() {
     try {
-      await handleDeleteIdentityFlow(id);
+      setIsTabOpen(false);
+      await handleDeleteIdentityFlow(identityId);
       alert("User Deleted");
     } catch (error) {
       console.error(error);
@@ -31,24 +29,9 @@ function UserPopup({ identityId }) {
 
   return (
     <div className="icon_box">
-      <input className="popup_button" type="button" value=":" onClick={togglePopup} />
-      {isOpen && (
-        <Popup
-          content={
-            <>
-              <div className="popup_content" onClick={() => setIsTabOpen(!isTabOpen)}>
-                Remove user
-              </div>
-              <div className="popup_content" onClick={() => handleBanUser(identityId)}>
-                Ban user
-              </div>
-              <div className="popup_content">Make user</div>
-            </>
-          }
-          handleClose={togglePopup}
-        />
-      )}
-      {isTabOpen && <UserPop handleDeleteUser={() => handleDeleteUser(identityId)} content={<>make popup</>} />}
+      <input className="popup_button" type="button" value=":" onClick={() => setIsOpen((old) => !old)} />
+      {isOpen && <Popup setIsTabOpen={setIsTabOpen} handleBanUser={handleBanUser} setIsOpen={setIsOpen} />}
+      {isTabOpen && <UserRemovePopup handleDeleteUser={handleDeleteUser} setIsTabOpen={setIsTabOpen} />}
     </div>
   );
 }
