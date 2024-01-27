@@ -38,7 +38,7 @@ function Table({ currentPost }) {
                 <td> {Val.traits.role} </td>
                 <td> {Val.traits.github} </td>
                 <td>
-                  <UserPopup identityId={Val.id} />
+                  <UserPopup identity={Val} />
                 </td>
               </tr>
             </>

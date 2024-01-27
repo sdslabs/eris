@@ -2,9 +2,9 @@ import { Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { React, useEffect, useState } from "react";
-import { handleGetSessionDetailsFlow } from "../../api/profileFlow";
 import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
-import VerifyEmailPage from "../../components/verifyEmail";
+import Carousel from "../../components/carousel";
+import Labs from "../../public/images/labs logo.png";
 
 function SettingsPage() {
   const [qrLink, setQrLink] = useState("");
@@ -57,11 +57,17 @@ function SettingsPage() {
     }
   }
 
-  if (showVerifyPage) {
-    return <VerifyEmailPage email={email} />;
-  } else {
-    return (
-      <>
+  return (
+    <div>
+      <div className="split_left">
+        <div className="top">
+          <Image src={Labs} alt="labs" />
+        </div>
+        <div className="centred_img">
+          <Carousel />
+        </div>
+      </div>
+      <div className="split_right" style={{ display: "block" }}>
         {!totpEnabled ? (
           <>
             {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
@@ -88,9 +94,9 @@ function SettingsPage() {
         <div>
           <Link href="/passwordReset">Change Password</Link>
         </div>
-      </>
-    );
-  }
+      </div>
+    </div>
+  );
 }
 
 export default SettingsPage;
