@@ -38,7 +38,7 @@ const LoginPage = () => {
 
   function redirect(traits) {
     if (traits) {
-      router.push({ pathname: "/dashboard", query: { role: traits.role } }, "dashboard");
+      router.push("dashboard");
     } else {
       router.push("confidential");
     }

@@ -16,7 +16,7 @@ function MFAPage() {
       const res = await handlePostMFAFlow(flowID, csrf_token, totpCode);
 
       if (res.status === "MFA Successful") {
-        router.push({ pathname: "/dashboard", query: { role: res.user.identity.traits } }, "dashboard");
+        router.push("dashboard");
       } else {
         alert("ERROR:MFA Failed");
       }

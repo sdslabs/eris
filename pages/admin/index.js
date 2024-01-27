@@ -209,6 +209,7 @@ function AdminPage() {
     <div>
       <LeftPanel
         page={"user"}
+        mode={"admin"}
         activity1={"active"}
         activity2={"inactive"}
         activity3={"inactive"}

@@ -15,8 +15,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
 }
 
 a {
@@ -39,10 +39,14 @@ a {
 }
 
 .green {
-  color: #00902B;
+  color: #00902b;
 }
 
-.perm{
+.red {
+  color: rgb(255, 38, 38);
+}
+
+.perm {
   text-decoration: underline;
 }
 
@@ -62,15 +66,31 @@ i {
 }
 
 ::placeholder {
-  color: #B3B3B3;
+  color: #b3b3b3;
 }
 
-th{
+th {
   font-weight: normal;
 }
 
-input[type=text]{
+input[type="text"] {
   padding: 0.5rem;
   width: 100%;
   color: #393939;
+}
+
+.settings_panel {
+  padding: 10em;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.transparent_btn {
+  border-radius: 20px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: white;
+  color: green;
+  border: 2px solid black;
+  margin-left: 0.8em;
 }

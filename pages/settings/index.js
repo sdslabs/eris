@@ -1,11 +1,47 @@
 import { Button } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import { React, useEffect, useState } from "react";
 import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
-import Carousel from "../../components/carousel";
+import LeftPanel from "../../components/leftPanel";
 import UpdateProfileForm from "../../components/updateProfileForm";
-import Labs from "../../public/images/labs logo.png";
+import ButtonSubmit from "../../components/button_submit";
+import Input from "../../components/input_box";
+
+function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
+  return (
+    <div>
+      <div>
+        <h1>
+          Multi Factor <span className="green">Authentication</span>
+        </h1>
+      </div>
+      {totpEnabled ? (
+        <Button onClick={unlinkTOTP}>Unlink TOTP</Button>
+      ) : (
+        <>
+          {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
+          <div>
+            If you cannot scan the QR, use this code:{" "}
+            <span className="green">
+              <code>{totpSecret}</code>
+            </span>
+          </div>
+          <label htmlFor="code">Enter Verification Code</label>
+          <input
+            type="text"
+            name="code"
+            text="Enter TOTP Code"
+            value={totp_code}
+            onChange={(e) => setTotpCode(e.target.value)}
+          />
+          <button className="button_submit" style={{marginTop:"0.5em"}} onClick={linkTOTP}>
+            Enable 2FA
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
 
 function SettingsPage() {
   const [qrLink, setQrLink] = useState("");
@@ -60,41 +96,27 @@ function SettingsPage() {
 
   return (
     <div>
-      <div className="split_left">
-        <div className="top">
-          <Image src={Labs} alt="labs" />
-        </div>
-        <div className="centred_img">
-          <Carousel />
-        </div>
-      </div>
-      <div className="split_right" style={{ display: "block" }}>
-        {!totpEnabled ? (
-          <>
-            {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
-            <div>
-              If you cannot scan the QR, use this code:
-              <pre>
-                <code>{totpSecret}</code>
-              </pre>
-            </div>
-            <label htmlFor="code">Enter Verification Code</label>
-            <input
-              type="text"
-              name="code"
-              id="code"
-              onChange={(e) => {
-                setTotpCode(e.target.value);
-              }}
-            />
-            <Button onClick={linkTOTP}>Save</Button>
-          </>
-        ) : (
-          <Button onClick={unlinkTOTP}>Unlink TOTP</Button>
-        )}
-        <div>
-          <Link href="/passwordReset">Change Password</Link>
-        </div>
+      <LeftPanel
+        page={"user"}
+        mode={"dashboard"}
+        activity1={"inactive"}
+        activity2={"inactive"}
+        activity3={"active"}
+        state1={"unused"}
+        state2={"unused"}
+        state3={"used"}
+      />
+      <div className="right_panel settings_panel">
+        <MFAauthentication
+          totpEnabled={totpEnabled}
+          qrLink={qrLink}
+          unlinkTOTP={unlinkTOTP}
+          totpSecret={totpSecret}
+          setTotpCode={setTotpCode}
+          linkTOTP={linkTOTP}
+          totp_code={totp_code}
+        />
+
         <UpdateProfileForm flowID={flowID} csrf_token={csrf_token} />
       </div>
     </div>

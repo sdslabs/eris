@@ -1,10 +1,14 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { handleGetSessionDetailsFlow } from "../api/profileFlow";
 import { handlePostUpdateProfileFlow } from "../api/settingsFlow";
+import Input from "../components/input_box";
 import ButtonSubmit from "./button_submit";
+import { useRouter } from "next/router";
 
 function UpdateProfileForm({ flowID, csrf_token }) {
   const [traits, setTraits] = useState({});
+  const router = useRouter();
 
   useEffect(() => {
     handleGetTraits();
@@ -30,46 +34,81 @@ function UpdateProfileForm({ flowID, csrf_token }) {
 
   return (
     <div>
-      <label>Name</label>
-      <input
-        type="text"
-        onChange={(e) =>
-          setTraits((t) => {
-            return { ...t, name: e.target.value };
-          })
-        }
-        value={traits.name}
-      />
-      <label>Email</label>
-      <input
-        type="text"
-        onChange={(e) =>
-          setTraits((t) => {
-            return { ...t, email: e.target.value };
-          })
-        }
-        value={traits.email}
-      />
-      <label>Phone Number</label>
-      <input
-        type="number"
-        onChange={(e) =>
-          setTraits((t) => {
-            return { ...t, phone_number: e.target.value };
-          })
-        }
-        value={traits.phone_number}
-      />
-      <label>Verification Status: </label>
-      {traits.verified ? "Verified" : "Not verified"}
+      <div style={{ marginTop: "2em" }}>
+        <h1>
+          Update <span className="green">Profile</span>
+        </h1>
+      </div>
+      <div className="form" style={{ marginTop: "0.3em" }}>
+        <div style={{ margin: "1em" }}>
+          <p>Full name</p>
+          <Input
+            type="text"
+            text="Enter your full name"
+            value={traits.name}
+            handleChange={(e) =>
+              setTraits((t) => {
+                return { ...t, name: e.target.value.trim() };
+              })
+            }
+          />
 
-      <ButtonSubmit
-        text="Update Profile"
-        func={handleUpdateButton}
-        email={traits.email}
-        password={traits.name}
-        confirmPassword={traits.phone_number}
-      />
+          <p>Email address</p>
+          <Input
+            type="text"
+            text="Enter your email address"
+            value={traits.email}
+            handleChange={(e) =>
+              setTraits((t) => {
+                return { ...t, email: e.target.value.trim() };
+              })
+            }
+          />
+
+          <p>Phone Number</p>
+          <Input
+            type="number"
+            text="Enter your Phone Number"
+            value={traits.phone_number}
+            handleChange={(e) =>
+              setTraits((t) => {
+                return { ...t, phone_number: e.target.value.trim() };
+              })
+            }
+          />
+          <div style={{ margin: "0.8em 0em 0.8em 0em" }}>
+            <span>Verification Status: </span>
+            {traits.verified ? (
+              <span className="green">Verified</span>
+            ) : (
+              <>
+                <span className="red">Not verified</span>{" "}
+                <button
+                  className="transparent_btn"
+                  onClick={() =>
+                    router.push({ pathname: "/verifyEmail", query: { email: traits.email } }, "verifyEmail")
+                  }
+                >
+                  Verify
+                </button>
+              </>
+            )}
+          </div>
+          <div style={{ color: "blue", fontSize: "1.1em" }}>
+            <Link href="/passwordReset">Change Password</Link>
+          </div>
+        </div>
+        <div>
+          <ButtonSubmit
+            text="Update Profile"
+            func={handleUpdateButton}
+            email={traits.email}
+            password={traits.name}
+            confirmPassword={traits.phone_number}
+          />
+        </div>
+      </div>
+      <div></div>
     </div>
   );
 }
