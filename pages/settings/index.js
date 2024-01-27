@@ -4,6 +4,7 @@ import Link from "next/link";
 import { React, useEffect, useState } from "react";
 import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
 import Carousel from "../../components/carousel";
+import UpdateProfileForm from "../../components/updateProfileForm";
 import Labs from "../../public/images/labs logo.png";
 
 function SettingsPage() {
@@ -94,6 +95,7 @@ function SettingsPage() {
         <div>
           <Link href="/passwordReset">Change Password</Link>
         </div>
+        <UpdateProfileForm flowID={flowID} csrf_token={csrf_token} />
       </div>
     </div>
   );

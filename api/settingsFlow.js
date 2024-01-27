@@ -34,3 +34,13 @@ export async function handlePostChangePasswordFlow(flowID, csrf_token, password)
     throw error;
   }
 }
+
+export async function handlePostUpdateProfileFlow(flowID, csrf_token, traits) {
+  try {
+    const objData = { csrf_token, flowID, traits };
+    const res = await axiosInstance.post(process.env.NEXT_PUBLIC_UPDATE_PROFILE, objData);
+    return res.data.status;
+  } catch (error) {
+    throw error;
+  }
+}
