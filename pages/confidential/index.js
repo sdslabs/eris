@@ -7,16 +7,13 @@ import Password from "../../components/password";
 function MFAPage() {
   const [totpCode, setTotpCode] = useState("");
 
-  function handleTOTPChange(e) {
-    setTotpCode(e.target.value.trim());
-  }
-
   async function verifyTOTP() {
     try {
       const { flowID, csrf_token } = await handleGetMFAFlow();
       const res = await handlePostMFAFlow(flowID, csrf_token, totpCode);
-      if (res === "MFA Successful") {
-        router.push("dashboard");
+
+      if (res.status === "MFA Successful") {
+        router.push({ pathname: "/dashboard", query: { role: res.user.identity.traits } }, "dashboard");
       } else {
         alert("ERROR:MFA Failed");
       }
@@ -30,7 +27,12 @@ function MFAPage() {
   return (
     <div>
       <label htmlFor="code">Enter TOTP Code</label>
-      <Password text="Enter TOTP Code here" onChange={handleTOTPChange} name="code" />
+      <Password
+        text="Enter TOTP Code here"
+        handlePasswordChange={(e) => setTotpCode(e.target.value.trim())}
+        name="code"
+        value={totpCode}
+      />
       <ButtonSubmit text="Authenticate" password={totpCode} func={verifyTOTP} />
     </div>
   );

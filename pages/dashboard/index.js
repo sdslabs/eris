@@ -29,6 +29,11 @@ function Dashboard() {
         </button>
         <p className="text-danger">{logoutError}</p>
       </div>
+      {router.query.role === "admin" && (
+        <div>
+          <button onClick={() => router.push("/admin")}>Admin</button>
+        </div>
+      )}
     </div>
   );
 }

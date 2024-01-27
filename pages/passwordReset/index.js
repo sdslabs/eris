@@ -5,6 +5,7 @@ import ButtonSubmit from "../../components/button_submit";
 import Carousel from "../../components/carousel";
 import PasswordValidation from "../../components/passwordValidation";
 import Labs from "../../public/images/labs logo.png";
+import { useRouter } from "next/router";
 
 const initialState = {
   password: { text: "", error: "" },
@@ -28,6 +29,7 @@ function reducer(state, action) {
 
 function PasswordReset() {
   const [{ password, confirmPassword }, dispatch] = useReducer(reducer, initialState);
+  const router = useRouter();
 
   async function handleRecovery() {
     try {
@@ -35,6 +37,7 @@ function PasswordReset() {
       await handlePostChangePasswordFlow(flowID, csrf_token, password.text);
       dispatch({ type: "reset" });
       alert("Password changed successfully");
+      router.push("/");
     } catch (error) {
       console.error(error);
     }

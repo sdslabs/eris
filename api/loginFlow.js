@@ -17,7 +17,8 @@ export async function handleGetLoginFlow() {
 export async function handlePostLoginFlow(flowID, csrf_token, email, password) {
   try {
     const objData = { flowID, csrf_token, password, identifier: email };
-    await axiosInstance.post(process.env.NEXT_PUBLIC_LOGIN, objData);
+    const res = await axiosInstance.post(process.env.NEXT_PUBLIC_LOGIN, objData);
+    return res.data;
   } catch (error) {
     throw error;
   }

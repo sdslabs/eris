@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { handleGetLoginFlow, handlePostLoginFlow } from "../api/loginFlow";
-import { handleGetSettingsFlow } from "../api/settingsFlow";
 import ButtonAuth from "../components/button_auth";
 import ButtonSubmit from "../components/button_submit";
 import Carousel from "../components/carousel";
@@ -20,10 +19,11 @@ const LoginPage = () => {
   async function handleSubmitLogin() {
     try {
       const { flowID, csrf_token } = await handleGetLoginFlow();
-      await handlePostLoginFlow(flowID, csrf_token, email, password);
+      const res = await handlePostLoginFlow(flowID, csrf_token, email, password);
+      const traits = res.person.identity.traits;
       setEmail("");
       setPassword("");
-      await redirect();
+      redirect(traits);
     } catch (err) {
       console.error(err);
       if (err.code === "ERR_NETWORK") {
@@ -36,17 +36,11 @@ const LoginPage = () => {
 
   const router = useRouter();
 
-  async function redirect() {
-    try {
-      const { qr, totp_secret } = await handleGetSettingsFlow();
-
-      if (qr === "" && totp_secret === "") {
-        router.push("confidential");
-      } else {
-        router.push("dashboard");
-      }
-    } catch (error) {
-      console.error(error);
+  function redirect(traits) {
+    if (traits) {
+      router.push({ pathname: "/dashboard", query: { role: traits.role } }, "dashboard");
+    } else {
+      router.push("confidential");
     }
   }
 
@@ -70,11 +64,17 @@ const LoginPage = () => {
           <div className="form">
             <div>
               <p>Email address</p>
-              <Input type="text" text="Enter your email address" handleChange={(e) => setEmail(e.target.value)} />
+              <Input
+                type="text"
+                text="Enter your email address"
+                value={email}
+                handleChange={(e) => setEmail(e.target.value)}
+              />
 
               <p>Password</p>
               <Password
                 text="Enter your password"
+                value={password}
                 handlePasswordChange={(e) => setPassword(e.target.value.trim())}
                 passwordError={passwordError}
               />

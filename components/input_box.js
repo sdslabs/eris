@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Input = ({ name, type, text, handleChange, handleKeyUp, children }) => {
+function Input({ name, type, text, handleChange, handleKeyUp, children, value }) {
   const [inputActive, setInputActive] = useState(false);
 
   return (
@@ -14,10 +14,11 @@ const Input = ({ name, type, text, handleChange, handleKeyUp, children }) => {
         onChange={handleChange}
         name={name}
         onKeyUp={handleKeyUp}
+        value={value}
       />
       {children}
     </div>
   );
-};
+}
 
 export default Input;
