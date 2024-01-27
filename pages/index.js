@@ -68,7 +68,7 @@ const LoginPage = () => {
                 type="text"
                 text="Enter your email address"
                 value={email}
-                handleChange={(e) => setEmail(e.target.value)}
+                handleChange={(e) => setEmail(e.target.value.trim())}
               />
 
               <p>Password</p>

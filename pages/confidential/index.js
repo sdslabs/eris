@@ -1,8 +1,11 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { handleGetMFAFlow, handlePostMFAFlow } from "../../api/mfaFlow";
 import ButtonSubmit from "../../components/button_submit";
+import Carousel from "../../components/carousel";
 import Password from "../../components/password";
+import Labs from "../../public/images/labs logo.png";
 
 function MFAPage() {
   const [totpCode, setTotpCode] = useState("");
@@ -26,14 +29,34 @@ function MFAPage() {
 
   return (
     <div>
-      <label htmlFor="code">Enter TOTP Code</label>
-      <Password
-        text="Enter TOTP Code here"
-        handlePasswordChange={(e) => setTotpCode(e.target.value.trim())}
-        name="code"
-        value={totpCode}
-      />
-      <ButtonSubmit text="Authenticate" password={totpCode} func={verifyTOTP} />
+      <div className="split_left">
+        <div className="top">
+          <Image src={Labs} alt="labs" />
+        </div>
+        <div className="centred_img">
+          <Carousel />
+        </div>
+      </div>
+      <div className="split_right">
+        <div className="login">
+          <div>
+            <h1>
+              Multi-Factor <span className="green">Authentication</span>
+            </h1>
+          </div>
+          <div className="form">
+            <Password
+              text="Enter TOTP Code here"
+              handlePasswordChange={(e) => setTotpCode(e.target.value.trim())}
+              name="code"
+              value={totpCode}
+            />
+          </div>
+          <div>
+            <ButtonSubmit text="Authenticate" password={totpCode} func={verifyTOTP} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

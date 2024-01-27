@@ -21,21 +21,21 @@ function Signup({ name, email, number, dispatch }) {
             <Input
               type="text"
               text="Enter your full name"
-              handleChange={(e) => dispatch({ type: "setName", payload: e.target.value })}
+              handleChange={(e) => dispatch({ type: "setName", payload: e.target.value.trim() })}
             />
 
             <p>Email address</p>
             <Input
               type="text"
               text="Enter your email address"
-              handleChange={(e) => dispatch({ type: "setEmail", payload: e.target.value })}
+              handleChange={(e) => dispatch({ type: "setEmail", payload: e.target.value.trim() })}
             />
 
             <p>Phone Number</p>
             <Input
               type="number"
               text="Enter your Phone Number"
-              handleChange={(e) => dispatch({ type: "setNumber", payload: e.target.value })}
+              handleChange={(e) => dispatch({ type: "setNumber", payload: e.target.value.trim() })}
             />
           </div>
           <div>

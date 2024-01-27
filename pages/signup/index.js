@@ -50,7 +50,9 @@ function SignupPage() {
       <div className="split_right ">
         <div className="signup">
           {status === "signupForm" ? <Signup dispatch={dispatch} name={name} email={email} number={number} /> : null}
-          {status === "passForm" ? <SetPassword dispatchSign={dispatch} name={name} email={email} number={number} /> : null}
+          {status === "passForm" ? (
+            <SetPassword dispatchSign={dispatch} name={name} email={email} number={number} />
+          ) : null}
           {status === "verificationForm" ? <Verify email={email} /> : null}
         </div>
       </div>
