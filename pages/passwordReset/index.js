@@ -1,11 +1,9 @@
-import Image from "next/image";
+import { useRouter } from "next/router";
 import { useReducer } from "react";
 import { handleGetSettingsFlow, handlePostChangePasswordFlow } from "../../api/settingsFlow";
+import LeftCarousel from "../../components/LeftCarousel";
 import ButtonSubmit from "../../components/button_submit";
-import Carousel from "../../components/carousel";
 import PasswordValidation from "../../components/passwordValidation";
-import Labs from "../../public/images/labs logo.png";
-import { useRouter } from "next/router";
 
 const initialState = {
   password: { text: "", error: "" },
@@ -45,14 +43,7 @@ function PasswordReset() {
 
   return (
     <div>
-      <div className="split_left">
-        <div className="top">
-          <Image src={Labs} alt="labs" />
-        </div>
-        <div className="centred_img">
-          <Carousel />
-        </div>
-      </div>
+      <LeftCarousel />
       <div className="split_right ">
         <div className="login">
           <div>

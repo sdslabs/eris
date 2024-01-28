@@ -1,23 +1,8 @@
-import Image from "next/image";
 import { useState } from "react";
 import { handleGetRecoveryFlow, handlePostRecoveryFlow } from "../../api/recoveryFlow";
+import LeftCarousel from "../../components/LeftCarousel";
 import ButtonSubmit from "../../components/button_submit";
-import Carousel from "../../components/carousel";
 import Input from "../../components/input_box";
-import Labs from "../../public/images/labs logo.png";
-
-function LeftSide() {
-  return (
-    <div className="split_left">
-      <div className="top">
-        <Image src={Labs} alt="labs" />
-      </div>
-      <div className="centred_img">
-        <Carousel />
-      </div>
-    </div>
-  );
-}
 
 const RecoveryPage = () => {
   const [email, setEmail] = useState("");
@@ -39,7 +24,7 @@ const RecoveryPage = () => {
 
   return (
     <div>
-      <LeftSide />
+      <LeftCarousel />
       <div className="split_right">
         <div className="login">
           <div>

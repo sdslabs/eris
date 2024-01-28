@@ -1,101 +1,99 @@
-.signup{
-    margin: auto;
-    margin-top:5rem;
-    width: 50%;
+.signup {
+  margin: auto;
+  margin-top: 5rem;
+  width: 50%;
 }
 
-.top{
-    width: 54.167%;
-    height: 100%;
-    position: fixed;
-    right: 0;
-    top: 0rem;
-    display: flex;
-    align-items: center;
-    background-color: white;
+.top {
+  width: 54.167%;
+  height: 10%;
+  position: fixed;
+  left: 1em;
+  top: 0rem;
+  display: flex;
+  align-items: center;
 }
 
-.otp{
-    margin-top: 3rem;
+.otp {
+  margin-top: 3rem;
 }
 
-.form{
-    margin-top: 3rem;
+.form {
+  margin-top: 3rem;
 }
 
-.icons{
-    margin: auto;
+.icons {
+  margin: auto;
 }
 
-.icon_box{
-    align-items: center;
-    align-self: center;
+.icon_box {
+  align-items: center;
+  align-self: center;
 }
 
-.icon_hr{
-    width: 4.5vw;
-    margin: -0.7rem -3rem;
+.icon_hr {
+  width: 4.5vw;
+  margin: -0.7rem -3rem;
 }
 
-.icon{
-    width: 7rem;
-    height: 7rem;
+.icon {
+  width: 7rem;
+  height: 7rem;
 }
 
-.text-danger{
-    color: red;
+.text-danger {
+  color: red;
 }
 
-.icon_table{
-    margin: auto;
+.icon_table {
+  margin: auto;
 }
 
-.pass-rules{
-    position: absolute;
-    top: 10rem;
-    left: 50%;
-    margin: 2rem auto;
-    background-color: white;
-    color: #393939;
+.pass-rules {
+  position: absolute;
+  top: 10rem;
+  left: 50%;
+  margin: 2rem auto;
+  background-color: white;
+  color: #393939;
 }
 
-.green-box{
-    background-color: #E5F5E0;
-    border-radius: 10px;
-    padding: 0 0.5rem;
+.green-box {
+  background-color: #e5f5e0;
+  border-radius: 10px;
+  padding: 0 0.5rem;
 }
-.red-box{
-    background-color: #FDEDEC;
-    border-radius: 10px;
-    padding: 0 0.5rem;
+.red-box {
+  background-color: #fdedec;
+  border-radius: 10px;
+  padding: 0 0.5rem;
 }
 
-  .slide-in {
-    animation: slide-in 0.5s forwards;
+.slide-in {
+  animation: slide-in 0.5s forwards;
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
   }
-
-  @keyframes slide-out {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-100%);
-    }
+  to {
+    transform: translateX(-100%);
   }
+}
 
-  @keyframes slide-in {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(0);
-    }
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
   }
+  to {
+    transform: translateX(0);
+  }
+}
 
-  @media only screen and (max-width: 768px){
-    .signup {
-      width: 80%;
-      margin-top: 1rem;
-    }
-    }
-
+@media only screen and (max-width: 768px) {
+  .signup {
+    width: 80%;
+    margin-top: 1rem;
+  }
+}

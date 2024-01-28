@@ -1,11 +1,9 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { handleGetMFAFlow, handlePostMFAFlow } from "../../api/mfaFlow";
+import LeftCarousel from "../../components/LeftCarousel";
 import ButtonSubmit from "../../components/button_submit";
-import Carousel from "../../components/carousel";
 import Password from "../../components/password";
-import Labs from "../../public/images/labs logo.png";
 
 function MFAPage() {
   const [totpCode, setTotpCode] = useState("");
@@ -29,14 +27,7 @@ function MFAPage() {
 
   return (
     <div>
-      <div className="split_left">
-        <div className="top">
-          <Image src={Labs} alt="labs" />
-        </div>
-        <div className="centred_img">
-          <Carousel />
-        </div>
-      </div>
+      <LeftCarousel />
       <div className="split_right">
         <div className="login">
           <div>
