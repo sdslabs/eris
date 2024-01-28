@@ -89,7 +89,7 @@ function UpdateProfileForm({ flowID, csrf_token }) {
                     router.push({ pathname: "/verifyEmail", query: { email: traits.email } }, "verifyEmail")
                   }
                 >
-                  Verify
+                  Verify Now
                 </button>
               </>
             )}

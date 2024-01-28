@@ -98,7 +98,7 @@ function Pagination({ post, currentPost, number, postPerPage, setPostPerPage, se
       </div>
       <div className="go_to_page">
         Go To
-        <input className="page_input" type="text" onChange={(e) => ChangePage(Number(e.target.value))} />
+        <input className="page_input" type="text" onChange={(e) => ChangePage(Number(e.target.value.trim()))} />
       </div>
     </div>
   );

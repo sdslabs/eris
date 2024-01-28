@@ -88,9 +88,16 @@ input[type="text"] {
 .transparent_btn {
   border-radius: 20px;
   font-size: 1em;
+  width: 7em;
   cursor: pointer;
   background-color: white;
-  color: green;
-  border: 2px solid black;
+  color: #00902b;
+  border: 2px solid #00902b;
   margin-left: 0.8em;
+}
+
+.transparent_btn:hover {
+  color: white;
+  background-color: #00902b;
+  border: 2px solid black;
 }

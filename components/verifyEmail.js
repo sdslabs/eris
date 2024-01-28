@@ -4,7 +4,7 @@ import { handleGetVerifyFlow, handlePostVerifyFlow } from "../api/verificationFl
 import ButtonSubmit from "./button_submit";
 import IconsVerify from "./icons_verify";
 
-function VerifyEmailPage({ email }) {
+function VerifyEmail({ email }) {
   const router = useRouter();
   function redirect() {
     router.push("dashboard");
@@ -58,4 +58,4 @@ function VerifyEmailPage({ email }) {
   );
 }
 
-export default VerifyEmailPage;
+export default VerifyEmail;

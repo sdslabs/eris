@@ -4,8 +4,6 @@ import { React, useEffect, useState } from "react";
 import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
 import LeftPanel from "../../components/leftPanel";
 import UpdateProfileForm from "../../components/updateProfileForm";
-import ButtonSubmit from "../../components/button_submit";
-import Input from "../../components/input_box";
 
 function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
   return (
@@ -16,7 +14,12 @@ function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTot
         </h1>
       </div>
       {totpEnabled ? (
-        <Button onClick={unlinkTOTP}>Unlink TOTP</Button>
+        <div>
+          <h3 style={{ color: "green" }}>2FA Method is Enabled</h3>
+          <button className="button_submit" style={{ marginTop: "0.5em" }} onClick={unlinkTOTP}>
+            Disable 2FA
+          </button>
+        </div>
       ) : (
         <>
           {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
@@ -32,9 +35,9 @@ function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTot
             name="code"
             text="Enter TOTP Code"
             value={totp_code}
-            onChange={(e) => setTotpCode(e.target.value)}
+            onChange={(e) => setTotpCode(e.target.value.trim())}
           />
-          <button className="button_submit" style={{marginTop:"0.5em"}} onClick={linkTOTP}>
+          <button className="button_submit" style={{ marginTop: "0.5em" }} onClick={linkTOTP}>
             Enable 2FA
           </button>
         </>
@@ -60,6 +63,7 @@ function SettingsPage() {
       await handlePostToggleTOTPFlow(flowID, csrf_token, totp_code, false);
       alert("Totp successful");
       setTotpEnabled(true);
+      setTotpCode("");
     } catch (error) {
       console.error(error);
     }

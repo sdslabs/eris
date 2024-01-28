@@ -53,7 +53,7 @@ const RecoveryPage = () => {
               <Input
                 type={"Email"}
                 text={"Enter your registered email address"}
-                handleChange={(e) => setEmail(e.target.value)}
+                handleChange={(e) => setEmail(e.target.value.trim())}
               />
             </div>
             <div>
