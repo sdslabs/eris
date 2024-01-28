@@ -3,6 +3,7 @@ import { React, useEffect, useState } from "react";
 import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
 import LeftPanel from "../../components/leftPanel";
 import UpdateProfileForm from "../../components/updateProfileForm";
+import { handleGetSessionDetailsFlow } from "../../api/profileFlow";
 
 function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
   return (
@@ -52,10 +53,21 @@ function SettingsPage() {
   const [csrf_token, setCsrfToken] = useState("");
   const [totp_code, setTotpCode] = useState("");
   const [totpEnabled, setTotpEnabled] = useState(false);
+  const [traits, setTraits] = useState({ name: "", email: "", phone_number: "" });
 
   useEffect(() => {
     fetchNewQR();
+    handleGetTraits();
   }, [totpEnabled]);
+
+  async function handleGetTraits() {
+    try {
+      const profileTraits = await handleGetSessionDetailsFlow();
+      setTraits(profileTraits);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   async function linkTOTP() {
     try {
@@ -120,7 +132,7 @@ function SettingsPage() {
           totp_code={totp_code}
         />
 
-        <UpdateProfileForm flowID={flowID} csrf_token={csrf_token} />
+        <UpdateProfileForm flowID={flowID} csrf_token={csrf_token} traits={traits} setTraits={setTraits} />
       </div>
     </div>
   );

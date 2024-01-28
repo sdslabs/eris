@@ -1,27 +1,11 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { handleGetSessionDetailsFlow } from "../api/profileFlow";
+import { useRouter } from "next/router";
 import { handlePostUpdateProfileFlow } from "../api/settingsFlow";
 import Input from "../components/input_box";
 import ButtonSubmit from "./button_submit";
-import { useRouter } from "next/router";
 
-function UpdateProfileForm({ flowID, csrf_token }) {
-  const [traits, setTraits] = useState({ name: "", email: "", phone_number: "" });
+function UpdateProfileForm({ flowID, csrf_token, traits, setTraits }) {
   const router = useRouter();
-
-  useEffect(() => {
-    handleGetTraits();
-  }, []);
-
-  async function handleGetTraits() {
-    try {
-      const profileTraits = await handleGetSessionDetailsFlow();
-      setTraits(profileTraits);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   async function handleUpdateButton() {
     try {

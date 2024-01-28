@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { handleGetVerifyFlow, handlePostVerifyFlow } from "../api/verificationFlow";
 import ButtonSubmit from "./button_submit";
-import Icons from "./icons";
 
 function VerifyEmail({ email }) {
   const router = useRouter();
@@ -30,29 +29,27 @@ function VerifyEmail({ email }) {
   }
 
   return (
-    <div>
-      <Icons step="verify" />
-      <div className="slide-in">
+    <div className="slide-in">
+      <div>
+        <h1>
+          Email <span className="green">Verification</span>
+        </h1>
+      </div>
+      <div className="form">
         <div>
-          <h1>
-            Email <span className="green">Verification</span>
-          </h1>
-        </div>
-        <div className="form">
-          <div>
-            <p>An email has been sent to</p>
-            <p className="green">{email}</p>
-          </div>
-          <div>
-            <ButtonSubmit text={"Continue to Dashboard"} func={redirect} />
-          </div>
           <p>
-            Didnt get the email?{" "}
-            <span className="green underline" onClick={() => sendEmail(email)}>
-              Resend Email
-            </span>
+            An email has been sent to <span className="green">{email}</span>
           </p>
         </div>
+        <div>
+          <ButtonSubmit text={"Continue to Dashboard"} func={redirect} />
+        </div>
+        <p>
+          Didnt get the email?{" "}
+          <span className="green underline" onClick={() => sendEmail(email)}>
+            Resend Email
+          </span>
+        </p>
       </div>
     </div>
   );

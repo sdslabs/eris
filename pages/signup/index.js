@@ -1,5 +1,6 @@
 import { React, useReducer } from "react";
 import LeftCarousel from "../../components/LeftCarousel";
+import Icons from "../../components/icons";
 import Signup from "../../components/register";
 import SetPassword from "../../components/setpass";
 import Verify from "../../components/verifyEmail";
@@ -38,7 +39,13 @@ function SignupPage() {
           {status === "passForm" ? (
             <SetPassword dispatchSign={dispatch} name={name} email={email} number={number} />
           ) : null}
-          {status === "verificationForm" ? <Verify email={email} /> : null}
+
+          {status === "verificationForm" ? (
+            <>
+              <Icons step="verify" />
+              <Verify email={email} />
+            </>
+          ) : null}
         </div>
       </div>
     </div>
