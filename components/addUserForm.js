@@ -35,11 +35,11 @@ function AddUserForm({ dispatch }) {
   return (
     <div>
       <label>Name</label>
-      <input type="text" onChange={(e) => setName(e.target.value)} />
+      <input type="text" onChange={(e) => setName(e.target.value)} value={name} />
       <label>Email</label>
-      <input type="text" onChange={(e) => setEmail(e.target.value)} />
+      <input type="text" onChange={(e) => setEmail(e.target.value)} value={email} />
       <label>Phone Number</label>
-      <input type="text" onChange={(e) => setPhoneNumber(e.target.value)} />
+      <input type="text" onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
       <label>Role</label>
       <Select
         defaultValue={{
