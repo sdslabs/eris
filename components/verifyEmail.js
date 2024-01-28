@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { handleGetVerifyFlow, handlePostVerifyFlow } from "../api/verificationFlow";
 import ButtonSubmit from "./button_submit";
-import IconsVerify from "./icons_verify";
+import Icons from "./icons";
 
 function VerifyEmail({ email }) {
   const router = useRouter();
@@ -31,7 +31,7 @@ function VerifyEmail({ email }) {
 
   return (
     <div>
-      <IconsVerify />
+      <Icons step="verify" />
       <div className="slide-in">
         <div>
           <h1>

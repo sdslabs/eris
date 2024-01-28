@@ -7,7 +7,7 @@ import ButtonSubmit from "./button_submit";
 import { useRouter } from "next/router";
 
 function UpdateProfileForm({ flowID, csrf_token }) {
-  const [traits, setTraits] = useState({});
+  const [traits, setTraits] = useState({ name: "", email: "", phone_number: "" });
   const router = useRouter();
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { React, useReducer } from "react";
 import { handleGetRegisterFlow, handlePostRegisterFlow } from "../api/registerFlow";
 import ButtonSubmit from "./button_submit";
-import IconsPass from "./icons_pass";
+import Icons from "./icons";
 import PasswordValidation from "./passwordValidation";
 
 const initialState = {
@@ -55,7 +55,7 @@ function SetPassword({ name, number, email, dispatchSign }) {
 
   return (
     <div>
-      <IconsPass />
+      <Icons step={"password"} />
       <div className="slide-out">
         <div>
           <h1>

@@ -8,7 +8,7 @@ import Icons from "./icons";
 function Signup({ name, email, number, dispatch }) {
   return (
     <div>
-      <Icons />
+      <Icons step={"account"} />
       <div className="slide-out">
         <div>
           <h1>
