@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { handleGetSettingsFlow, handlePostChangePasswordFlow } from "../../api/settingsFlow";
 import LeftCarousel from "../../components/LeftCarousel";
 import ButtonSubmit from "../../components/button_submit";
 import PasswordValidation from "../../components/passwordValidation";
+import { handleGetSessionDetailsFlow } from "../../api/profileFlow";
 
 const initialState = {
   password: { text: "", error: "" },
@@ -28,6 +29,20 @@ function reducer(state, action) {
 function PasswordReset() {
   const [{ password, confirmPassword }, dispatch] = useReducer(reducer, initialState);
   const router = useRouter();
+
+  useEffect(() => {
+    async function checkTotpEnabled() {
+      try {
+        await handleGetSettingsFlow();
+      } catch (error) {
+        if (error.response.data.error === "403 Forbidden") {
+          router.push({ pathname: "/confidential", query: { nextPage: "changePassword" } }, "confidential");
+        }
+        console.error(error);
+      }
+    }
+    checkTotpEnabled();
+  }, [router]);
 
   async function handleRecovery() {
     try {

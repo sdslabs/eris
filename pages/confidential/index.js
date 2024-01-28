@@ -14,7 +14,11 @@ function MFAPage() {
       const res = await handlePostMFAFlow(flowID, csrf_token, totpCode);
 
       if (res.status === "MFA Successful") {
-        router.push("dashboard");
+        if (router.query.nextPage === "changePassword") {
+          router.push("passwordReset");
+        } else {
+          router.push("dashboard");
+        }
       } else {
         alert("ERROR:MFA Failed");
       }
