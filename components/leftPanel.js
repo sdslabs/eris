@@ -62,10 +62,14 @@ function LeftPanel({ page, mode, activity1, activity2, activity3, state1, state2
 
   useEffect(() => {
     async function getProfileDetails() {
-      const { name, email, role } = await handleGetSessionDetailsFlow();
-      setName(name);
-      setEmail(email);
-      setRole(role);
+      try {
+        const { name, email, role } = await handleGetSessionDetailsFlow();
+        setName(name);
+        setEmail(email);
+        setRole(role);
+      } catch (error) {
+        console.error(error);
+      }
     }
     getProfileDetails();
   }, []);

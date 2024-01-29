@@ -10,6 +10,7 @@ function UpdateProfileForm({ flowID, csrf_token, traits, setTraits }) {
   async function handleUpdateButton() {
     try {
       const res = await handlePostUpdateProfileFlow(flowID, csrf_token, traits);
+      alert("Profile updated");
       console.log(res);
     } catch (error) {
       console.error(error);
