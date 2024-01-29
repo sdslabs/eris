@@ -21,7 +21,7 @@ function Dashboard() {
   return (
     <div>
       <div className="active">
-        <Link className=" underline green" href="/settings" style={{ float: "right" }}>
+        <Link className=" underline green" href="/settings" >
           Settings
         </Link>
         <button className="button_submit" onClick={handleLogout}>
