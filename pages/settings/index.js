@@ -105,7 +105,7 @@ function SettingsPage() {
         setTotpSecret(totp_secret);
       }
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   }
 

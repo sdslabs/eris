@@ -101,3 +101,19 @@ input[type="text"] {
   background-color: #00902b;
   border: 2px solid black;
 }
+
+.profile_image {
+  display: block;
+  height: 15.5rem;
+  width: 15.5rem;
+  margin: 0.8rem 1rem;
+  border-radius: 50%;
+}
+
+.edit_image_btn {
+  position: relative;
+  font-size: 1.2rem;
+  border-radius: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+}
