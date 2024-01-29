@@ -52,7 +52,7 @@ function Table({ currentPost }) {
                 <td> {Val.traits.date} </td>
                 <td> {Val.traits.invitedby} </td>
                 <td>
-                  <UserPopup identityId={Val.id} />
+                  <UserPopup identity={Val} />
                 </td>
               </tr>
             </>

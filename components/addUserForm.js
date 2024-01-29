@@ -10,14 +10,16 @@ function AddUserForm({ dispatch }) {
   const [role, setRole] = useState("admin");
 
   async function handleCreateAccount() {
-    const res = await handleCreateIdentityFlow(name, phoneNumber, email, role);
-    if (res.status === "success") {
+    try {
+      const res = await handleCreateIdentityFlow(name, phoneNumber, email, role);
       alert("Created account successfully");
       setName("");
       setEmail("");
       setPhoneNumber("");
       setRole("admin");
       dispatch({ type: "showAddUserForm" });
+    } catch (error) {
+      console.error(error);
     }
   }
 

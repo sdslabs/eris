@@ -1,3 +1,4 @@
+import { IconButton } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -24,7 +25,7 @@ function LinkPanelAdmin({ User, Application, activity1, activity2, activity3, st
         <Image src={Application} alt="applications" />
         <p className={state2}>Applications</p>
       </Link>
-      <Link className={activity3} href="#">
+      <Link className={activity3} href="/settings">
         <Image src={Settings} alt="settings" />
         <p className={state3}>Settings</p>
       </Link>
@@ -117,13 +118,13 @@ function LeftPanel({ page, mode, activity1, activity2, activity3, state1, state2
         <div className="logout_image">
           <Image className="logout_image" src={Test} alt="test" />
         </div>
-        <div className="logout_text">
+        <div className="logout_text" onClick={() => router.push("settings")}>
           <p style={{ color: "white", fontSize: "1.3rem" }}>{name}</p>
           <p style={{ color: "white" }}>{email}</p>
         </div>
-        <button onClick={handleLogout}>
+        <IconButton onClick={handleLogout} style={{ cursor: "pointer" }}>
           <Image className="logout_logo" src={Logout} alt="logout" />
-        </button>
+        </IconButton>
       </div>
     </div>
   );

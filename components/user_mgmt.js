@@ -26,7 +26,7 @@ function UserPopup({ identity }) {
     try {
       setIsOpen(false);
       await handleRemoveBanFlow(identity.id);
-      alert("User banned");
+      alert("User unbanned");
     } catch (error) {
       console.error(error);
     }
