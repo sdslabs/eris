@@ -27,6 +27,8 @@ function UpdateProfileForm({ flowID, csrf_token, traits, setTraits }) {
     console.log(e.target.files);
   }
 
+  const imgDisplay = traits.img_url === "" ? Test : traits.img_url;
+
   return (
     <div>
       <div style={{ marginTop: "2em" }}>
@@ -36,11 +38,11 @@ function UpdateProfileForm({ flowID, csrf_token, traits, setTraits }) {
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div>
-          <Image className="profile_image" alt="profile_img" src={traits.img_url === "" ? Test : traits.img_url} />
-          <input type="file" accept="image/*" id="fileInput" hidden onChange={handleImageUpload} />
+          <Image src={imgDisplay} className="profile_image" alt="profile_img" />
+          {/* <input type="file" accept="image/*" id="fileInput" hidden onChange={handleImageUpload} />
           <button className="edit_image_btn" onClick={handleEditImage}>
             Edit Image
-          </button>
+          </button> */}
         </div>
         <div className="form" style={{ marginTop: "0.3em" }}>
           <div style={{ margin: "1em" }}>

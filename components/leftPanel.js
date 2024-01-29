@@ -58,15 +58,17 @@ function LeftPanel({ page, mode, activity1, activity2, activity3, state1, state2
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
+  const [img_url, setImageUrl] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     async function getProfileDetails() {
       try {
-        const { name, email, role } = await handleGetSessionDetailsFlow();
+        const { name, email, role, img_url } = await handleGetSessionDetailsFlow();
         setName(name);
         setEmail(email);
         setRole(role);
+        setImageUrl(img_url);
       } catch (error) {
         console.error(error);
       }
@@ -86,6 +88,8 @@ function LeftPanel({ page, mode, activity1, activity2, activity3, state1, state2
       console.error(err);
     }
   }
+
+  const profileImageUrl = img_url === "" ? Test : img_url;
 
   return (
     <div className="left_panel">
@@ -120,7 +124,7 @@ function LeftPanel({ page, mode, activity1, activity2, activity3, state1, state2
       )}
       <div className="logout centre">
         <div className="logout_image">
-          <Image className="logout_image" src={Test} alt="test" />
+          <Image className="logout_image" src={profileImageUrl} alt="test" />
         </div>
         <div className="logout_text" onClick={() => router.push("settings")}>
           <p style={{ color: "white", fontSize: "1.3rem" }}>{name}</p>
