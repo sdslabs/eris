@@ -1,53 +1,80 @@
 import Image from "next/image";
 import { React, useEffect, useState } from "react";
-import Input from "../../components/input_box";
-import { handleGetSettingsFlow, handlePostChangePasswordFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
+import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
+import LeftPanel from "../../components/leftPanel";
+import UpdateProfileForm from "../../components/updateProfileForm";
+import { handleGetSessionDetailsFlow } from "../../api/profileFlow";
 
-function ChangePassword({ flowID, csrf_token }) {
-  const [newPassword, setNewPassword] = useState("");
-
-  async function handleChangePassword() {
-    try {
-      await handlePostChangePasswordFlow(flowID, csrf_token, newPassword);
-      alert("Password changed successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
+function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
   return (
     <div>
-      <label htmlFor="newPassword"><p>Enter New Password</p></label>
-      <Input
-        type="text"
-        name="newPassword"
-        id="newPassword"
-        onChange={(e) => {
-          setNewPassword(e.target.value);
-        }}
-      />
-      <button className="button_submit" style={{marginTop: "1rem"}} onClick={handleChangePassword}>Change</button>
+      <div>
+        <h1>
+          Multi Factor <span className="green">Authentication</span>
+        </h1>
+      </div>
+      {totpEnabled ? (
+        <div>
+          <h3 style={{ color: "green" }}>2FA Method is Enabled</h3>
+          <button className="button_submit" style={{ marginTop: "0.5em" }} onClick={unlinkTOTP}>
+            Disable 2FA
+          </button>
+        </div>
+      ) : (
+        <>
+          {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
+          <div>
+            If you cannot scan the QR, use this code:{" "}
+            <span className="green">
+              <code>{totpSecret}</code>
+            </span>
+          </div>
+          <label htmlFor="code">Enter Verification Code</label>
+          <input
+            type="text"
+            name="code"
+            text="Enter TOTP Code"
+            value={totp_code}
+            onChange={(e) => setTotpCode(e.target.value.trim())}
+          />
+          <button className="button_submit" style={{ marginTop: "0.5em" }} onClick={linkTOTP}>
+            Enable 2FA
+          </button>
+        </>
+      )}
     </div>
   );
 }
 
-const SettingsPage = () => {
+function SettingsPage() {
   const [qrLink, setQrLink] = useState("");
   const [totpSecret, setTotpSecret] = useState("");
   const [flowID, setFlowID] = useState("");
   const [csrf_token, setCsrfToken] = useState("");
   const [totp_code, setTotpCode] = useState("");
   const [totpEnabled, setTotpEnabled] = useState(false);
+  const [traits, setTraits] = useState({ name: "", email: "", phone_number: "" });
 
   useEffect(() => {
     fetchNewQR();
+    handleGetTraits();
   }, [totpEnabled]);
+
+  async function handleGetTraits() {
+    try {
+      const profileTraits = await handleGetSessionDetailsFlow();
+      setTraits(profileTraits);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   async function linkTOTP() {
     try {
       await handlePostToggleTOTPFlow(flowID, csrf_token, totp_code, false);
       alert("Totp successful");
       setTotpEnabled(true);
+      setTotpCode("");
     } catch (error) {
       console.error(error);
     }
@@ -78,38 +105,37 @@ const SettingsPage = () => {
         setTotpSecret(totp_secret);
       }
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   }
 
   return (
-    <div className="settings">
-      {!totpEnabled ? (
-        <>
-          {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
-          <div style={{margin: "2rem 0"}}>
-            <p>If you cannot scan the QR, use this code:</p>
-            <pre>
-              <code>{totpSecret}</code>
-            </pre>
-          </div>
-          <label htmlFor="code"><p>Enter Verification Code</p></label>
-          <Input
-            type="text"
-            name="code"
-            id="code"
-            onChange={(e) => {
-              setTotpCode(e.target.value);
-            }}
-          />
-          <button className="button_submit" style={{margin: "1rem 0 2rem 0"}} onClick={linkTOTP}>Save</button>
-        </>
-      ) : (
-        <Button onClick={unlinkTOTP}>Unlink TOTP</Button>
-      )}
-      <ChangePassword flowID={flowID} csrf_token={csrf_token} />
+    <div>
+      <LeftPanel
+        page={"user"}
+        mode={"dashboard"}
+        activity1={"inactive"}
+        activity2={"inactive"}
+        activity3={"active"}
+        state1={"unused"}
+        state2={"unused"}
+        state3={"used"}
+      />
+      <div className="right_panel settings_panel">
+        <MFAauthentication
+          totpEnabled={totpEnabled}
+          qrLink={qrLink}
+          unlinkTOTP={unlinkTOTP}
+          totpSecret={totpSecret}
+          setTotpCode={setTotpCode}
+          linkTOTP={linkTOTP}
+          totp_code={totp_code}
+        />
+
+        <UpdateProfileForm flowID={flowID} csrf_token={csrf_token} traits={traits} setTraits={setTraits} />
+      </div>
     </div>
   );
-};
+}
 
 export default SettingsPage;

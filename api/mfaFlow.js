@@ -18,7 +18,7 @@ export async function handlePostMFAFlow(flowID, csrf_token, totp) {
   try {
     const objData = { flowID, csrf_token, totp };
     const res = await axiosInstance.post(process.env.NEXT_PUBLIC_MFA, objData);
-    return res.data.status;
+    return res.data;
   } catch (error) {
     throw error;
   }

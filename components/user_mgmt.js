@@ -1,29 +1,52 @@
 import React, { useState } from "react";
+import {
+  handleBanIdentityFlow,
+  handleDeleteIdentityFlow,
+  handleRemoveBanFlow,
+  handleRoleSwitchFlow,
+} from "../api/adminFlow";
 import Popup from "./popup";
-import UserPop from "./user_mgmt_pop";
-import { handleBanIdentityFlow, handleDeleteIdentityFlow } from "../api/adminFlow";
+import UserRemovePopup from "./user_mgmt_pop";
 
-function UserPopup({ identityId }) {
+function UserPopup({ identity }) {
   const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
-
   const [isTabOpen, setIsTabOpen] = useState(false);
 
-  async function handleBanUser(id) {
+  async function handleBanUser() {
     try {
-      await handleBanIdentityFlow(id);
+      setIsOpen(false);
+      await handleBanIdentityFlow(identity.id);
       alert("User banned");
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function handleDeleteUser(id) {
+  async function handleLiftBanUser() {
     try {
-      await handleDeleteIdentityFlow(id);
+      setIsOpen(false);
+      await handleRemoveBanFlow(identity.id);
+      alert("User unbanned");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleDeleteUser() {
+    try {
+      setIsTabOpen(false);
+      await handleDeleteIdentityFlow(identity.id);
       alert("User Deleted");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleRoleSwitch() {
+    try {
+      setIsOpen(false);
+      await handleRoleSwitchFlow(identity.id);
+      alert("Role Switched");
     } catch (error) {
       console.error(error);
     }
@@ -31,24 +54,18 @@ function UserPopup({ identityId }) {
 
   return (
     <div className="icon_box">
-      <input className="popup_button" type="button" value=":" onClick={togglePopup} />
+      <input className="popup_button" type="button" value=":" onClick={() => setIsOpen((old) => !old)} />
       {isOpen && (
         <Popup
-          content={
-            <>
-              <div className="popup_content" onClick={() => setIsTabOpen(!isTabOpen)}>
-                Remove user
-              </div>
-              <div className="popup_content" onClick={() => handleBanUser(identityId)}>
-                Ban user
-              </div>
-              <div className="popup_content">Make user</div>
-            </>
-          }
-          handleClose={togglePopup}
+          setIsTabOpen={setIsTabOpen}
+          handleBanUser={handleBanUser}
+          handleLiftBanUser={handleLiftBanUser}
+          setIsOpen={setIsOpen}
+          handleRoleSwitch={handleRoleSwitch}
+          identity={identity}
         />
       )}
-      {isTabOpen && <UserPop handleDeleteUser={() => handleDeleteUser(identityId)} content={<>make popup</>} />}
+      {isTabOpen && <UserRemovePopup handleDeleteUser={handleDeleteUser} setIsTabOpen={setIsTabOpen} />}
     </div>
   );
 }

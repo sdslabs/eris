@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { handleGetMFAFlow, handlePostMFAFlow } from "../../api/mfaFlow";
+import LeftCarousel from "../../components/LeftCarousel";
 import ButtonSubmit from "../../components/button_submit";
 import Password from "../../components/password";
 
@@ -11,8 +12,13 @@ function MFAPage() {
     try {
       const { flowID, csrf_token } = await handleGetMFAFlow();
       const res = await handlePostMFAFlow(flowID, csrf_token, totpCode);
-      if (res === "MFA Successful") {
-        router.push("dashboard");
+
+      if (res.status === "MFA Successful") {
+        if (router.query.nextPage === "changePassword") {
+          router.push("passwordReset");
+        } else {
+          router.push("dashboard");
+        }
       } else {
         alert("ERROR:MFA Failed");
       }
@@ -24,10 +30,28 @@ function MFAPage() {
   const router = useRouter();
 
   return (
-    <div className="settings">
-      <label htmlFor="code"><p>Enter TOTP Code</p></label>
-      <Password text="Enter TOTP Code here" handlePasswordChange={(e) => setTotpCode(e.target.value.trim())} name="code" />
-      <ButtonSubmit text="Authenticate" password={totpCode} func={verifyTOTP} />
+    <div>
+      <LeftCarousel />
+      <div className="split_right">
+        <div className="login">
+          <div>
+            <h1>
+              Multi-Factor <span className="green">Authentication</span>
+            </h1>
+          </div>
+          <div className="form">
+            <Password
+              text="Enter TOTP Code here"
+              handlePasswordChange={(e) => setTotpCode(e.target.value.trim())}
+              name="code"
+              value={totpCode}
+            />
+          </div>
+          <div>
+            <ButtonSubmit text="Authenticate" password={totpCode} func={verifyTOTP} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Input from "./input_box";
 const eye = <FontAwesomeIcon icon={faEye} />;
 const crossedEye = <FontAwesomeIcon icon={faEyeSlash} />;
 
-function Password({ text, handlePasswordChange, passwordError, name, handleValidation }) {
+function Password({ text, value, handlePasswordChange, passwordError, name, handleValidation }) {
   const [passwordShown, setPasswordShown] = useState(false);
 
   return (
@@ -15,6 +15,7 @@ function Password({ text, handlePasswordChange, passwordError, name, handleValid
         text={text}
         handleChange={handlePasswordChange}
         name={name}
+        value={value}
         handleKeyUp={handleValidation}
       >
         <i className="passEye" onClick={() => setPasswordShown(!passwordShown)}>

@@ -15,8 +15,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
 }
 
 a {
@@ -39,10 +39,14 @@ a {
 }
 
 .green {
-  color: #00902B;
+  color: #00902b;
 }
 
-.perm{
+.red {
+  color: rgb(255, 38, 38);
+}
+
+.perm {
   text-decoration: underline;
 }
 
@@ -62,15 +66,54 @@ i {
 }
 
 ::placeholder {
-  color: #B3B3B3;
+  color: #b3b3b3;
 }
 
-th{
+th {
   font-weight: normal;
 }
 
-input[type=text]{
+input[type="text"] {
   padding: 0.5rem;
   width: 100%;
   color: #393939;
+}
+
+.settings_panel {
+  padding: 10em;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.transparent_btn {
+  border-radius: 20px;
+  font-size: 1em;
+  width: 7em;
+  cursor: pointer;
+  background-color: white;
+  color: #00902b;
+  border: 2px solid #00902b;
+  margin-left: 0.8em;
+}
+
+.transparent_btn:hover {
+  color: white;
+  background-color: #00902b;
+  border: 2px solid black;
+}
+
+.profile_image {
+  display: block;
+  height: 15.5rem;
+  width: 15.5rem;
+  margin: 0.8rem 1rem;
+  border-radius: 50%;
+}
+
+.edit_image_btn {
+  position: relative;
+  font-size: 1.2rem;
+  border-radius: 7px;
+  left: 50%;
+  transform: translateX(-50%);
 }
