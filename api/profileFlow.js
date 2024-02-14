@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const axiosInstance = axios.create({ withCredentials: true });
+import axiosInstance from "./axiosInstance";
 
 export async function handleGetSessionDetailsFlow() {
   try {
-    const getResponse = await axiosInstance.post(process.env.NEXT_PUBLIC_GET_PROFILE);
+    const getResponse = await axiosInstance.post(process.env.NEXT_PUBLIC_NYMERIA + "get_profile");
     return getResponse.data;
   } catch (error) {
     throw error;
