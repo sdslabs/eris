@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  eris:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: eris
+    networks:
+      - accounts
+    ports:
+      - "3000:3000"
+
+networks:
+  accounts:
+    external: true
