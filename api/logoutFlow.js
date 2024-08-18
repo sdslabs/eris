@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const axiosInstance = axios.create({ withCredentials: true });
+import axiosInstance from "./axiosInstance";
 
 export async function handleGetLogoutFlow() {
   try {
-    const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_LOGOUT);
+    const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_NYMERIA + "logout");
 
     const logoutToken = getResponse.data.logoutToken;
     return logoutToken;
@@ -15,7 +13,7 @@ export async function handleGetLogoutFlow() {
 
 export async function handlePostLogoutFlow(logoutToken) {
   try {
-    await axiosInstance.post(process.env.NEXT_PUBLIC_LOGOUT, { logoutToken });
+    await axiosInstance.post(process.env.NEXT_PUBLIC_NYMERIA + "logout", { logoutToken });
   } catch (error) {
     throw error;
   }
