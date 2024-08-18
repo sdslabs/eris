@@ -4,7 +4,7 @@ const axiosInstance = axios.create({ withCredentials: true });
 
 export async function handleGetSettingsFlow() {
   try {
-    const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_BASE_URL + "/getsettings");
+    const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_BASE_URL + "/settings");
     const flowID = getResponse.data.flowID;
     const csrf_token = getResponse.data.csrf_token;
     const qr = getResponse.data.qr;
