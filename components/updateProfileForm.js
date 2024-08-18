@@ -64,7 +64,7 @@ function UpdateProfileForm({ flowID, csrf_token, traits, setTraits, emails }) {
           />
           <div style={{ margin: "0.8em 0em 0.8em 0em" }}>
             <span>Verification Status: </span>
-            {emails[0].verified ? (
+            {emails.length > 0 && emails[0]?.verified ? (
               <span className="green">Verified</span>
             ) : (
               <>
