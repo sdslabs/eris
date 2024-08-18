@@ -1,22 +1,9 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { React, useState } from "react";
+import { React } from "react";
 import Image from "next/image";
 import errImage from "../../public/images/errImage.png"
 import Labs from "../../public/images/labs logo.png";
 
 const ErrorPage = () => {
-
-  const router = useRouter();
-
-  function redirect(traits) {
-    if (traits) {
-      router.push("dashboard");
-    } else {
-      router.push("confidential");
-    }
-  }
-
   return (
     <div className="loginpage">
       <div className="split_left">
