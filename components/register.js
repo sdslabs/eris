@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import ButtonAuth from "./button_auth";
 import Link from "next/link";
 import Hr_or from "./hr_or";
@@ -6,6 +6,29 @@ import Input from "./input_box";
 import Icons from "./icons";
 
 function Signup({ name, email, number, dispatch }) {
+
+  const [greenBox, setGreenBox] = useState("");
+
+  function handleRegistrationSubmit() {
+    dispatch({ type: "setStatus", payload: "passForm" });
+  }
+
+  function handleRegistrationChange(event) {
+    const nameInputValue = event.target.value.trim();
+    const nameInputFieldName = event.target.name;
+
+    if (nameInputFieldName === "number") {
+      const numberLength = nameInputValue.length;
+      console.log(numberLength);
+      if (numberLength == 10 || numberLength == 0) {
+        setGreenBox("");
+      }else {
+        setGreenBox("red-box");
+      }
+      dispatch({ type: "setNumber", payload: nameInputValue });
+    }
+  }
+
   return (
     <div>
       <Icons step={"account"} />
@@ -19,14 +42,16 @@ function Signup({ name, email, number, dispatch }) {
           <div>
             <p>Full name</p>
             <Input
+              name="name"
               type="text"
               text="Enter your full name"
               value={name}
-              handleChange={(e) => dispatch({ type: "setName", payload: e.target.value.trim() })}
+              handleChange={(e) => dispatch({ type: "setName", payload: e.target.value })}
             />
 
             <p>Email address</p>
             <Input
+              name="email"
               type="text"
               value={email}
               text="Enter your email address"
@@ -34,18 +59,21 @@ function Signup({ name, email, number, dispatch }) {
             />
 
             <p>Phone Number</p>
-            <Input
-              type="number"
-              value={number}
-              text="Enter your Phone Number"
-              handleChange={(e) => dispatch({ type: "setNumber", payload: e.target.value.trim() })}
-            />
+              <div className={greenBox}>
+                <Input
+                  name="number"
+                  type="number"
+                  value={number}
+                  text="Enter your Phone Number"
+                  handleChange={handleRegistrationChange}
+                />
+              </div>
           </div>
           <div>
             <button
               type="submit"
               className="button_submit"
-              onClick={() => dispatch({ type: "setStatus", payload: "passForm" })}
+              onClick={handleRegistrationSubmit}
               disabled={!name || !number || !email}
             >
               Create Account
