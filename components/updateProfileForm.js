@@ -4,7 +4,7 @@ import { handlePostUpdateProfileFlow } from "../api/settingsFlow";
 import Input from "../components/input_box";
 import ButtonSubmit from "./button_submit";
 
-function UpdateProfileForm({ flowID, csrf_token, traits, setTraits }) {
+function UpdateProfileForm({ flowID, csrf_token, traits, setTraits, emails }) {
   const router = useRouter();
 
   async function handleUpdateButton() {
@@ -64,7 +64,7 @@ function UpdateProfileForm({ flowID, csrf_token, traits, setTraits }) {
           />
           <div style={{ margin: "0.8em 0em 0.8em 0em" }}>
             <span>Verification Status: </span>
-            {traits.verified ? (
+            {emails[0].verified ? (
               <span className="green">Verified</span>
             ) : (
               <>
