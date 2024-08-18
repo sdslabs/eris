@@ -62,7 +62,7 @@ function SettingsPage() {
     fetchNewQR();
     handleGetTraits();
     handleGetEmails();
-  }, [totpEnabled]);
+  }, []);
 
   async function handleGetEmails() {
     try {
