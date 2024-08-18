@@ -4,7 +4,7 @@ const axiosInstance = axios.create({ withCredentials: true });
 
 export async function handleGetSessionDetailsFlow() {
   try {
-    const getResponse = await axiosInstance.post(process.env.NEXT_PUBLIC_BASE_URL + "");
+    const getResponse = await axiosInstance.post(process.env.NEXT_PUBLIC_BASE_URL + "/get_profile");
     return getResponse.data;
   } catch (error) {
     throw error;
