@@ -3,7 +3,9 @@ import { React, useEffect, useState } from "react";
 import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
 import LeftPanel from "../../components/leftPanel";
 import UpdateProfileForm from "../../components/updateProfileForm";
-import { handleGetSessionDetailsFlow } from "../../api/profileFlow";
+import { handleGetSessionDetailsFlow, handleGetVerificationDetails } from "../../api/profileFlow";
+import { faTry } from "@fortawesome/free-solid-svg-icons";
+import { handleGetVerifyFlow } from "../../api/verificationFlow";
 
 function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
   return (
@@ -54,11 +56,22 @@ function SettingsPage() {
   const [totp_code, setTotpCode] = useState("");
   const [totpEnabled, setTotpEnabled] = useState(false);
   const [traits, setTraits] = useState({ name: "", email: "", phone_number: "" });
+  const [emails, setEmails] = useState([]);
 
   useEffect(() => {
     fetchNewQR();
     handleGetTraits();
+    handleGetEmails();
   }, [totpEnabled]);
+
+  async function handleGetEmails() {
+    try {
+      const emails = await handleGetVerificationDetails();
+      setEmails(emails);
+    } catch(error){
+      console.error(error);
+    }
+  }
 
   async function handleGetTraits() {
     try {
@@ -132,7 +145,7 @@ function SettingsPage() {
           totp_code={totp_code}
         />
 
-        <UpdateProfileForm flowID={flowID} csrf_token={csrf_token} traits={traits} setTraits={setTraits} />
+        <UpdateProfileForm flowID={flowID} csrf_token={csrf_token} traits={traits} setTraits={setTraits} emails={emails}/>
       </div>
     </div>
   );

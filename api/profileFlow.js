@@ -10,3 +10,12 @@ export async function handleGetSessionDetailsFlow() {
     throw error;
   }
 }
+
+export async function handleGetVerificationDetails() {
+  try {
+    const getResponse = await axiosInstance.post(process.env.NEXT_PUBLIC_BASE_URL + "/get_verified_status");
+    return getResponse.data;
+  } catch (error) {
+    throw error;
+  }
+}
