@@ -9,10 +9,6 @@ function VerifyEmail({ email }) {
     router.push("dashboard");
   }
 
-  useEffect(() => {
-    sendEmail(email);
-  }, [email]);
-
   async function sendEmail(email) {
     try {
       const { flowID, csrf_token } = await handleGetVerifyFlow();

@@ -5,7 +5,6 @@ const axiosInstance = axios.create({ withCredentials: true });
 export async function handleGetMFAFlow() {
   try {
     const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_BASE_URL + "/mfa");
-
     const flowID = getResponse.data.flowID;
     const csrf_token = getResponse.data.csrf_token;
     return { flowID, csrf_token };

@@ -28,7 +28,7 @@ function reducer(state, action) {
 }
 
 function SignupPage() {
-  const [{ email, name, number, status }, dispatch] = useReducer(reducer, initialState);
+  let [{ email, name, number, status }, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div>
@@ -37,7 +37,7 @@ function SignupPage() {
         <div className="signup">
           {status === "signupForm" ? <Signup dispatch={dispatch} name={name} email={email} number={number} /> : null}
           {status === "passForm" ? (
-            <SetPassword dispatchSign={dispatch} name={name} email={email} number={number} />
+            <SetPassword dispatchSign={dispatch} name={name.trim()} email={email} number={number} />
           ) : null}
 
           {status === "verificationForm" ? (
