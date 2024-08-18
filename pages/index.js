@@ -85,11 +85,11 @@ const LoginPage = () => {
                 Sign up{" "}
               </Link>
             </p>
-            <Hr_or />
+            {/* <Hr_or /> */}
           </div>
-          <div className="oauth">
+          {/* <div className="oauth">
             <ButtonAuth text={"Continue with Google"} />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

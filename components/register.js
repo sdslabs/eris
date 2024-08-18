@@ -58,10 +58,10 @@ function Signup({ name, email, number, dispatch }) {
             </Link>
           </p>
         </div>
-        <Hr_or />
+        {/* <Hr_or />
         <div className="oauth">
           <ButtonAuth text={"Continue with Google"} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
