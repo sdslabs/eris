@@ -4,7 +4,7 @@ const axiosInstance = axios.create({ withCredentials: true });
 
 export async function handleGetMFAFlow() {
   try {
-    const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_MFA);
+    const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_BASE_URL + "/mfa");
 
     const flowID = getResponse.data.flowID;
     const csrf_token = getResponse.data.csrf_token;
@@ -17,7 +17,7 @@ export async function handleGetMFAFlow() {
 export async function handlePostMFAFlow(flowID, csrf_token, totp) {
   try {
     const objData = { flowID, csrf_token, totp };
-    const res = await axiosInstance.post(process.env.NEXT_PUBLIC_MFA, objData);
+    const res = await axiosInstance.post(process.env.NEXT_PUBLIC_BASE_URL + "/mfa", objData);
     return res.data;
   } catch (error) {
     throw error;

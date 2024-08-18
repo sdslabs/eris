@@ -4,7 +4,7 @@ const axiosInstance = axios.create({ withCredentials: true });
 
 export async function handleGetLoginFlow() {
   try {
-    const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_LOGIN);
+    const getResponse = await axiosInstance.get(process.env.NEXT_PUBLIC_BASE_URL + "/login");
 
     const flowID = getResponse.data.flowID;
     const csrf_token = getResponse.data.csrf_token;
@@ -17,7 +17,7 @@ export async function handleGetLoginFlow() {
 export async function handlePostLoginFlow(flowID, csrf_token, email, password) {
   try {
     const objData = { flowID, csrf_token, password, identifier: email };
-    const res = await axiosInstance.post(process.env.NEXT_PUBLIC_LOGIN, objData);
+    const res = await axiosInstance.post(process.env.NEXT_PUBLIC_BASE_URL + "/login", objData);
     return res.data;
   } catch (error) {
     throw error;
