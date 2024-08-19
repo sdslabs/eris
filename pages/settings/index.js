@@ -66,8 +66,8 @@ function SettingsPage() {
 
   async function handleGetEmails() {
     try {
-      const emails = await handleGetVerificationDetails();
-      setEmails(emails);
+      const email = await handleGetVerificationDetails();
+      setEmails(email);
     } catch(error){
       console.error(error);
     }
