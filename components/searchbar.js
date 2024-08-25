@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Search from "../public/images/search_icon.svg";
 import Image from "next/image";
-import data from "../data/users_data.json"
+import data from "@/data/users_data.json"
 
 const Searchbar = ({ type, text}) => {
   const [inputActive, setInputActive] = useState(false);

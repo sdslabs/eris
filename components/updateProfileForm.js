@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { handlePostUpdateProfileFlow } from "../api/settingsFlow";
-import Input from "../components/input_box";
+import Input from "@/components/input_box";
 import ButtonSubmit from "./button_submit";
 
 function UpdateProfileForm({ flowID, csrf_token, traits, setTraits, emails }) {

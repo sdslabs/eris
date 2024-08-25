@@ -1,9 +1,9 @@
 import { React, useReducer } from "react";
-import LeftCarousel from "../../components/LeftCarousel";
-import Icons from "../../components/icons";
-import Signup from "../../components/register";
-import SetPassword from "../../components/setpass";
-import Verify from "../../components/verifyEmail";
+import LeftCarousel from "@/components/LeftCarousel";
+import Icons from "@/components/icons";
+import Signup from "@/components/register";
+import SetPassword from "@/components/setpass";
+import Verify from "@/components/verifyEmail";
 
 const initialState = {
   email: "",

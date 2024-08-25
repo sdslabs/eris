@@ -1,14 +1,14 @@
 import { React, useEffect, useReducer } from "react";
-import { handleGetIdentitiesFlow } from "../../api/adminFlow";
-import AddUserForm from "../../components/addUserForm";
-import InviteFilterDropdown from "../../components/inviteFilterDropdown";
-import InvitesPanel from "../../components/invitePanel";
-import InvitesTable from "../../components/invitesTable";
-import LeftPanel from "../../components/leftPanel";
-import SearchBarAdmin from "../../components/searchBarAdmin";
-import UserFilterDropdown from "../../components/userFilterDropdown";
-import UserTable from "../../components/userTable";
-import UsersPanel from "../../components/usersPanel";
+import { handleGetIdentitiesFlow } from "@/api/adminFlow";
+import AddUserForm from "@/components/addUserForm";
+import InviteFilterDropdown from "@/components/inviteFilterDropdown";
+import InvitesPanel from "@/components/invitePanel";
+import InvitesTable from "@/components/invitesTable";
+import LeftPanel from "@/components/leftPanel";
+import SearchBarAdmin from "@/components/searchBarAdmin";
+import UserFilterDropdown from "@/components/userFilterDropdown";
+import UserTable from "@/components/userTable";
+import UsersPanel from "@/components/usersPanel";
 
 const initialState = {
   invitesActive: false,

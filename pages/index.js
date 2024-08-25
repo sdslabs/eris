@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { handleGetLoginFlow, handlePostLoginFlow } from "../api/loginFlow";
-import LeftCarousel from "../components/LeftCarousel";
-import ButtonAuth from "../components/button_auth";
-import ButtonSubmit from "../components/button_submit";
+import LeftCarousel from "@/components/LeftCarousel";
+import ButtonAuth from "@/components/button_auth";
+import ButtonSubmit from "@/components/button_submit";
 import Hr_or from "../components/hr_or";
-import Input from "../components/input_box";
-import Password from "../components/password";
+import Input from "@/components/input_box";
+import Password from "@/components/password";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

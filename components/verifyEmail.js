@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { handleGetVerifyFlow, handlePostVerifyFlow } from "../api/verificationFlow";
+import { handleGetVerifyFlow, handlePostVerifyFlow } from "@/api/verificationFlow";
 import ButtonSubmit from "./button_submit";
 
 function VerifyEmail({ email }) {

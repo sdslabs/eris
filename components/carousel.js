@@ -2,9 +2,9 @@ import Image from "next/image";
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import Build from "../public/images/illustration_build.svg";
-import Ship from "../public/images/illustration_ship.svg";
-import Think from "../public/images/illustration_think.svg";
+import Build from "@/public/images/illustration_build.svg";
+import Ship from "@/public/images/illustration_ship.svg";
+import Think from "@/public/images/illustration_think.svg";
 
 function Caro() {
   return (

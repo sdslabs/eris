@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { handleGetRecoveryFlow, handlePostRecoveryFlow } from "../../api/recoveryFlow";
-import LeftCarousel from "../../components/LeftCarousel";
-import ButtonSubmit from "../../components/button_submit";
-import Input from "../../components/input_box";
+import { handleGetRecoveryFlow, handlePostRecoveryFlow } from "@/api/recoveryFlow";
+import LeftCarousel from "@/components/LeftCarousel";
+import ButtonSubmit from "@/components/button_submit";
+import Input from "@/components/input_box";
 
 const RecoveryPage = () => {
   const [email, setEmail] = useState("");

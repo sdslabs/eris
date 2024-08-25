@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { React, useState } from "react";
-import { handleGetLogoutFlow, handlePostLogoutFlow } from "../../api/logoutFlow";
-import LeftPanel from "../../components/leftPanel";
+import { handleGetLogoutFlow, handlePostLogoutFlow } from "@/api/logoutFlow";
+import LeftPanel from "@/components/leftPanel";
 
 function Dashboard() {
   const router = useRouter();

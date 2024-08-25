@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from "next/image";
-import ClosePopup from "../public/images/close_popup.svg"
+import ClosePopup from "@/public/images/close_popup.svg"
 
 const Popup = ({clicks, name}) => {
 

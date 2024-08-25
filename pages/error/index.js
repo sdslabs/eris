@@ -1,7 +1,7 @@
 import { React } from "react";
 import Image from "next/image";
-import errImage from "../../public/images/errImage.png"
-import Labs from "../../public/images/labs logo.png";
+import errImage from "@/public/images/errImage.png"
+import Labs from "@/public/images/labs logo.png";
 
 const ErrorPage = () => {
   return (

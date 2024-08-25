@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Create_curr from "../public/images/Create.svg";
-import Create_done from "../public/images/Create_done.svg";
-import Pwd_notDone from "../public/images/Set.svg";
-import Pwd_curr from "../public/images/Set_2.svg";
-import Pwd_done from "../public/images/Set_2.svg";
-import Verify_notDone from "../public/images/Verify.svg";
-import Verify_curr from "../public/images/Verify_2.svg";
-import Verify_done from "../public/images/Verify_done.svg";
+import Create_curr from "@/public/images/Create.svg";
+import Create_done from "@/public/images/Create_done.svg";
+import Pwd_notDone from "@/public/images/Set.svg";
+import Pwd_curr from "@/public/images/Set_2.svg";
+import Pwd_done from "@/public/images/Set_2.svg";
+import Verify_notDone from "@/public/images/Verify.svg";
+import Verify_curr from "@/public/images/Verify_2.svg";
+import Verify_done from "@/public/images/Verify_done.svg";
 
 function Icons({ step }) {
   let verifyImg = Verify_notDone,

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { React } from "react";
-import Filter from "../public/images/filter.svg";
-import UserAdd from "../public/images/user_add.svg";
+import Filter from "@/public/images/filter.svg";
+import UserAdd from "@/public/images/user_add.svg";
 
 function UserRoleFilter({ dispatch, adminChecked, userChecked, handleRoleCheckboxes }) {
   return (

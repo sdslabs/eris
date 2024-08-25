@@ -1,5 +1,5 @@
 import { React } from "react";
-import LeftCarousel from "../../components/LeftCarousel";
+import LeftCarousel from "@/components/LeftCarousel";
 
 const VerificationSuccessPage = () => {
   return (

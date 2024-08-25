@@ -1,8 +1,8 @@
 import {React, useState} from "react";
-import Export from "../public/images/export.svg"
 import Image from "next/image";
 import Link from "next/link";
-import CopyIcon from "../public/images/copyicon.svg"
+import Export from "@/public/images/export.svg"
+import CopyIcon from "@/public/images/copyicon.svg"
 
 const EditAppBox = ({ img, name, des, href, domains, organisations, handleAppBox}) => {
 

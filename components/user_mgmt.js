@@ -4,7 +4,7 @@ import {
   handleDeleteIdentityFlow,
   handleRemoveBanFlow,
   handleRoleSwitchFlow,
-} from "../api/adminFlow";
+} from "@/api/adminFlow";
 import Popup from "./popup";
 import UserRemovePopup from "./user_mgmt_pop";
 

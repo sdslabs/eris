@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { React } from "react";
-import LeftCarousel from "../../components/LeftCarousel";
-import Verify from "../../components/verifyEmail";
+import LeftCarousel from "@/components/LeftCarousel";
+import Verify from "@/components/verifyEmail";
 
 function VerifyEmailPage() {
   const router = useRouter();

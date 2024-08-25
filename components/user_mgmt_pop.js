@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import Cross from "../public/images/cross.png";
-import Logo from "../public/images/remove_user.svg";
+import Cross from "@/public/images/cross.png";
+import Logo from "@/public/images/remove_user.svg";
 import ButtonKeep from "./button_keep";
 import ButtonPopup from "./button_popup";
 

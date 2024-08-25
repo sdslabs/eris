@@ -1,18 +1,18 @@
 import {React, useState} from "react";
-import LeftPanel from "../../components/leftPanel";
-import Searchbar from "../../components/searchbar";
-import Buttons from "../../components/admin_buttons"
-import Apps from "../../components/apps"
-import AppBox from "../../components/appBox"
-import EditAppBox from "../../components/editAppBox"
-import NewAppBox from "../../components/newAppBox"
-import ApplicationsPopup from "../../components/appPop"
-import Sort from "../../public/images/sort.svg"
-import AppAdd from "../../public/images/app_add.svg"
-import Test from "../../public/images/gasper.png"
-import Gasper from "../../public/images/gasper.png"
-import Quizio from "../../public/images/quizio.svg"
-import ApplicationList from "../../components/apps";
+import LeftPanel from "@/components/leftPanel";
+import Searchbar from "@/components/searchbar";
+import Buttons from "@/components/admin_buttons"
+import Apps from "@/components/apps"
+import AppBox from "@/components/appBox"
+import EditAppBox from "@/components/editAppBox"
+import NewAppBox from "@/components/newAppBox"
+import ApplicationsPopup from "@/components/appPop"
+import Sort from "@/public/images/sort.svg"
+import AppAdd from "@/public/images/app_add.svg"
+import Test from "@/public/images/gasper.png"
+import Gasper from "@/public/images/gasper.png"
+import Quizio from "@/public/images/quizio.svg"
+import ApplicationList from "@/components/apps";
 
 const AdminPage = () => {
 

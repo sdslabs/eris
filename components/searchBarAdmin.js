@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import Search from "../public/images/search_icon.svg";
+import Search from "@/public/images/search_icon.svg";
 
 function SearchBarAdmin({ invitesActive, totalUserData, totalInviteData, filterUserData, filterInviteData }) {
   const [inputActive, setInputActive] = useState(false);

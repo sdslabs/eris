@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
-import { handleCreateIdentityFlow } from "../api/adminFlow";
-import ButtonSubmit from "./button_submit";
+import { handleCreateIdentityFlow } from "@api/adminFlow";
+import ButtonSubmit from "@components/button_submit";
 
 function AddUserForm({ dispatch }) {
   const [name, setName] = useState("");

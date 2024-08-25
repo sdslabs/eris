@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Labs from "./../public/images/labs logo.png";
+import Labs from "@/public/images/labs logo.png";
 import Carousel from "./carousel";
 
 function LeftCarousel() {

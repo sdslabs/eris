@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { React, useState } from "react";
-import bannedUser from "../public/images/banned.svg";
-import defaultFace from "../public/images/default_face.svg";
+import bannedUser from "@/public/images/banned.svg";
+import defaultFace from "@/public/images/default_face.svg";
 import Pagination from "./pagination";
 import UserPopup from "./user_mgmt";
 

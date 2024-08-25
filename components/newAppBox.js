@@ -1,7 +1,7 @@
 import {React, useState} from "react";
 import ApplicationsPopup from "./appPop"
 import Image from "next/image";
-import DefaultImage from "../public/images/default_img.svg"
+import DefaultImage from "@/public/images/default_img.svg"
 
 const NewAppBox = ({ name, des, href, domains, clkey, clsecret, handleAppBox, handleEditAppBox }) => {
   const organisations = ["SDSLabs", "DSG", "PAG", "Infosec"];

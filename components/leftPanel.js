@@ -3,16 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { handleGetLogoutFlow, handlePostLogoutFlow } from "../api/logoutFlow";
-import { handleGetSessionDetailsFlow } from "../api/profileFlow";
-import Applications from "../public/images/applications.svg";
-import Applications_self from "../public/images/applications_self.svg";
-import Labs from "../public/images/labs logo.png";
-import Logout from "../public/images/logout.svg";
-import Settings from "../public/images/settings.svg";
-import Test from "../public/images/test.jpg";
-import Users from "../public/images/users.svg";
-import Users_self from "../public/images/users_self.svg";
+import { handleGetLogoutFlow, handlePostLogoutFlow } from "@/api/logoutFlow";
+import { handleGetSessionDetailsFlow } from "@/api/profileFlow";
+import Applications from "@/public/images/applications.svg";
+import Applications_self from "@/public/images/applications_self.svg";
+import Labs from "@/public/images/labs logo.png";
+import Logout from "@/public/images/logout.svg";
+import Settings from "@/public/images/settings.svg";
+import Test from "@/public/images/test.jpg";
+import Users from "@/public/images/users.svg";
+import Users_self from "@/public/images/users_self.svg";
 
 function LinkPanelAdmin({ User, Application, activity1, activity2, activity3, state1, state2, state3 }) {
   return (

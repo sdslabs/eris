@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { React, useEffect, useState } from "react";
-import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "../../api/settingsFlow";
-import LeftPanel from "../../components/leftPanel";
-import UpdateProfileForm from "../../components/updateProfileForm";
-import { handleGetSessionDetailsFlow, handleGetVerificationDetails } from "../../api/profileFlow";
+import { handleGetSettingsFlow, handlePostToggleTOTPFlow } from "@/api/settingsFlow";
+import LeftPanel from "@/components/leftPanel";
+import UpdateProfileForm from "@/components/updateProfileForm";
+import { handleGetSessionDetailsFlow, handleGetVerificationDetails } from "@/api/profileFlow";
 import { faTry } from "@fortawesome/free-solid-svg-icons";
-import { handleGetVerifyFlow } from "../../api/verificationFlow";
+import { handleGetVerifyFlow } from "@/api/verificationFlow";
 
 function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
   return (

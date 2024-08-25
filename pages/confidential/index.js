@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { React, useState } from "react";
-import { handleGetMFAFlow, handlePostMFAFlow } from "../../api/mfaFlow";
-import LeftCarousel from "../../components/LeftCarousel";
-import ButtonSubmit from "../../components/button_submit";
-import Password from "../../components/password";
+import { handleGetMFAFlow, handlePostMFAFlow } from "@/api/mfaFlow";
+import LeftCarousel from "@/components/LeftCarousel";
+import ButtonSubmit from "@/components/button_submit";
+import Password from "@/components/password";
 
 function MFAPage() {
   const [totpCode, setTotpCode] = useState("");

@@ -1,5 +1,5 @@
 import React from "react";
-import Google from "../public/images/google.svg";
+import Google from "@/public/images/google.svg";
 import Image from "next/image";
 
 const ButtonAuth = ({ text }) => {

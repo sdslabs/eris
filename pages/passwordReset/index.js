@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
-import { handleGetSettingsFlow, handlePostChangePasswordFlow } from "../../api/settingsFlow";
-import LeftCarousel from "../../components/LeftCarousel";
-import ButtonSubmit from "../../components/button_submit";
-import PasswordValidation from "../../components/passwordValidation";
-import { handleGetSessionDetailsFlow } from "../../api/profileFlow";
+import { handleGetSettingsFlow, handlePostChangePasswordFlow } from "@/api/settingsFlow";
+import LeftCarousel from "@/components/LeftCarousel";
+import ButtonSubmit from "@/components/button_submit";
+import PasswordValidation from "@/components/passwordValidation";
+import { handleGetSessionDetailsFlow } from "@/api/profileFlow";
 
 const initialState = {
   password: { text: "", error: "" },
