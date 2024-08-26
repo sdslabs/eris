@@ -1,5 +1,5 @@
 import { React, useReducer } from "react";
-import { handleGetRegisterFlow, handlePostRegisterFlow } from "../api/registerFlow";
+import { handleGetRegisterFlow, handlePostRegisterFlow } from "@/api/registerFlow";
 import ButtonSubmit from "./button_submit";
 import Icons from "./icons";
 import PasswordValidation from "./passwordValidation";

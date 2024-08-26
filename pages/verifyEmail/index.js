@@ -8,7 +8,7 @@ function VerifyEmailPage() {
   return (
     <div>
       <LeftCarousel />
-      <div className="split_right ">
+      <div className="split_right">
         <div className="signup" style={{ marginTop: "20em" }}>
           <Verify email={router.query.email} />
         </div>

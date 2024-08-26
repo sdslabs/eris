@@ -27,17 +27,11 @@ function Icons({ step }) {
 
   return (
     <div className="icon_box">
-      <table className="icon_table">
-        <tbody>
-          <tr>
-            <td><Image className="icon" src={createAccImg} alt="create" /></td>
-            <td><hr className="icon_hr" /></td>
-            <td><Image className="icon" src={setPwdImg} alt="set" /></td>
-            <td><hr className="icon_hr" /></td>
-            <td><Image className="icon" src={verifyImg} alt="verify" /></td>
-          </tr>
-        </tbody>
-      </table>
+      <Image className="icon" src={createAccImg} alt="create" />
+      <hr className="icon_hr" />
+      <Image className="icon" src={setPwdImg} alt="set" />
+      <hr className="icon_hr" />
+      <Image className="icon" src={verifyImg} alt="verify" />
     </div>
   );
 }

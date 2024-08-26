@@ -1,4 +1,4 @@
-import { React, useReducer } from "react";
+import { React, useReducer, useState } from "react";
 import LeftCarousel from "@/components/LeftCarousel";
 import Icons from "@/components/icons";
 import Signup from "@/components/register";
@@ -28,16 +28,31 @@ function reducer(state, action) {
 }
 
 function SignupPage() {
-  let [{ email, name, number, status }, dispatch] = useReducer(reducer, initialState);
+  let [{ email, name, number, status }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   return (
     <div>
       <LeftCarousel />
-      <div className="split_right ">
+      <div className="split_right">
         <div className="signup">
-          {status === "signupForm" ? <Signup dispatch={dispatch} name={name} email={email} number={number} /> : null}
+          {status === "signupForm" ? (
+            <Signup
+              dispatch={dispatch}
+              name={name}
+              email={email}
+              number={number}
+            />
+          ) : null}
           {status === "passForm" ? (
-            <SetPassword dispatchSign={dispatch} name={name.trim()} email={email} number={number} />
+            <SetPassword
+              dispatchSign={dispatch}
+              name={name.trim()}
+              email={email}
+              number={number}
+            />
           ) : null}
 
           {status === "verificationForm" ? (

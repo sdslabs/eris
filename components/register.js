@@ -33,11 +33,11 @@ function Signup({ name, email, number, dispatch }) {
     <div>
       <Icons step={"account"} />
       <div className="slide-out">
-        <div>
+
           <h1>
             Sign <span className="green">up</span>
           </h1>
-        </div>
+
         <div className="form">
           <div>
             <p>Full name</p>
@@ -86,10 +86,6 @@ function Signup({ name, email, number, dispatch }) {
             </Link>
           </p>
         </div>
-        {/* <Hr_or />
-        <div className="oauth">
-          <ButtonAuth text={"Continue with Google"} />
-        </div> */}
       </div>
     </div>
   );

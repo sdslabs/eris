@@ -1,14 +1,14 @@
-.split_left{
-  width: 45.833%;
+.split_left {
+  width: 42%;
   height: 100%;
   position: fixed;
   left: 0;
-  background-color: #191919  ;
+  background-color: #191919;
 }
 
-.split_right{
-  width: 54.167%;
-  height: 100%;
+.split_right {
+  width: 58%;
+  height: 100vh;
   position: fixed;
   right: 0;
   display: flex;
@@ -23,7 +23,7 @@
   margin: auto;
 }
 
-.centred_img{
+.centred_img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -34,44 +34,44 @@
   padding: 1.5rem;
 }
 
-.passEye{
+.passEye {
   color: #939393;
   margin-right: 0.5rem;
 }
 
 .or {
-  color: #B3B3B3;
+  color: #b3b3b3;
   font-size: 14px;
   margin: auto;
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
 }
 
-.option_hr{
+.option_hr {
   width: 12vw;
   margin: 0 -1rem;
 }
 
-.tickBox{
+.tickBox {
   padding-top: 1rem;
   width: 100%;
 }
 
-.loginpage{
-  display:flex;
+.loginpage {
+  display: flex;
   flex-direction: row;
 }
 
-.text-danger{
-  color: #FF0000;
+.text-danger {
+  color: #ff0000;
 }
 
-@media only screen and (max-width: 768px){
-  .split_left{
-display: none;
+@media only screen and (max-width: 768px) {
+  .split_left {
+    display: none;
   }
 
-  .split_right{
+  .split_right {
     width: 100%;
   }
 
@@ -79,5 +79,4 @@ display: none;
     width: 80%;
     margin-top: 1rem;
   }
-
-  }
+}

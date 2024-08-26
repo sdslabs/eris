@@ -33,7 +33,7 @@ function VerifyEmail({ email }) {
       </div>
       <div className="form">
         <div>
-          <p>
+          <p >
             An email has been sent to <span className="green">{email}</span>
           </p>
         </div>
@@ -41,7 +41,7 @@ function VerifyEmail({ email }) {
           <ButtonSubmit text={"Continue to Dashboard"} func={redirect} />
         </div>
         <p>
-          Didnt get the email?{" "}
+          Didn't get the email?{" "}
           <span className="green underline" onClick={() => sendEmail(email)}>
             Resend Email
           </span>
