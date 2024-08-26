@@ -34,7 +34,7 @@ function SignupPage() {
     initialState
   );
 
-  const [status, setStatus] = useState("signupForm");
+  const [status, setStatus] = useState("verificationForm");
 
 
   return (

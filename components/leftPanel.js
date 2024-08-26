@@ -14,9 +14,18 @@ import Test from "@/public/images/test.jpg";
 import Users from "@/public/images/users.svg";
 import Users_self from "@/public/images/users_self.svg";
 
-function LinkPanelAdmin({ User, Application, activity1, activity2, activity3, state1, state2, state3 }) {
+function LinkPanelAdmin({
+  User,
+  Application,
+  activity1,
+  activity2,
+  activity3,
+  state1,
+  state2,
+  state3,
+}) {
   return (
-    <>
+    <div>
       <Link className={activity1} href="/admin">
         <Image src={User} alt="user management" />
         <p className={state1}>User Management</p>
@@ -29,13 +38,23 @@ function LinkPanelAdmin({ User, Application, activity1, activity2, activity3, st
         <Image src={Settings} alt="settings" />
         <p className={state3}>Settings</p>
       </Link>
-    </>
+    </div>
   );
 }
 
-function LinkPanelDashboard({ User, role, Application, activity1, activity2, activity3, state1, state2, state3 }) {
+function LinkPanelDashboard({
+  User,
+  role,
+  Application,
+  activity1,
+  activity2,
+  activity3,
+  state1,
+  state2,
+  state3,
+}) {
   return (
-    <>
+    <div>
       <Link className={activity1} href="/dashboard">
         <Image src={Application} alt="applications" />
         <p className={state1}>Dashboard</p>
@@ -50,13 +69,23 @@ function LinkPanelDashboard({ User, role, Application, activity1, activity2, act
         <Image src={Settings} alt="settings" />
         <p className={state3}>Settings</p>
       </Link>
-    </>
+    </div>
   );
 }
 
-function LeftPanel({ page, mode, activity1, activity2, activity3, state1, state2, state3 }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+function LeftPanel({
+  page,
+  mode,
+  activity1,
+  activity2,
+  activity3,
+  state1,
+  state2,
+  state3,
+}) {
+  // TODO: Blank kro inn states ko
+  const [name, setName] = useState("Garv Makkar");
+  const [email, setEmail] = useState("abcde@gmail.com");
   const [role, setRole] = useState("");
   const [img_url, setImageUrl] = useState("");
   const router = useRouter();
@@ -64,7 +93,8 @@ function LeftPanel({ page, mode, activity1, activity2, activity3, state1, state2
   useEffect(() => {
     async function getProfileDetails() {
       try {
-        const { name, email, role, img_url } = await handleGetSessionDetailsFlow();
+        const { name, email, role, img_url } =
+          await handleGetSessionDetailsFlow();
         setName(name);
         setEmail(email);
         setRole(role);
@@ -91,47 +121,78 @@ function LeftPanel({ page, mode, activity1, activity2, activity3, state1, state2
 
   const profileImageUrl = img_url === "" ? Test : img_url;
 
+  const nameInitials = name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase();
+
+  const truncatedEmail =
+    email.length > 14
+      ? email.split("@")[0].slice(0, 6) + "...@" + email.split("@")[1]
+      : email;
+
   return (
     <div className="left_panel">
-      <div className="centre" style={{ width: "8.2rem" }}>
-        <Image src={Labs} alt="labs" />
-      </div>
-      {mode === "admin" && (
-        <LinkPanelAdmin
-          User={User}
-          Application={Application}
-          state1={state1}
-          state2={state2}
-          state3={state3}
-          activity1={activity1}
-          activity2={activity2}
-          activity3={activity3}
-        />
-      )}
-
-      {mode === "dashboard" && (
-        <LinkPanelDashboard
-          User={User}
-          role={role}
-          Application={Application}
-          state1={state1}
-          state2={state2}
-          state3={state3}
-          activity1={activity1}
-          activity2={activity2}
-          activity3={activity3}
-        />
-      )}
-      <div className="logout centre">
-        <div className="logout_image">
-          <Image className="logout_image" src={profileImageUrl} alt="test" />
+      {/* To be refactored */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div className="centre" style={{ width: "8.2rem" }}>
+          <Image src={Labs} alt="labs" />
         </div>
-        <div className="logout_text" onClick={() => router.push("settings")}>
-          <p style={{ color: "white", fontSize: "1.3rem" }}>{name}</p>
-          <p style={{ color: "white" }}>{email}</p>
+        {mode === "admin" && (
+          <LinkPanelAdmin
+            User={User}
+            Application={Application}
+            state1={state1}
+            state2={state2}
+            state3={state3}
+            activity1={activity1}
+            activity2={activity2}
+            activity3={activity3}
+          />
+        )}
+        {mode === "dashboard" && (
+          <LinkPanelDashboard
+            User={User}
+            role={role}
+            Application={Application}
+            state1={state1}
+            state2={state2}
+            state3={state3}
+            activity1={activity1}
+            activity2={activity2}
+            activity3={activity3}
+          />
+        )}
+      </div>
+      <div className="logout">
+        {/* TODO: To be refactored */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "0.6rem",
+          }}
+        >
+          <Image
+            className="logout_image"
+            src={profileImageUrl}
+            alt="profile-image"
+          />
+          <div className="logout_text" onClick={() => router.push("settings")}>
+            <span id="name">{nameInitials}</span>
+            <br />
+            <span id="email">{truncatedEmail}</span>
+          </div>
         </div>
         <IconButton onClick={handleLogout} style={{ cursor: "pointer" }}>
-          <Image className="logout_logo" src={Logout} alt="logout" />
+          <Image src={Logout} alt="logout" />
         </IconButton>
       </div>
     </div>

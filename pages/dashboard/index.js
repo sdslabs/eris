@@ -24,10 +24,10 @@ function Dashboard() {
         page={"dashboard"}
         mode={"dashboard"}
         activity1={"active"}
-        activity2={"inactive"}
+        activity2={"active"}
         activity3={"inactive"}
         state1={"used"}
-        state2={"unused"}
+        state2={"used"}
         state3={"unused"}
       />
       <div className="right_panel">

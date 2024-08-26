@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
-import { handleCreateIdentityFlow } from "@api/adminFlow";
-import ButtonSubmit from "@components/button_submit";
+import { handleCreateIdentityFlow } from "@/api/adminFlow";
+import ButtonSubmit from "@/components/button_submit";
 import toast from "react-hot-toast";
 
 function AddUserForm({ dispatch }) {

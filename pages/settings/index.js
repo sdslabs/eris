@@ -8,47 +8,6 @@ import { faTry } from "@fortawesome/free-solid-svg-icons";
 import { handleGetVerifyFlow } from "@/api/verificationFlow";
 import toast from "react-hot-toast";
 
-function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
-  return (
-    <div>
-      <div>
-        <h1>
-          Multi Factor <span className="green">Authentication</span>
-        </h1>
-      </div>
-      {totpEnabled ? (
-        <div>
-          <h3 style={{ color: "green" }}>2FA Method is Enabled</h3>
-          <button className="button_submit" style={{ marginTop: "0.5em" }} onClick={unlinkTOTP}>
-            Disable 2FA
-          </button>
-        </div>
-      ) : (
-        <>
-          {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
-          <div>
-            If you cannot scan the QR, use this code:{" "}
-            <span className="green">
-              <code>{totpSecret}</code>
-            </span>
-          </div>
-          <label htmlFor="code">Enter Verification Code</label>
-          <input
-            type="text"
-            name="code"
-            text="Enter TOTP Code"
-            value={totp_code}
-            onChange={(e) => setTotpCode(e.target.value.trim())}
-          />
-          <button className="button_submit" style={{ marginTop: "0.5em" }} onClick={linkTOTP}>
-            Enable 2FA
-          </button>
-        </>
-      )}
-    </div>
-  );
-}
-
 function SettingsPage() {
   const [qrLink, setQrLink] = useState("");
   const [totpSecret, setTotpSecret] = useState("");
@@ -148,6 +107,47 @@ function SettingsPage() {
 
         <UpdateProfileForm flowID={flowID} csrf_token={csrf_token} traits={traits} setTraits={setTraits} emails={emails}/>
       </div>
+    </div>
+  );
+}
+
+function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
+  return (
+    <div>
+      <div>
+        <h1>
+          Multi Factor <span className="green">Authentication</span>
+        </h1>
+      </div>
+      {totpEnabled ? (
+        <div>
+          <h3 style={{ color: "green" }}>2FA Method is Enabled</h3>
+          <button className="button_submit" style={{ marginTop: "0.5em" }} onClick={unlinkTOTP}>
+            Disable 2FA
+          </button>
+        </div>
+      ) : (
+        <>
+          {qrLink !== "" ? <Image src={qrLink} alt="qr" width={200} height={200} /> : null}
+          <div>
+            If you cannot scan the QR, use this code:{" "}
+            <span className="green">
+              <code>{totpSecret}</code>
+            </span>
+          </div>
+          <label htmlFor="code">Enter Verification Code</label>
+          <input
+            type="text"
+            name="code"
+            text="Enter TOTP Code"
+            value={totp_code}
+            onChange={(e) => setTotpCode(e.target.value.trim())}
+          />
+          <button className="button_submit" style={{ marginTop: "0.5em" }} onClick={linkTOTP}>
+            Enable 2FA
+          </button>
+        </>
+      )}
     </div>
   );
 }
