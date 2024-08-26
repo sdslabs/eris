@@ -3,6 +3,7 @@ import { handleGetRecoveryFlow, handlePostRecoveryFlow } from "@/api/recoveryFlo
 import LeftCarousel from "@/components/LeftCarousel";
 import ButtonSubmit from "@/components/button_submit";
 import Input from "@/components/input_box";
+import toast from "react-hot-toast";
 
 const RecoveryPage = () => {
   const [email, setEmail] = useState("");
@@ -12,13 +13,13 @@ const RecoveryPage = () => {
       const { flowID, csrf_token } = await handleGetRecoveryFlow();
       const res = await handlePostRecoveryFlow(flowID, csrf_token, email);
       if (res == "Mail sent with recovery link") {
-        alert(res);
+        toast.success(res);
       } else {
-        alert("Some error occurred");
+        toast.error("Some error occured");
       }
     } catch (error) {
       console.error(error);
-      alert("Some error occurred");
+      toast.error("Some error occured");
     }
   }
 

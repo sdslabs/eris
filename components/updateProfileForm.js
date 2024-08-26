@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { handlePostUpdateProfileFlow } from "../api/settingsFlow";
 import Input from "@/components/input_box";
 import ButtonSubmit from "./button_submit";
+import toast from "react-hot-toast";
 
 function UpdateProfileForm({ flowID, csrf_token, traits, setTraits, emails }) {
   const router = useRouter();
@@ -10,7 +11,7 @@ function UpdateProfileForm({ flowID, csrf_token, traits, setTraits, emails }) {
   async function handleUpdateButton() {
     try {
       const res = await handlePostUpdateProfileFlow(flowID, csrf_token, traits);
-      alert("Profile updated");
+      toast.success("Profile updated successfully");
       console.log(res);
     } catch (error) {
       console.error(error);

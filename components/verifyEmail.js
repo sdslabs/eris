@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { handleGetVerifyFlow, handlePostVerifyFlow } from "@/api/verificationFlow";
 import ButtonSubmit from "./button_submit";
+import toast from "react-hot-toast";
 
 function VerifyEmail({ email }) {
   const router = useRouter();
@@ -15,9 +16,9 @@ function VerifyEmail({ email }) {
       const res = await handlePostVerifyFlow(flowID, csrf_token, email);
 
       if (res === "Account Verification Mail Sent") {
-        alert(res);
+        toast.success(res);
       } else {
-        alert("Some error occured");
+        toast.error("Some error occured");
       }
     } catch (error) {
       console.error(error);

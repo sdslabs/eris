@@ -2,34 +2,10 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { React, useState } from "react";
 import Password from "./password";
+import { Tooltip } from "react-tooltip";
 const info = <FontAwesomeIcon icon={faInfoCircle} />;
 
-function PasswordRules() {
-  return (
-    <div className="pass-rules">
-      Your password needs to have:
-      <ul>
-        <li>Minimum 8 characters</li>
-        <li>Atleast 1 uppercase character</li>
-        <li>Atleast 1 lowercase character</li>
-        <li>Atleast 1 special character</li>
-        <li>Atleast 1 digit</li>
-      </ul>
-    </div>
-  );
-}
-
 function PasswordValidation({ password, confirmPassword, dispatchPass }) {
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseOver = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-  };
-
   const [greenBox, setGreenBox] = useState("");
   const [confirmGreenBox, setConfirmGreenBox] = useState("");
 
@@ -111,12 +87,12 @@ function PasswordValidation({ password, confirmPassword, dispatchPass }) {
     <div className="row">
       <div className="col-sm-4">
         <p>
-          Password{" "}
-          <i onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-            {info}
-          </i>
+          Password <i data-tooltip-id="criteria">{info}</i>
+          <Tooltip id="criteria">
+            <PasswordRules />
+          </Tooltip>
         </p>
-        {isHovering && <PasswordRules />}
+
         <div className={greenBox}>
           <Password
             name="password"
@@ -137,6 +113,21 @@ function PasswordValidation({ password, confirmPassword, dispatchPass }) {
           />
         </div>
       </div>
+    </div>
+  );
+}
+
+function PasswordRules() {
+  return (
+    <div>
+      Your password needs to have:
+      <ul>
+        <li>Minimum 8 characters</li>
+        <li>Atleast 1 uppercase character</li>
+        <li>Atleast 1 lowercase character</li>
+        <li>Atleast 1 special character</li>
+        <li>Atleast 1 digit</li>
+      </ul>
     </div>
   );
 }

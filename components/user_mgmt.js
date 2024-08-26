@@ -7,6 +7,7 @@ import {
 } from "@/api/adminFlow";
 import Popup from "./popup";
 import UserRemovePopup from "./user_mgmt_pop";
+import toast from "react-hot-toast";
 
 function UserPopup({ identity }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ function UserPopup({ identity }) {
     try {
       setIsOpen(false);
       await handleBanIdentityFlow(identity.id);
-      alert("User banned");
+      toast.success("User banned");
     } catch (error) {
       console.error(error);
     }
@@ -26,7 +27,7 @@ function UserPopup({ identity }) {
     try {
       setIsOpen(false);
       await handleRemoveBanFlow(identity.id);
-      alert("User unbanned");
+      toast.success("Ban lifted");
     } catch (error) {
       console.error(error);
     }
@@ -36,7 +37,7 @@ function UserPopup({ identity }) {
     try {
       setIsTabOpen(false);
       await handleDeleteIdentityFlow(identity.id);
-      alert("User Deleted");
+      toast.success("User deleted");
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +47,7 @@ function UserPopup({ identity }) {
     try {
       setIsOpen(false);
       await handleRoleSwitchFlow(identity.id);
-      alert("Role Switched");
+      toast.success("Role switched");
     } catch (error) {
       console.error(error);
     }

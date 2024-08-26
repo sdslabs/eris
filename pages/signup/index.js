@@ -1,9 +1,10 @@
-import { React, useReducer, useState } from "react";
+import { React, useEffect, useReducer, useState } from "react";
 import LeftCarousel from "@/components/LeftCarousel";
 import Icons from "@/components/icons";
 import Signup from "@/components/register";
 import SetPassword from "@/components/setpass";
 import Verify from "@/components/verifyEmail";
+import toast from "react-hot-toast";
 
 const initialState = {
   email: "",
@@ -28,10 +29,13 @@ function reducer(state, action) {
 }
 
 function SignupPage() {
-  let [{ email, name, number, status }, dispatch] = useReducer(
+  let [{ email, name, number }, dispatch] = useReducer(
     reducer,
     initialState
   );
+
+  const [status, setStatus] = useState("signupForm");
+
 
   return (
     <div>

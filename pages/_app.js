@@ -1,7 +1,13 @@
-import '../styles/globals.scss'
+import "@/styles/globals.scss";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Component {...pageProps} />
+      <Toaster position="top-right" reverseOrder={false} />
+    </>
+  );
 }
 
-export default MyApp
+export default MyApp;

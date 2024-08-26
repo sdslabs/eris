@@ -5,6 +5,7 @@ import LeftCarousel from "@/components/LeftCarousel";
 import ButtonSubmit from "@/components/button_submit";
 import PasswordValidation from "@/components/passwordValidation";
 import { handleGetSessionDetailsFlow } from "@/api/profileFlow";
+import toast from "react-hot-toast";
 
 const initialState = {
   password: { text: "", error: "" },
@@ -49,7 +50,7 @@ function PasswordReset() {
       const { flowID, csrf_token } = await handleGetSettingsFlow();
       await handlePostChangePasswordFlow(flowID, csrf_token, password.text);
       dispatch({ type: "reset" });
-      alert("Password changed successfully");
+      toast.success("Password changed successfully");
       router.push("/");
     } catch (error) {
       console.error(error);

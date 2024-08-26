@@ -2,6 +2,7 @@ import { useState } from "react";
 import Select from "react-select";
 import { handleCreateIdentityFlow } from "@api/adminFlow";
 import ButtonSubmit from "@components/button_submit";
+import toast from "react-hot-toast";
 
 function AddUserForm({ dispatch }) {
   const [name, setName] = useState("");
@@ -12,7 +13,7 @@ function AddUserForm({ dispatch }) {
   async function handleCreateAccount() {
     try {
       const res = await handleCreateIdentityFlow(name, phoneNumber, email, role);
-      alert("Created account successfully");
+      toast.success("Created account successfully");
       setName("");
       setEmail("");
       setPhoneNumber("");

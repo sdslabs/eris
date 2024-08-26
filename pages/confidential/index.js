@@ -4,6 +4,7 @@ import { handleGetMFAFlow, handlePostMFAFlow } from "@/api/mfaFlow";
 import LeftCarousel from "@/components/LeftCarousel";
 import ButtonSubmit from "@/components/button_submit";
 import Password from "@/components/password";
+import toast from "react-hot-toast";
 
 function MFAPage() {
   const [totpCode, setTotpCode] = useState("");
@@ -20,11 +21,11 @@ function MFAPage() {
           router.push("dashboard");
         }
       } else {
-        alert("ERROR:MFA Failed");
+        toast.error("Error: MFA Failed");
       }
     } catch (error) {
       console.error(error);
-      alert("ERROR:MFA Failed");
+      toast.error("Error: MFA Failed");
     }
   }
   const router = useRouter();

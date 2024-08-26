@@ -6,6 +6,7 @@ import UpdateProfileForm from "@/components/updateProfileForm";
 import { handleGetSessionDetailsFlow, handleGetVerificationDetails } from "@/api/profileFlow";
 import { faTry } from "@fortawesome/free-solid-svg-icons";
 import { handleGetVerifyFlow } from "@/api/verificationFlow";
+import toast from "react-hot-toast";
 
 function MFAauthentication({ totpEnabled, qrLink, unlinkTOTP, totpSecret, setTotpCode, linkTOTP, totp_code }) {
   return (
@@ -85,7 +86,7 @@ function SettingsPage() {
   async function linkTOTP() {
     try {
       await handlePostToggleTOTPFlow(flowID, csrf_token, totp_code, false);
-      alert("Totp successful");
+      toast.success("Totp linked successfuly");
       setTotpEnabled(true);
       setTotpCode("");
     } catch (error) {
@@ -96,7 +97,7 @@ function SettingsPage() {
   async function unlinkTOTP() {
     try {
       await handlePostToggleTOTPFlow(flowID, csrf_token, totp_code, true);
-      alert("Totp unlinked successfuly");
+      toast.success("Totp unlinked successfuly");
       setTotpEnabled(false);
     } catch (error) {
       console.error(error);

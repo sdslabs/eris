@@ -71,8 +71,8 @@ const LoginPage = () => {
               />
             </div>
             <div className="tickBox">
-              <input type="checkbox" className="checkbox" />
-              <label className="remember">Remember me</label>
+              <input type="checkbox" id="remember_me" className="checkbox" />
+              <label className="remember" for="remember_me">Remember me</label>
               <Link className=" underline green" href="/recover" style={{ float: "right" }}>
                 Forgot password?
               </Link>
@@ -85,11 +85,7 @@ const LoginPage = () => {
                 Sign up{" "}
               </Link>
             </p>
-            {/* <Hr_or /> */}
           </div>
-          {/* <div className="oauth">
-            <ButtonAuth text={"Continue with Google"} />
-          </div> */}
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ function reducer(state, action) {
   }
 }
 
-function SetPassword({ name, number, email, dispatchSign }) {
+function  SetPassword({ name, number, email, dispatchSign }) {
   const [{ password, confirmPassword, registrationError }, dispatchPass] = useReducer(reducer, initialState);
 
   async function handleCreateAccount() {
