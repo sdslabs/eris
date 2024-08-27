@@ -206,7 +206,7 @@ function AdminPage() {
   }
 
   return (
-    <div>
+    <div className="panel_wrapper">
       <LeftPanel
         page={"user"}
         mode={"admin"}

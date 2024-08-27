@@ -2,10 +2,14 @@ import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { handleGetLogoutFlow, handlePostLogoutFlow } from "@/api/logoutFlow";
 import LeftPanel from "@/components/leftPanel";
+import Announcements from "@/components/announcements";
+import sampleAnnouncementsJson from "@/data/announcement_data.json";
 
 function Dashboard() {
   const router = useRouter();
   const [logoutError, setLogoutError] = useState("");
+
+  const sampleAnnouncements = JSON.parse(JSON.stringify(sampleAnnouncementsJson));
 
   async function handleLogout() {
     try {
@@ -19,7 +23,7 @@ function Dashboard() {
   }
 
   return (
-    <div>
+    <div className="panel_wrapper">
       <LeftPanel
         page={"dashboard"}
         mode={"dashboard"}
@@ -31,6 +35,7 @@ function Dashboard() {
         state3={"unused"}
       />
       <div className="right_panel">
+        <Announcements announcements={sampleAnnouncements} />
         <div className="active">
           <button className="button_submit" onClick={handleLogout}>
             Logout

@@ -29,13 +29,10 @@ function reducer(state, action) {
 }
 
 function SignupPage() {
-  let [{ email, name, number }, dispatch] = useReducer(
+  let [{ email, name, number, status }, dispatch] = useReducer(
     reducer,
     initialState
   );
-
-  const [status, setStatus] = useState("verificationForm");
-
 
   return (
     <div>

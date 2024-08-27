@@ -1,8 +1,11 @@
+.panel_wrapper{
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+}
+
 .left_panel {
-  width: 18%;
-  height: 100%;
-  position: fixed;
-  left: 0;
   background-color: #191919;
   display: flex;
   flex-direction: column;
@@ -10,12 +13,10 @@
 }
 
 .right_panel {
-  width: 82%;
-  height: auto;
-  position: fixed;
-  right: 0;
   background-color: white;
   overflow: auto;
+  padding: 2rem 4rem;
+  margin: 0 auto;
 }
 
 .centre {

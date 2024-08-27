@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "image": "https://via.placeholder.com/300x150.png?text=Announcement+1",
+      "title": "New Feature Release",
+      "description": "We’re excited to announce the release of a new feature in our platform. Check it out now!",
+      "date": "2024-08-28T10:00:00"
+    },
+    {
+      "id": 2,
+      "image": "https://via.placeholder.com/300x150.png?text=Announcement+2",
+      "title": "Scheduled Maintenance",
+      "description": "Our platform will undergo scheduled maintenance on September 1st, 2024. Expect some downtime.",
+      "date": "2024-09-01T15:30:00"
+    },
+    {
+      "id": 3,
+      "image": "https://via.placeholder.com/300x150.png?text=Announcement+3",
+      "title": "Community Event",
+      "description": "Join our community event happening on September 5th. Fun activities and giveaways await!",
+      "date": "2024-09-05T18:00:00"
+    },
+    {
+      "id": 4,
+      "image": "https://via.placeholder.com/300x150.png?text=Announcement+4",
+      "title": "Product Update",
+      "description": "A major update to our product will be rolling out next week. Get ready for new and improved features!",
+      "date": "2024-08-30T09:00:00"
+    }
+  ]
